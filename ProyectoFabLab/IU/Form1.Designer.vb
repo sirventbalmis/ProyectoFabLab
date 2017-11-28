@@ -22,10 +22,11 @@ Partial Class Form1
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
+        Me.MenuStrip = New System.Windows.Forms.MenuStrip()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AddUsuarioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GestionUsuariosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ArchivoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NuevoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GuardarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -39,41 +40,50 @@ Partial Class Form1
         Me.MinimizarTodasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AyudaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AcercaDeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.UsuMaquinasToolStrip = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripLabel3 = New System.Windows.Forms.ToolStripLabel()
+        Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
-        Me.MenuStrip1.SuspendLayout()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.AddUsuarioToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.AbrirToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ImprimirToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
+        Me.AyudaToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.MenuStrip.SuspendLayout()
+        Me.UsuMaquinasToolStrip.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'MenuStrip1
+        'MenuStrip
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ArchivoToolStripMenuItem, Me.InformesToolStripMenuItem, Me.VentanasToolStripMenuItem, Me.AyudaToolStripMenuItem})
-        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
-        Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(820, 24)
-        Me.MenuStrip1.TabIndex = 3
-        Me.MenuStrip1.Text = "MenuStrip1"
+        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ArchivoToolStripMenuItem, Me.InformesToolStripMenuItem, Me.VentanasToolStripMenuItem, Me.AyudaToolStripMenuItem})
+        Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip.Name = "MenuStrip"
+        Me.MenuStrip.Size = New System.Drawing.Size(952, 24)
+        Me.MenuStrip.TabIndex = 3
+        Me.MenuStrip.Text = "MenuStrip1"
         '
         'ToolStripMenuItem1
         '
-        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.ToolStripMenuItem3})
+        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUsuarioToolStripMenuItem, Me.GestionUsuariosToolStripMenuItem})
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
         Me.ToolStripMenuItem1.Size = New System.Drawing.Size(60, 20)
         Me.ToolStripMenuItem1.Text = "Archivo"
         '
-        'ToolStripMenuItem2
+        'AddUsuarioToolStripMenuItem
         '
-        Me.ToolStripMenuItem2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(177, 22)
-        Me.ToolStripMenuItem2.Text = "Nuevo Usuario"
+        Me.AddUsuarioToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.AddUsuarioToolStripMenuItem.Name = "AddUsuarioToolStripMenuItem"
+        Me.AddUsuarioToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.AddUsuarioToolStripMenuItem.Text = "Nuevo Usuario"
         '
-        'ToolStripMenuItem3
+        'GestionUsuariosToolStripMenuItem
         '
-        Me.ToolStripMenuItem3.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(177, 22)
-        Me.ToolStripMenuItem3.Text = "Gestión de usuarios"
+        Me.GestionUsuariosToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.GestionUsuariosToolStripMenuItem.Name = "GestionUsuariosToolStripMenuItem"
+        Me.GestionUsuariosToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.GestionUsuariosToolStripMenuItem.Text = "Gestión de usuarios"
         '
         'ArchivoToolStripMenuItem
         '
@@ -158,35 +168,100 @@ Partial Class Form1
         Me.AcercaDeToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
         Me.AcercaDeToolStripMenuItem.Text = "Acerca de"
         '
-        'ToolStrip1
+        'UsuMaquinasToolStrip
         '
-        Me.ToolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1})
-        Me.ToolStrip1.Location = New System.Drawing.Point(0, 382)
-        Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(820, 25)
-        Me.ToolStrip1.TabIndex = 5
-        Me.ToolStrip1.Text = "ToolStrip1"
+        Me.UsuMaquinasToolStrip.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.UsuMaquinasToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel3, Me.ToolStripLabel2, Me.ToolStripLabel1})
+        Me.UsuMaquinasToolStrip.Location = New System.Drawing.Point(0, 528)
+        Me.UsuMaquinasToolStrip.Name = "UsuMaquinasToolStrip"
+        Me.UsuMaquinasToolStrip.Size = New System.Drawing.Size(952, 25)
+        Me.UsuMaquinasToolStrip.TabIndex = 5
+        Me.UsuMaquinasToolStrip.Text = "ToolStrip1"
+        '
+        'ToolStripLabel3
+        '
+        Me.ToolStripLabel3.Name = "ToolStripLabel3"
+        Me.ToolStripLabel3.Size = New System.Drawing.Size(70, 22)
+        Me.ToolStripLabel3.Text = "Usuarios: 15"
+        '
+        'ToolStripLabel2
+        '
+        Me.ToolStripLabel2.Name = "ToolStripLabel2"
+        Me.ToolStripLabel2.Size = New System.Drawing.Size(12, 22)
+        Me.ToolStripLabel2.Text = "-"
         '
         'ToolStripLabel1
         '
         Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        Me.ToolStripLabel1.Size = New System.Drawing.Size(70, 22)
-        Me.ToolStripLabel1.Text = "Usuarios: 15"
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(71, 22)
+        Me.ToolStripLabel1.Text = "Máquinas: 6"
+        '
+        'ToolStrip1
+        '
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUsuarioToolStripButton, Me.AbrirToolStripButton, Me.ImprimirToolStripButton, Me.toolStripSeparator, Me.AyudaToolStripButton})
+        Me.ToolStrip1.Location = New System.Drawing.Point(0, 24)
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.Size = New System.Drawing.Size(952, 25)
+        Me.ToolStrip1.TabIndex = 7
+        Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'AddUsuarioToolStripButton
+        '
+        Me.AddUsuarioToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.AddUsuarioToolStripButton.Image = CType(resources.GetObject("AddUsuarioToolStripButton.Image"), System.Drawing.Image)
+        Me.AddUsuarioToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.AddUsuarioToolStripButton.Name = "AddUsuarioToolStripButton"
+        Me.AddUsuarioToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.AddUsuarioToolStripButton.Text = "&Nuevo"
+        '
+        'AbrirToolStripButton
+        '
+        Me.AbrirToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.AbrirToolStripButton.Image = CType(resources.GetObject("AbrirToolStripButton.Image"), System.Drawing.Image)
+        Me.AbrirToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.AbrirToolStripButton.Name = "AbrirToolStripButton"
+        Me.AbrirToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.AbrirToolStripButton.Text = "&Abrir"
+        '
+        'ImprimirToolStripButton
+        '
+        Me.ImprimirToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ImprimirToolStripButton.Image = CType(resources.GetObject("ImprimirToolStripButton.Image"), System.Drawing.Image)
+        Me.ImprimirToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ImprimirToolStripButton.Name = "ImprimirToolStripButton"
+        Me.ImprimirToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.ImprimirToolStripButton.Text = "&Imprimir"
+        '
+        'toolStripSeparator
+        '
+        Me.toolStripSeparator.Name = "toolStripSeparator"
+        Me.toolStripSeparator.Size = New System.Drawing.Size(6, 25)
+        '
+        'AyudaToolStripButton
+        '
+        Me.AyudaToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.AyudaToolStripButton.Image = CType(resources.GetObject("AyudaToolStripButton.Image"), System.Drawing.Image)
+        Me.AyudaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.AyudaToolStripButton.Name = "AyudaToolStripButton"
+        Me.AyudaToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.AyudaToolStripButton.Text = "Ay&uda"
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(820, 407)
+        Me.ClientSize = New System.Drawing.Size(952, 553)
         Me.Controls.Add(Me.ToolStrip1)
-        Me.Controls.Add(Me.MenuStrip1)
+        Me.Controls.Add(Me.UsuMaquinasToolStrip)
+        Me.Controls.Add(Me.MenuStrip)
         Me.IsMdiContainer = True
-        Me.MainMenuStrip = Me.MenuStrip1
+        Me.MainMenuStrip = Me.MenuStrip
         Me.Name = "Form1"
         Me.Text = "FabLab-Ventana Principal"
-        Me.MenuStrip1.ResumeLayout(False)
-        Me.MenuStrip1.PerformLayout()
+        Me.MenuStrip.ResumeLayout(False)
+        Me.MenuStrip.PerformLayout()
+        Me.UsuMaquinasToolStrip.ResumeLayout(False)
+        Me.UsuMaquinasToolStrip.PerformLayout()
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
         Me.ResumeLayout(False)
@@ -194,13 +269,13 @@ Partial Class Form1
 
     End Sub
 
-    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents MenuStrip As MenuStrip
     Friend WithEvents ArchivoToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents NuevoToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GuardarToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem2 As ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem3 As ToolStripMenuItem
+    Friend WithEvents AddUsuarioToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GestionUsuariosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents VentanasToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OrganizarVentanasToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents MinimizarTodasToolStripMenuItem As ToolStripMenuItem
@@ -211,6 +286,14 @@ Partial Class Form1
     Friend WithEvents AyudaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AcercaDeToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
-    Friend WithEvents ToolStrip1 As ToolStrip
+    Friend WithEvents UsuMaquinasToolStrip As ToolStrip
     Friend WithEvents ToolStripLabel1 As ToolStripLabel
+    Friend WithEvents ToolStripLabel2 As ToolStripLabel
+    Friend WithEvents ToolStripLabel3 As ToolStripLabel
+    Friend WithEvents ToolStrip1 As ToolStrip
+    Friend WithEvents AddUsuarioToolStripButton As ToolStripButton
+    Friend WithEvents AbrirToolStripButton As ToolStripButton
+    Friend WithEvents ImprimirToolStripButton As ToolStripButton
+    Friend WithEvents toolStripSeparator As ToolStripSeparator
+    Friend WithEvents AyudaToolStripButton As ToolStripButton
 End Class
