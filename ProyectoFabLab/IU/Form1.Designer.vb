@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form1
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Form1
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.MenuStrip = New System.Windows.Forms.MenuStrip()
@@ -31,34 +31,35 @@ Partial Class Form1
         Me.NuevoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GuardarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InformesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.VentanasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OrganizarVentanasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CascadaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MosaicoHorizontalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MosaicoVerticalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.MinimizarTodasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AyudaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AcercaDeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UsuMaquinasToolStrip = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel3 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.ToolStrip = New System.Windows.Forms.ToolStrip()
         Me.AddUsuarioToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.AbrirToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ImprimirToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.AyudaToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.VentanaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OrganizarVentanasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CascadaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MosaicoVerticalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MosaicoHorizontalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MinimizarTodasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuStrip.SuspendLayout()
         Me.UsuMaquinasToolStrip.SuspendLayout()
-        Me.ToolStrip1.SuspendLayout()
+        Me.ToolStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip
         '
-        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ArchivoToolStripMenuItem, Me.InformesToolStripMenuItem, Me.VentanasToolStripMenuItem, Me.AyudaToolStripMenuItem})
+        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ArchivoToolStripMenuItem, Me.InformesToolStripMenuItem, Me.VentanaToolStripMenuItem, Me.AyudaToolStripMenuItem})
         Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip.MdiWindowListItem = Me.VentanaToolStripMenuItem
         Me.MenuStrip.Name = "MenuStrip"
         Me.MenuStrip.Size = New System.Drawing.Size(952, 24)
         Me.MenuStrip.TabIndex = 3
@@ -75,15 +76,15 @@ Partial Class Form1
         '
         Me.AddUsuarioToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.AddUsuarioToolStripMenuItem.Name = "AddUsuarioToolStripMenuItem"
-        Me.AddUsuarioToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.AddUsuarioToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
         Me.AddUsuarioToolStripMenuItem.Text = "Nuevo Usuario"
         '
         'GestionUsuariosToolStripMenuItem
         '
         Me.GestionUsuariosToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.GestionUsuariosToolStripMenuItem.Name = "GestionUsuariosToolStripMenuItem"
-        Me.GestionUsuariosToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
-        Me.GestionUsuariosToolStripMenuItem.Text = "Gestión de usuarios"
+        Me.GestionUsuariosToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
+        Me.GestionUsuariosToolStripMenuItem.Text = "Gestión de Usuarios"
         '
         'ArchivoToolStripMenuItem
         '
@@ -104,56 +105,13 @@ Partial Class Form1
         Me.GuardarToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.GuardarToolStripMenuItem.Name = "GuardarToolStripMenuItem"
         Me.GuardarToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
-        Me.GuardarToolStripMenuItem.Text = "Gestión de máquinas"
+        Me.GuardarToolStripMenuItem.Text = "Gestión de Máquinas"
         '
         'InformesToolStripMenuItem
         '
         Me.InformesToolStripMenuItem.Name = "InformesToolStripMenuItem"
         Me.InformesToolStripMenuItem.Size = New System.Drawing.Size(66, 20)
         Me.InformesToolStripMenuItem.Text = "Informes"
-        '
-        'VentanasToolStripMenuItem
-        '
-        Me.VentanasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OrganizarVentanasToolStripMenuItem, Me.ToolStripSeparator1, Me.MinimizarTodasToolStripMenuItem})
-        Me.VentanasToolStripMenuItem.Name = "VentanasToolStripMenuItem"
-        Me.VentanasToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
-        Me.VentanasToolStripMenuItem.Text = "Ventana"
-        '
-        'OrganizarVentanasToolStripMenuItem
-        '
-        Me.OrganizarVentanasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CascadaToolStripMenuItem, Me.MosaicoHorizontalToolStripMenuItem, Me.MosaicoVerticalToolStripMenuItem})
-        Me.OrganizarVentanasToolStripMenuItem.Name = "OrganizarVentanasToolStripMenuItem"
-        Me.OrganizarVentanasToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
-        Me.OrganizarVentanasToolStripMenuItem.Text = "Organizar ventanas"
-        '
-        'CascadaToolStripMenuItem
-        '
-        Me.CascadaToolStripMenuItem.Name = "CascadaToolStripMenuItem"
-        Me.CascadaToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
-        Me.CascadaToolStripMenuItem.Text = "Cascada"
-        '
-        'MosaicoHorizontalToolStripMenuItem
-        '
-        Me.MosaicoHorizontalToolStripMenuItem.Name = "MosaicoHorizontalToolStripMenuItem"
-        Me.MosaicoHorizontalToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
-        Me.MosaicoHorizontalToolStripMenuItem.Text = "Mosaico Horizontal"
-        '
-        'MosaicoVerticalToolStripMenuItem
-        '
-        Me.MosaicoVerticalToolStripMenuItem.Name = "MosaicoVerticalToolStripMenuItem"
-        Me.MosaicoVerticalToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
-        Me.MosaicoVerticalToolStripMenuItem.Text = "Mosaico Vertical"
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(172, 6)
-        '
-        'MinimizarTodasToolStripMenuItem
-        '
-        Me.MinimizarTodasToolStripMenuItem.Name = "MinimizarTodasToolStripMenuItem"
-        Me.MinimizarTodasToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
-        Me.MinimizarTodasToolStripMenuItem.Text = "Minimizar Todas"
         '
         'AyudaToolStripMenuItem
         '
@@ -165,7 +123,7 @@ Partial Class Form1
         'AcercaDeToolStripMenuItem
         '
         Me.AcercaDeToolStripMenuItem.Name = "AcercaDeToolStripMenuItem"
-        Me.AcercaDeToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.AcercaDeToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.AcercaDeToolStripMenuItem.Text = "Acerca de"
         '
         'UsuMaquinasToolStrip
@@ -196,14 +154,14 @@ Partial Class Form1
         Me.ToolStripLabel1.Size = New System.Drawing.Size(71, 22)
         Me.ToolStripLabel1.Text = "Máquinas: 6"
         '
-        'ToolStrip1
+        'ToolStrip
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUsuarioToolStripButton, Me.AbrirToolStripButton, Me.ImprimirToolStripButton, Me.toolStripSeparator, Me.AyudaToolStripButton})
-        Me.ToolStrip1.Location = New System.Drawing.Point(0, 24)
-        Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(952, 25)
-        Me.ToolStrip1.TabIndex = 7
-        Me.ToolStrip1.Text = "ToolStrip1"
+        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUsuarioToolStripButton, Me.AbrirToolStripButton, Me.ImprimirToolStripButton, Me.toolStripSeparator, Me.AyudaToolStripButton})
+        Me.ToolStrip.Location = New System.Drawing.Point(0, 24)
+        Me.ToolStrip.Name = "ToolStrip"
+        Me.ToolStrip.Size = New System.Drawing.Size(952, 25)
+        Me.ToolStrip.TabIndex = 7
+        Me.ToolStrip.Text = "ToolStrip1"
         '
         'AddUsuarioToolStripButton
         '
@@ -246,24 +204,68 @@ Partial Class Form1
         Me.AyudaToolStripButton.Size = New System.Drawing.Size(23, 22)
         Me.AyudaToolStripButton.Text = "Ay&uda"
         '
+        'VentanaToolStripMenuItem
+        '
+        Me.VentanaToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OrganizarVentanasToolStripMenuItem, Me.MinimizarTodasToolStripMenuItem, Me.ToolStripSeparator1})
+        Me.VentanaToolStripMenuItem.Name = "VentanaToolStripMenuItem"
+        Me.VentanaToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
+        Me.VentanaToolStripMenuItem.Text = "Ventana"
+        '
+        'OrganizarVentanasToolStripMenuItem
+        '
+        Me.OrganizarVentanasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CascadaToolStripMenuItem, Me.MosaicoVerticalToolStripMenuItem, Me.MosaicoHorizontalToolStripMenuItem})
+        Me.OrganizarVentanasToolStripMenuItem.Name = "OrganizarVentanasToolStripMenuItem"
+        Me.OrganizarVentanasToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.OrganizarVentanasToolStripMenuItem.Text = "Organizar Ventanas"
+        '
+        'CascadaToolStripMenuItem
+        '
+        Me.CascadaToolStripMenuItem.Name = "CascadaToolStripMenuItem"
+        Me.CascadaToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.CascadaToolStripMenuItem.Text = "Cascada"
+        '
+        'MosaicoVerticalToolStripMenuItem
+        '
+        Me.MosaicoVerticalToolStripMenuItem.Name = "MosaicoVerticalToolStripMenuItem"
+        Me.MosaicoVerticalToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.MosaicoVerticalToolStripMenuItem.Text = "Mosaico Vertical"
+        '
+        'MosaicoHorizontalToolStripMenuItem
+        '
+        Me.MosaicoHorizontalToolStripMenuItem.Name = "MosaicoHorizontalToolStripMenuItem"
+        Me.MosaicoHorizontalToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.MosaicoHorizontalToolStripMenuItem.Text = "Mosaico Horizontal"
+        '
+        'MinimizarTodasToolStripMenuItem
+        '
+        Me.MinimizarTodasToolStripMenuItem.Name = "MinimizarTodasToolStripMenuItem"
+        Me.MinimizarTodasToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.MinimizarTodasToolStripMenuItem.Text = "Minimizar Todas"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(172, 6)
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(952, 553)
-        Me.Controls.Add(Me.ToolStrip1)
+        Me.Controls.Add(Me.ToolStrip)
         Me.Controls.Add(Me.UsuMaquinasToolStrip)
         Me.Controls.Add(Me.MenuStrip)
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.MenuStrip
         Me.Name = "Form1"
-        Me.Text = "FabLab-Ventana Principal"
+        Me.Text = "FabLab - Ventana Principal"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.MenuStrip.ResumeLayout(False)
         Me.MenuStrip.PerformLayout()
         Me.UsuMaquinasToolStrip.ResumeLayout(False)
         Me.UsuMaquinasToolStrip.PerformLayout()
-        Me.ToolStrip1.ResumeLayout(False)
-        Me.ToolStrip1.PerformLayout()
+        Me.ToolStrip.ResumeLayout(False)
+        Me.ToolStrip.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -276,24 +278,24 @@ Partial Class Form1
     Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents AddUsuarioToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GestionUsuariosToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents VentanasToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents OrganizarVentanasToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents MinimizarTodasToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents InformesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CascadaToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents MosaicoHorizontalToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents MosaicoVerticalToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AyudaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AcercaDeToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents UsuMaquinasToolStrip As ToolStrip
     Friend WithEvents ToolStripLabel1 As ToolStripLabel
     Friend WithEvents ToolStripLabel2 As ToolStripLabel
     Friend WithEvents ToolStripLabel3 As ToolStripLabel
-    Friend WithEvents ToolStrip1 As ToolStrip
+    Friend WithEvents ToolStrip As ToolStrip
     Friend WithEvents AddUsuarioToolStripButton As ToolStripButton
     Friend WithEvents AbrirToolStripButton As ToolStripButton
     Friend WithEvents ImprimirToolStripButton As ToolStripButton
     Friend WithEvents toolStripSeparator As ToolStripSeparator
     Friend WithEvents AyudaToolStripButton As ToolStripButton
+    Friend WithEvents VentanaToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OrganizarVentanasToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CascadaToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MosaicoVerticalToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MosaicoHorizontalToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents MinimizarTodasToolStripMenuItem As ToolStripMenuItem
 End Class
