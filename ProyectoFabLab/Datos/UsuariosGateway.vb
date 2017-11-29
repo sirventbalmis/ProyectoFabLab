@@ -29,6 +29,7 @@ Public Class UsuariosGateway
         ' Dim patronEmail As Regex = New Regex("^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$")
         Dim sentenciaInsert As New StringBuilder("INSERT INTO Usuarios(nombre, apellidos, fecha_nacimiento, telefono, email, direccion, organizacion, tipo, fecha_alta) VALUES(")
         Dim lector As SqlDataReader
+        Dim tiposUsuarioGateway As New TiposUsuarioGateway(My.Settings.Conexion)
 
         If nombre.Equals("") Or nombre = Nothing Then
 
@@ -87,7 +88,7 @@ Public Class UsuariosGateway
 
         End If
 
-        lector = SeleccionarTiposUsuarioPorTipo()          ' Obtenemos los tipos de usuarios para, saber si el usuario es profesional o investigador.
+        lector = tiposUsuarioGateway.SeleccionarTipos()         ' Obtenemos los tipos de usuarios para, saber si el usuario es profesional o investigador.
 
         While lector.Read
 
@@ -119,7 +120,7 @@ Public Class UsuariosGateway
 
         End If
 
-        numTipoUsuario = SeleccionarTiposUsuarioPorNombre(tipo)
+        numTipoUsuario = tiposUsuarioGateway.SeleccionarPorNombre(tipo)
         sentenciaInsert.Append(String.Format(", {0}", numTipoUsuario))
 
         sentenciaInsert.Append(", CONVERT(varchar, GETDATE(), 105))")
@@ -152,57 +153,6 @@ Public Class UsuariosGateway
 
 
     ''' <summary>
-    ''' Obtiene todos los tipos de usuarios.
-    ''' </summary>
-    ''' <returns>SqlDataReader con todos los tipos</returns>
-    Private Function SeleccionarTiposUsuarioPorTipo() As SqlDataReader
-
-        Dim lector As SqlDataReader
-
-        Try
-            ConexionABd.Open()
-            Comando.CommandText = "SELECT tipo FROM TiposUsuario"
-            lector = Comando.ExecuteReader()
-
-        Catch ex As Exception
-
-            Throw New Exception(ex.Message)
-
-        End Try
-
-        Return lector
-
-    End Function
-
-
-    ''' <summary>
-    ''' Obtiene el Id del tipo de usuario a partir de uno introducido.
-    ''' </summary>
-    ''' <param name="tipo"></param>
-    ''' <returns>El id del tipo</returns>
-    Private Function SeleccionarTiposUsuarioPorNombre(ByRef tipo As String) As Integer
-
-        Dim numTipoUsuario As Integer
-
-        Try
-            ConexionABd.Open()
-            Comando.CommandText = String.Format("SELECT id FROM TiposUsuario WHERE tipo = '{0}'", tipo)
-            numTipoUsuario = DirectCast(Comando.ExecuteScalar(), Integer)
-
-            CerrarConexionABd()
-
-        Catch ex As Exception
-
-            Throw New Exception(ex.Message)
-
-        End Try
-
-        Return numTipoUsuario
-
-    End Function
-
-
-    ''' <summary>
     ''' Cierra la conexión a la Base de Datos.
     ''' </summary>
     Private Sub CerrarConexionABd()
@@ -217,7 +167,7 @@ Public Class UsuariosGateway
     ''' </summary>
     ''' <param name="idUsuario">Id del usuario para obtener sus datos</param>
     ''' <returns>DataTable con los datos de ese usuario</returns>
-    Public Function SeleccionarUsuarioPorId(ByRef idUsuario As Integer) As DataTable
+    Public Function SeleccionarPorId(ByRef idUsuario As Integer) As DataTable
 
         Dim tabla As New DataTable("Usuarios")
         Dim lector As SqlDataReader
@@ -259,7 +209,7 @@ Public Class UsuariosGateway
     ''' <param name="organizacion">Nueva organización del usuario</param>
     ''' <param name="tipo">Nuevo tipo del usuario</param>
     ''' <returns>True: Se han actualizado los datos. False: No se han actualizado los datos</returns>
-    Public Function ModificarUsuarioPorId(ByRef id As Integer, ByRef nombre As String, ByRef apellidos As String, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipo As String) As Boolean
+    Public Function ModificarPorId(ByRef id As Integer, ByRef nombre As String, ByRef apellidos As String, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipo As String) As Boolean
 
         Dim numFilas As Integer, numTipoUsuario As Integer
         Dim esNombreCorrecto As Boolean = False
@@ -267,6 +217,7 @@ Public Class UsuariosGateway
         Dim esProfesionalOInvestigador As Boolean = False
         Dim sentenciaUpdate As New StringBuilder("UPDATE Usuarios ")
         Dim lector As SqlDataReader
+        Dim tiposUsuariosGateway As New TiposUsuarioGateway(My.Settings.Conexion)
 
         If nombre.Equals("") Or nombre = Nothing Then
 
@@ -314,7 +265,7 @@ Public Class UsuariosGateway
 
         End If
 
-        lector = SeleccionarTiposUsuarioPorTipo()          ' Obtenemos los tipos de usuarios para, saber si el usuario es profesional o investigador.
+        lector = tiposUsuariosGateway.SeleccionarTipos()          ' Obtenemos los tipos de usuarios para, saber si el usuario es profesional o investigador.
 
         While lector.Read
 
@@ -346,7 +297,7 @@ Public Class UsuariosGateway
 
         End If
 
-        numTipoUsuario = SeleccionarTiposUsuarioPorNombre(tipo)
+        numTipoUsuario = tiposUsuariosGateway.SeleccionarPorNombre(tipo)
         sentenciaUpdate.Append(String.Format(", SET tipo = {0}", numTipoUsuario)).Append(")")
         MessageBox.Show(sentenciaUpdate.ToString(), "Sentencia", MessageBoxButtons.OK, MessageBoxIcon.Information)          ' Para hacer pruebas mientras se depura.
 
@@ -381,7 +332,7 @@ Public Class UsuariosGateway
     ''' </summary>
     ''' <param name="id">Id del usuario a borrar</param>
     ''' <returns></returns>
-    Public Function EliminarUsuarioPorId(ByRef id As Integer) As Boolean
+    Public Function EliminarPorId(ByRef id As Integer) As Boolean
 
         Dim numFilas As Integer
 

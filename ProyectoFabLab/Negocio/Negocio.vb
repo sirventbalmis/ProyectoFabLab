@@ -39,7 +39,7 @@
 
         Dim gatewayDatosUsuario As New UsuariosGateway(My.Settings.Conexion)
 
-        Return gatewayDatosUsuario.SeleccionarUsuarioPorId(idUsuario)
+        Return gatewayDatosUsuario.SeleccionarPorId(idUsuario)
 
     End Function
 
@@ -47,7 +47,7 @@
 
         Dim gatewayTipoUsuario As New TiposUsuarioGateway(My.Settings.Conexion)
 
-        If gatewayTipoUsuario.Insertar(tipoUsuario) Then
+        If gatewayTipoUsuario.InsertarTipoUsuario(tipoUsuario) Then
 
             Return True
 
