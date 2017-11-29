@@ -12,11 +12,13 @@
     ''' <param name="organizacion">Organización del usuario</param>
     ''' <param name="tipo">Tipo de usuario</param>
     ''' <param name="fechaAlta">Fecha de alta del usuario</param>
-    Public Function InsertarUsuario(ByRef nombre As String, ByRef apellidos As String, ByRef fechaNacimiento As Date, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipo As Integer, ByRef fechaAlta As Date) As Boolean
+    Public Function InsertarUsuario(ByRef nombre As String, ByRef apellidos As String, ByRef fechaNacimiento As Date, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipo As Integer) As Boolean
+
+
 
         Dim gatewayUsuario As New UsuariosGateway(My.Settings.Conexion)
 
-        If gatewayUsuario.Insertar(nombre, apellidos, fechaAlta, telefono, email, direccion, organizacion, tipo, fechaAlta) Then
+        If gatewayUsuario.Insertar(nombre, apellidos, fechaNacimiento, telefono, email, direccion, organizacion, tipo) Then
 
             Return True
 
@@ -25,6 +27,20 @@
             Return False
 
         End If
+
+    End Function
+
+
+    ''' <summary>
+    ''' Muestra los datos del usuario a partir de su Id.
+    ''' </summary>
+    ''' <param name="idUsuario"></param>
+    ''' <returns>DataTable con los datos de ese usuario</returns>
+    Public Function MostrarDatosUsuario(ByRef idUsuario As Integer) As DataTable
+
+        Dim gatewayDatosUsuario As New UsuariosGateway(My.Settings.Conexion)
+
+        Return gatewayDatosUsuario.SeleccionarUsuarioPorId(idUsuario)
 
     End Function
 
