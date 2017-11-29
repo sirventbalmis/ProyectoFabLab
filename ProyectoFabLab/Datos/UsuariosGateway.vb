@@ -1,5 +1,6 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Text.RegularExpressions
+Imports System.Text
 
 Public Class UsuariosGateway
 
@@ -16,112 +17,126 @@ Public Class UsuariosGateway
     ''' <param name="email">E-mail del usuario</param>
     ''' <param name="direccion">Dirección del usuario</param>
     ''' <param name="organizacion">Organización del usuario</param>
-    ''' <param name="tipo">Tipo de usuario</param>
-    ''' <param name="fechaAlta">Fecha de alta del usuario</param>
+    ''' <param name="tipo">Tipo de usuario</param>    
     ''' <returns>True: El usuario se ha insertado. False: El usuario no se ha insertado</returns>
-    Public Function Insertar(ByRef nombre As String, ByRef apellidos As String, ByRef fechaNacimiento As Date, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipo As Integer) As Boolean
+    Public Function Insertar(ByRef nombre As String, ByRef apellidos As String, ByRef fechaNacimiento As Date, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipo As String) As Boolean
 
-        Dim numFilas As Integer
+        Dim numFilas As Integer, numTipoUsuario As Integer
         Dim esNombreCorrecto As Boolean = False
         Dim esApellidoCorrecto As Boolean = False
-        Dim esTelefonoCorrecto As Boolean = False
-        Dim esEmailCorrecto As Boolean = False
-        Dim esDireccionCorrecta As Boolean = False
-        Dim esOrgCorrecta As Boolean = False
-        Dim esTipoCorrecto As Boolean = False
-        Dim patronTelefono As Regex = New Regex("^[0-9]{9}$")
-        Dim patronEmail As Regex = New Regex("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
+        Dim esProfesionalOInvestigador As Boolean = False
+        ' Dim patronTelefono As Regex = New Regex("^[0-9]{9}$")
+        ' Dim patronEmail As Regex = New Regex("^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$")
+        Dim sentenciaInsert As New StringBuilder("INSERT INTO Usuarios(nombre, apellidos, fecha_nacimiento, telefono, email, direccion, organizacion, tipo, fecha_alta) VALUES(")
+        Dim lector As SqlDataReader
 
+        If nombre.Equals("") Or nombre = Nothing Then
 
+            Throw New ArgumentException("El campo nombre está vacío.")
 
+        Else
 
-
-
-        'If nombre.Equals("") Or nombre = Nothing Then
-
-        '    Throw New ArgumentException("El campo nombre está vacío.")
-
-        'Else
-
-        '    esNombreCorrecto = True
-
-        'End If
-
-        'If apellidos.Equals("") Or apellidos = Nothing Then
-
-        '    Throw New ArgumentException("El campo apellidos está vacío.")
-
-        'Else
-
-        '    esApellidoCorrecto = True
-
-        'End If
-
-        'If telefono.Equals("") Or telefono = Nothing Then
-
-        '    Throw New ArgumentException("El campo teléfono está vacío.")
-
-        'Else
-
-        '    If patronTelefono.IsMatch(telefono) Then
-
-        '        esTelefonoCorrecto = True
-
-        '    End If
-
-        'End If
-
-        'If email.Equals("") Or email = Nothing Then
-
-        '    Throw New ArgumentException("El campo email está vacío.")
-
-        'Else
-
-        '    esEmailCorrecto = True
-
-        'End If
-
-        'If direccion.Equals("") Or direccion = Nothing Then
-
-        '    Throw New ArgumentException("El campo dirección está vacío.")
-
-        'Else
-
-        '    esDireccionCorrecta = True
-
-        'End If
-
-        'If organizacion.Equals("") Or organizacion = Nothing Then
-
-        '    Throw New ArgumentException("El campo organización está vacío.")
-
-        'Else
-
-        '    esOrgCorrecta = True
-
-        'End If
-
-        If esNombreCorrecto And esApellidoCorrecto And esTelefonoCorrecto And esEmailCorrecto And esDireccionCorrecta And esOrgCorrecta Then        ' Si todos los campos son correctos añadimos el usuario.
-
-            Try
-                ConexionABd.Open()
-                Comando.CommandText = String.Format("")
-                numFilas = Comando.ExecuteNonQuery()
-
-            Catch ex As Exception
-
-                Throw New Exception(ex.Message)
-
-            Finally
-                If ConexionABd.State = ConnectionState.Open Then
-
-                    ConexionABd.Close()
-
-                End If
-
-            End Try
+            esNombreCorrecto = True
 
         End If
+
+        If apellidos.Equals("") Or apellidos = Nothing Then
+
+            Throw New ArgumentException("El campo apellidos está vacío.")
+
+        Else
+
+            esApellidoCorrecto = True
+
+        End If
+
+
+        If esNombreCorrecto And esApellidoCorrecto Then         ' Añadimos el nombre, los apellidos y la fecha de nacimiento al INSERT.
+
+            sentenciaInsert.Append(String.Format("'{0}', '{1}', CONVERT(varchar, '{2}', 105)", nombre, apellidos, fechaNacimiento.Date.ToString()))
+
+        End If
+
+        If telefono.Equals("") Then
+
+            sentenciaInsert.Append(", NULL")
+
+        Else
+
+            sentenciaInsert.Append(String.Format(", '{0}'", telefono))          ' Añadimos el teléfono.
+
+        End If
+
+        If email.Equals("") Then
+
+            sentenciaInsert.Append(", NULL")
+
+        Else
+
+            sentenciaInsert.Append(String.Format(", '{0}'", email))             ' Añadimos el email.
+
+        End If
+
+        If direccion.Equals("") Then
+
+            sentenciaInsert.Append(", NULL")
+
+        Else
+
+            sentenciaInsert.Append(String.Format(", '{0}'", direccion))         ' Añadimos la dirección.
+
+        End If
+
+        lector = SeleccionarTiposUsuarioPorTipo()          ' Obtenemos los tipos de usuarios para, saber si el usuario es profesional o investigador.
+
+        While lector.Read
+
+            If tipo.Equals(lector.GetString(0)) Then
+
+                esProfesionalOInvestigador = True
+
+            End If
+
+        End While
+
+        CerrarConexionABd()
+
+        If esProfesionalOInvestigador Then
+
+            If organizacion.Equals("") Then             ' Si el usuario es profesional o investigador. Pero, no ha introducido una orgnanización, lanzamos una excepción.
+
+                Throw New ArgumentException("El campo organización está vacío.")
+
+            Else
+
+                sentenciaInsert.Append(String.Format(", '{0}'", organizacion))                ' Añadimos la organización.
+
+            End If
+
+        Else
+
+            sentenciaInsert.Append(", NULL")
+
+        End If
+
+        numTipoUsuario = SeleccionarTiposUsuarioPorNombre(tipo)
+        sentenciaInsert.Append(String.Format(", {0}", numTipoUsuario))
+
+        sentenciaInsert.Append(", CONVERT(varchar, GETDATE(), 105))")
+        MessageBox.Show(sentenciaInsert.ToString(), "Sentencia", MessageBoxButtons.OK, MessageBoxIcon.Information)          ' Para hacer pruebas mientras se depura.
+
+        Try
+            ConexionABd.Open()
+            Comando.CommandText = sentenciaInsert.ToString()
+            numFilas = Comando.ExecuteNonQuery()
+
+            CerrarConexionABd()
+
+        Catch ex As Exception
+
+            Throw New Exception(ex.Message)
+
+        End Try
 
         If numFilas > 0 Then            ' Se ha insertado un usuario.
 
@@ -134,6 +149,68 @@ Public Class UsuariosGateway
         End If
 
     End Function
+
+
+    ''' <summary>
+    ''' Obtiene todos los tipos de usuarios.
+    ''' </summary>
+    ''' <returns>SqlDataReader con todos los tipos</returns>
+    Private Function SeleccionarTiposUsuarioPorTipo() As SqlDataReader
+
+        Dim lector As SqlDataReader
+
+        Try
+            ConexionABd.Open()
+            Comando.CommandText = "SELECT tipo FROM TiposUsuario"
+            lector = Comando.ExecuteReader()
+
+        Catch ex As Exception
+
+            Throw New Exception(ex.Message)
+
+        End Try
+
+        Return lector
+
+    End Function
+
+
+    ''' <summary>
+    ''' Obtiene el Id del tipo de usuario a partir de uno introducido.
+    ''' </summary>
+    ''' <param name="tipo"></param>
+    ''' <returns>El id del tipo</returns>
+    Private Function SeleccionarTiposUsuarioPorNombre(ByRef tipo As String) As Integer
+
+        Dim numTipoUsuario As Integer
+
+        Try
+            ConexionABd.Open()
+            Comando.CommandText = String.Format("SELECT id FROM TiposUsuario WHERE tipo = '{0}'", tipo)
+            numTipoUsuario = DirectCast(Comando.ExecuteScalar(), Integer)
+
+            CerrarConexionABd()
+
+        Catch ex As Exception
+
+            Throw New Exception(ex.Message)
+
+        End Try
+
+        Return numTipoUsuario
+
+    End Function
+
+
+    ''' <summary>
+    ''' Cierra la conexión a la Base de Datos.
+    ''' </summary>
+    Private Sub CerrarConexionABd()
+
+        ConexionABd.Close()
+
+    End Sub
+
 
     ''' <summary>
     ''' Muestra los datos de un usuario a partir de un Id.
@@ -169,9 +246,167 @@ Public Class UsuariosGateway
 
     End Function
 
-    Public Function ModificarUsuarioPorId(ByRef id As Integer, ByRef nombre As String, ByRef apellidos As String, ByRef fechaNacimiento As Date, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipo As Integer, ByRef fechaAlta As Date) As Boolean
+
+    ''' <summary>
+    ''' Cambia los datos de un usuario a partir de su Id.
+    ''' </summary>
+    ''' <param name="id">Id del usuario</param>
+    ''' <param name="nombre">Nuevo nombre del usuario</param>
+    ''' <param name="apellidos">Nuevos apellidos del usuario</param>
+    ''' <param name="telefono">Nuevo teléfono del usuario</param>
+    ''' <param name="email">Nuevo email del usuario</param>
+    ''' <param name="direccion">Nueva dirección del usuario</param>
+    ''' <param name="organizacion">Nueva organización del usuario</param>
+    ''' <param name="tipo">Nuevo tipo del usuario</param>
+    ''' <returns>True: Se han actualizado los datos. False: No se han actualizado los datos</returns>
+    Public Function ModificarUsuarioPorId(ByRef id As Integer, ByRef nombre As String, ByRef apellidos As String, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipo As String) As Boolean
+
+        Dim numFilas As Integer, numTipoUsuario As Integer
+        Dim esNombreCorrecto As Boolean = False
+        Dim esApellidoCorrecto As Boolean = False
+        Dim esProfesionalOInvestigador As Boolean = False
+        Dim sentenciaUpdate As New StringBuilder("UPDATE Usuarios ")
+        Dim lector As SqlDataReader
+
+        If nombre.Equals("") Or nombre = Nothing Then
+
+            Throw New ArgumentException("El campo nombre está vacío.")
+
+        Else
+
+            esNombreCorrecto = True
+
+        End If
+
+        If apellidos.Equals("") Or apellidos = Nothing Then
+
+            Throw New ArgumentException("El campo apellidos está vacío.")
+
+        Else
+
+            esApellidoCorrecto = True
+
+        End If
+
+        If esNombreCorrecto And esApellidoCorrecto Then
+
+            sentenciaUpdate.Append(String.Format("SET nombre = '{0}', SET apellidos = '{1}'", nombre, apellidos))
+
+        End If
+
+        If email.Equals("") Then
+
+            sentenciaUpdate.Append(", SET email = NULL")
+
+        Else
+
+            sentenciaUpdate.Append(String.Format(", SET email = '{0}'", email))
+
+        End If
+
+        If direccion.Equals("") Then
+
+            sentenciaUpdate.Append(", SET direccion = NULL")
+
+        Else
+
+            sentenciaUpdate.Append(String.Format(", SET direccion = '{0}'", direccion))
+
+        End If
+
+        lector = SeleccionarTiposUsuarioPorTipo()          ' Obtenemos los tipos de usuarios para, saber si el usuario es profesional o investigador.
+
+        While lector.Read
+
+            If tipo.Equals(lector.GetString(0)) Then
+
+                esProfesionalOInvestigador = True
+
+            End If
+
+        End While
+
+        CerrarConexionABd()
+
+        If esProfesionalOInvestigador Then
+
+            If organizacion.Equals("") Then             ' Si el usuario es profesional o investigador. Pero, no ha introducido una orgnanización, lanzamos una excepción.
+
+                Throw New ArgumentException("El campo organización está vacío.")
+
+            Else
+
+                sentenciaUpdate.Append(String.Format(", SET organizacion = '{0}'", organizacion))                ' Cambiamos la organización.
+
+            End If
+
+        Else
+
+            sentenciaUpdate.Append(", SET organizacion = NULL")
+
+        End If
+
+        numTipoUsuario = SeleccionarTiposUsuarioPorNombre(tipo)
+        sentenciaUpdate.Append(String.Format(", SET tipo = {0}", numTipoUsuario)).Append(")")
+        MessageBox.Show(sentenciaUpdate.ToString(), "Sentencia", MessageBoxButtons.OK, MessageBoxIcon.Information)          ' Para hacer pruebas mientras se depura.
+
+        Try
+            ConexionABd.Open()
+            Comando.CommandText = sentenciaUpdate.ToString()
+            numFilas = Comando.ExecuteNonQuery()
+
+            CerrarConexionABd()
+
+        Catch ex As Exception
+
+            Throw New Exception(ex.Message)
+
+        End Try
+
+        If numFilas > 0 Then            ' Se ha actualizado un usuario.
+
+            Return True
+
+        Else
+
+            Return False
+
+        End If
+
+    End Function
 
 
+    ''' <summary>
+    ''' Elimina un usuario a partir de su Id.
+    ''' </summary>
+    ''' <param name="id">Id del usuario a borrar</param>
+    ''' <returns></returns>
+    Public Function EliminarUsuarioPorId(ByRef id As Integer) As Boolean
+
+        Dim numFilas As Integer
+
+        Try
+            ConexionABd.Open()
+            Comando.CommandText = String.Format("DELETE FROM Usuarios WHERE id = {0}", id)
+            numFilas = Comando.ExecuteNonQuery()
+
+            CerrarConexionABd()
+
+        Catch ex As Exception
+
+            Throw New Exception(ex.Message)
+
+        End Try
+
+        If numFilas > 0 Then            ' Se ha actualizado un usuario.
+
+            Return True
+
+        Else
+
+            Return False
+
+        End If
 
     End Function
 

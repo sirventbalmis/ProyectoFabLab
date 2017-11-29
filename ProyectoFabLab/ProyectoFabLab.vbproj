@@ -76,6 +76,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Datos\MaquinasGateway.vb" />
     <Compile Include="Datos\TiposUsuarioGateway.vb" />
     <Compile Include="Datos\UsuariosGateway.vb" />
@@ -109,6 +110,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Negocio\Negocio.vb" />
+    <Compile Include="InicioProgramaSplashScreen.Designer.vb">
+      <DependentUpon>InicioProgramaSplashScreen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="InicioProgramaSplashScreen.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="IU\Form1.resx">
@@ -123,6 +130,9 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="InicioProgramaSplashScreen.resx">
+      <DependentUpon>InicioProgramaSplashScreen.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="My Project\Application.myapp">
@@ -136,7 +146,9 @@
     </None>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\Fab_Lab_logo.png.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

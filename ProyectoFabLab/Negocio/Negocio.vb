@@ -10,9 +10,8 @@
     ''' <param name="email">E-mail del usuario</param>
     ''' <param name="direccion">Dirección del usuario</param>
     ''' <param name="organizacion">Organización del usuario</param>
-    ''' <param name="tipo">Tipo de usuario</param>
-    ''' <param name="fechaAlta">Fecha de alta del usuario</param>
-    Public Function InsertarUsuario(ByRef nombre As String, ByRef apellidos As String, ByRef fechaNacimiento As Date, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipo As Integer) As Boolean
+    ''' <param name="tipo">Tipo de usuario</param>    
+    Public Function InsertarUsuario(ByRef nombre As String, ByRef apellidos As String, ByRef fechaNacimiento As Date, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipo As String) As Boolean
 
 
 
