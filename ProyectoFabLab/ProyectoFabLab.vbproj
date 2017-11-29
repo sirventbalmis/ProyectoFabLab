@@ -76,6 +76,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Datos\MaquinasGateway.vb" />
     <Compile Include="Datos\TiposUsuarioGateway.vb" />
     <Compile Include="Datos\UsuariosGateway.vb" />
     <Compile Include="Foo.vb" />
