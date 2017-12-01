@@ -99,6 +99,47 @@ Public Class TiposUsuarioGateway
     End Function
 
 
+    ''' <summary>
+    ''' Modifica el tipo de usuario a partir de su Id.
+    ''' </summary>
+    ''' <param name="id">El id del tipo de usuario</param>
+    ''' <param name="tipoUsuario">Nuevo tipo de usuario</param>
+    ''' <returns></returns>
+    Public Function ModificarPorId(ByRef id As Integer, ByRef tipoUsuario As String) As Boolean
+
+        Dim numFilas As Integer
+
+        Try
+            ConexionABd.Open()
+            Comando.CommandText = String.Format("UPDATE tiposUsuario SET tipo = '{0}' WHERE id = {1}", tipoUsuario, id)
+            numFilas = Comando.ExecuteNonQuery()
+
+            CerrarConexionABd()
+
+        Catch ex As Exception
+
+            Throw New Exception(ex.Message)
+
+        End Try
+
+        If numFilas > 0 Then
+
+            Return True
+
+        Else
+
+            Return False
+
+        End If
+
+    End Function
+
+
+    ''' <summary>
+    ''' Elimina un tipo de usuario a partir de su Id.
+    ''' </summary>
+    ''' <param name="id">Id del tipo de usuario a eliminar</param>
+    ''' <returns></returns>
     Public Function EliminarPorId(ByRef id As Integer) As Boolean
 
         Dim numFilas As Integer
