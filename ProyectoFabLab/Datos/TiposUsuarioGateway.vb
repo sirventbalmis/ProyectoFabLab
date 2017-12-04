@@ -104,7 +104,7 @@ Public Class TiposUsuarioGateway
     ''' </summary>
     ''' <param name="id">El id del tipo de usuario</param>
     ''' <param name="tipoUsuario">Nuevo tipo de usuario</param>
-    ''' <returns></returns>
+    ''' <returns>True: Se ha modificado el tipo de usuario. False: No se ha modificado el tipo de usuario.</returns>
     Public Function ModificarPorId(ByRef id As Integer, ByRef tipoUsuario As String) As Boolean
 
         Dim numFilas As Integer

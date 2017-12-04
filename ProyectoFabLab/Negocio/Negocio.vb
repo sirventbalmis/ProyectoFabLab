@@ -87,21 +87,42 @@ Public Class Negocio
     ''' <summary>
     ''' Inserta un nuevo tipo de usuario.
     ''' </summary>
-    ''' <param name="tipoUsuario">Tipo de usuario a insertar</param>
+    ''' <param name="tipo">Tipo de usuario a insertar</param>
     ''' <returns>True: Se ha insertado el nuevo tipo de usuario False: No se ha insertado el nuevo tipo de usuario</returns>
-    Public Function InsertarTipoUsuario(ByRef tipoUsuario As String) As Boolean
+    Public Function InsertarTipoUsuario(ByRef tipo As String) As Boolean
 
         Dim gatewayTipoUsuario As New TiposUsuarioGateway(My.Settings.Conexion)
 
-        If gatewayTipoUsuario.InsertarTipoUsuario(tipoUsuario) Then
+        Return gatewayTipoUsuario.InsertarTipoUsuario(tipo)
 
-            Return True
+    End Function
 
-        Else
 
-            Return False
+    ''' <summary>
+    ''' Modifica el tipo de usuario a partir de su Id.
+    ''' </summary>
+    ''' <param name="id">El id del tipo de usuario</param>
+    ''' <param name="tipoUsuario">Nuevo tipo de usuario</param>
+    ''' <returns>True: Se ha modificado el tipo de usuario. False: No se ha modificado el tipo de usuario.</returns>
+    Public Function ModificarTipoUsuarioPorId(ByRef id As Integer, ByRef tipoUsuario As String) As Boolean
 
-        End If
+        Dim gatewayTiposUsuario As New TiposUsuarioGateway(My.Settings.Conexion)
+
+        Return gatewayTiposUsuario.ModificarPorId(id, tipoUsuario)
+
+    End Function
+
+
+    ''' <summary>
+    ''' Elimina un tipo de usuario a partir de su Id.
+    ''' </summary>
+    ''' <param name="id">Id del tipo de usuario a eliminar</param>
+    ''' <returns>True: El tipo de usuario se ha eliminado. False: El tipo de usuario no se ha eliminado.</returns>
+    Public Function EliminarTipoUsuarioPorId(ByRef id As Integer) As Boolean
+
+        Dim gatewayTiposUsuario As New TiposUsuarioGateway(My.Settings.Conexion)
+
+        Return gatewayTiposUsuario.EliminarPorId(id)
 
     End Function
 
@@ -129,6 +150,20 @@ Public Class Negocio
         Dim tiposUsuarioGateway As New TiposUsuarioGateway(My.Settings.Conexion)
 
         Return tiposUsuarioGateway.SeleccionarPorNombre(tipo)
+
+    End Function
+
+
+    ''' <summary>
+    ''' Obtiene las reservas de un usuario a partir de su Id.
+    ''' </summary>
+    ''' <param name="id">Id del usuario</param>
+    ''' <returns>DataTable con las reservas de un usuario.</returns>
+    Public Function ObtenerReservasUsuarioPorId(ByRef id As Integer) As DataTable
+
+        Dim gatewayReservas As New ReservasGateway(My.Settings.Conexion)
+
+        Return gatewayReservas.SeleccionarReservasPorId(id)
 
     End Function
 

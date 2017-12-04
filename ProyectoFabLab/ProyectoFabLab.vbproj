@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Datos\MaquinasGateway.vb" />
+    <Compile Include="Datos\ReservasGateway.vb" />
     <Compile Include="Datos\TiposMaquinaGateway.vb" />
     <Compile Include="Datos\TiposUsuarioGateway.vb" />
     <Compile Include="Datos\UsuariosGateway.vb" />
