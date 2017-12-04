@@ -13,13 +13,25 @@ Public Class MaquinasGateway
         Dim tabla As New DataTable("Maquinas")
         Try
             ConexionBD.Open()
-            Comando.CommandText = "SELECT id, modelo, precio_hora, fecha_compra, telefono_sat, tipo, descripcion, caracteristicas FROM TiposMaquina"
+            Comando.CommandText = "SELECT id, modelo, precio_hora, fecha_compra, telefono_sat, tipo, descripcion, caracteristicas FROM Maquinas"
             lector = Comando.ExecuteReader()
             tabla.Load(lector)
         Catch ex As Exception
             Throw New Exception(ex.Message)
-            End Try
+        End Try
         Return tabla
+    End Function
+
+    Public Function NumeroMaquinas() As SqlDataReader
+        Dim lector As SqlDataReader
+        Try
+            ConexionBD.Open()
+            Comando.CommandText = "SELECT COUNT(*) FROM Maquinas"
+            lector = Comando.ExecuteReader()
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+        Return lector
     End Function
 
     ''' <summary>
@@ -33,7 +45,7 @@ Public Class MaquinasGateway
         If id > 0 Then
             Try
                 ConexionBD.Open()
-                Comando.CommandText = String.Format("SELECT id, modelo, precio_hora, fecha_compra, telefono_sat, tipo, descripcion, caracteristicas FROM TiposMaquina WHERE id = {0}", id)
+                Comando.CommandText = String.Format("SELECT id, modelo, precio_hora, fecha_compra, telefono_sat, tipo, descripcion, caracteristicas FROM Maquinas WHERE id = {0}", id)
                 lector = Comando.ExecuteReader()
                 tabla.Load(lector)
             Catch ex As Exception
