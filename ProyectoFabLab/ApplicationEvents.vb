@@ -9,10 +9,10 @@
     ' NetworkAvailabilityChanged: Raised when the network connection is connected or disconnected.
     Partial Friend Class MyApplication
 
-        Protected Overrides Function OnInitialize(commandLineArgs As System.Collections.ObjectModel.ReadOnlyCollection(Of String)) As Boolean
-            Me.MinimumSplashScreenDisplayTime = 5000
-            Return MyBase.OnInitialize(commandLineArgs)
-        End Function
+        'Protected Overrides Function OnInitialize(commandLineArgs As System.Collections.ObjectModel.ReadOnlyCollection(Of String)) As Boolean
+        '    Me.MinimumSplashScreenDisplayTime = 5000
+        '    Return MyBase.OnInitialize(commandLineArgs)
+        'End Function
 
     End Class
 

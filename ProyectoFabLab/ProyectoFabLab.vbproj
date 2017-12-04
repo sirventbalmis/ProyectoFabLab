@@ -50,6 +50,9 @@
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -118,6 +121,12 @@
     <Compile Include="IU\InicioProgramaSplashScreen.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="IU\NuevaMaquina.Designer.vb">
+      <DependentUpon>NuevaMaquina.vb</DependentUpon>
+    </Compile>
+    <Compile Include="IU\NuevaMaquina.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="IU\Form1.resx">
@@ -125,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="IU\GestionUsuarios.resx">
       <DependentUpon>GestionUsuarios.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IU\NuevaMaquina.resx">
+      <DependentUpon>NuevaMaquina.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -137,6 +149,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

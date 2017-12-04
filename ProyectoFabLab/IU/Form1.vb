@@ -1,4 +1,7 @@
-﻿Public Class Form1
+﻿Imports System.Threading
+
+Public Class Form1
+
     Private Sub AddUsuario_Click(sender As Object, e As EventArgs) Handles AddUsuarioToolStripMenuItem.Click
 
         Dim documento As New GestionUsuarios
@@ -41,4 +44,5 @@
         Next
 
     End Sub
+
 End Class
