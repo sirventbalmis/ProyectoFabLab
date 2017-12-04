@@ -207,7 +207,7 @@ Public Class UsuariosGateway
     ''' <param name="email">Nuevo email del usuario</param>
     ''' <param name="direccion">Nueva dirección del usuario</param>
     ''' <param name="organizacion">Nueva organización del usuario</param>
-    ''' <param name="tipo">Nuevo tipo del usuario</param>
+    ''' <param name="tipo">Nuevo tipo de usuario</param>
     ''' <returns>True: Se han actualizado los datos. False: No se han actualizado los datos</returns>
     Public Function ModificarPorId(ByRef id As Integer, ByRef nombre As String, ByRef apellidos As String, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipo As String) As Boolean
 
@@ -331,7 +331,7 @@ Public Class UsuariosGateway
     ''' Elimina un usuario a partir de su Id.
     ''' </summary>
     ''' <param name="id">Id del usuario a borrar</param>
-    ''' <returns></returns>
+    ''' <returns>True: El usuario se ha eliminado. False: El usuario no se ha eliminado</returns>
     Public Function EliminarPorId(ByRef id As Integer) As Boolean
 
         Dim numFilas As Integer
@@ -358,6 +358,30 @@ Public Class UsuariosGateway
             Return False
 
         End If
+
+    End Function
+
+
+    ''' <summary>
+    ''' Obtiene el número de usuarios actuales.
+    ''' </summary>
+    ''' <returns>Número de usuarios actuales</returns>
+    Public Function SeleccionarNumUsuarios() As Integer
+
+        Dim numUsuariosActuales As Integer
+
+        Try
+            ConexionABd.Open()
+            Comando.CommandText = "SELECT COUNT(id) FROM usuarios"
+            numUsuariosActuales = DirectCast(Comando.ExecuteScalar(), Integer)
+
+        Catch ex As Exception
+
+            Throw New Exception(ex.Message)
+
+        End Try
+
+        Return numUsuariosActuales
 
     End Function
 

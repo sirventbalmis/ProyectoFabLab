@@ -110,10 +110,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Negocio\Negocio.vb" />
-    <Compile Include="InicioProgramaSplashScreen.Designer.vb">
+    <Compile Include="IU\InicioProgramaSplashScreen.Designer.vb">
       <DependentUpon>InicioProgramaSplashScreen.vb</DependentUpon>
     </Compile>
-    <Compile Include="InicioProgramaSplashScreen.vb">
+    <Compile Include="IU\InicioProgramaSplashScreen.vb">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
@@ -130,7 +130,7 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="InicioProgramaSplashScreen.resx">
+    <EmbeddedResource Include="IU\InicioProgramaSplashScreen.resx">
       <DependentUpon>InicioProgramaSplashScreen.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

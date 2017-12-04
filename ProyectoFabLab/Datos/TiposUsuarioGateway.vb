@@ -75,16 +75,16 @@ Public Class TiposUsuarioGateway
     ''' <summary>
     ''' Obtiene el Id del tipo de usuario a partir de uno introducido.
     ''' </summary>
-    ''' <param name="tipo"></param>
-    ''' <returns>El id del tipo</returns>
+    ''' <param name="tipo">Tipo de usuario existente</param>
+    ''' <returns>El id del tipo de usuario</returns>
     Public Function SeleccionarPorNombre(ByRef tipo As String) As Integer
 
-        Dim numTipoUsuario As Integer
+        Dim idTipoUsuario As Integer
 
         Try
             ConexionABd.Open()
             Comando.CommandText = String.Format("SELECT id FROM TiposUsuario WHERE tipo = '{0}'", tipo)
-            numTipoUsuario = DirectCast(Comando.ExecuteScalar(), Integer)
+            idTipoUsuario = DirectCast(Comando.ExecuteScalar(), Integer)
 
             CerrarConexionABd()
 
@@ -94,7 +94,7 @@ Public Class TiposUsuarioGateway
 
         End Try
 
-        Return numTipoUsuario
+        Return idTipoUsuario
 
     End Function
 
@@ -139,7 +139,7 @@ Public Class TiposUsuarioGateway
     ''' Elimina un tipo de usuario a partir de su Id.
     ''' </summary>
     ''' <param name="id">Id del tipo de usuario a eliminar</param>
-    ''' <returns></returns>
+    ''' <returns>True: El tipo de usuario se ha eliminado. False: El tipo de usuario no se ha eliminado.</returns>
     Public Function EliminarPorId(ByRef id As Integer) As Boolean
 
         Dim numFilas As Integer

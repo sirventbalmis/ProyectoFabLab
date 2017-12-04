@@ -8,9 +8,7 @@
         'Configure el texto del cuadro de diálogo en tiempo de ejecución según la información del ensamblado de la aplicación.  
 
         'TODO: Personalice la información del ensamblado de la aplicación en el panel "Aplicación" del cuadro de diálogo 
-        '  propiedades del proyecto (bajo el menú "Proyecto").
-
-
+        '  propiedades del proyecto (bajo el menú "Proyecto").        
 
         'Dé formato a la información de versión usando el texto establecido en el control de versiones en tiempo de diseño como
         '  cadena de formato.  Esto le permite una localización efectiva si lo desea.
