@@ -99,6 +99,12 @@
     <Compile Include="IU\GestionUsuarios.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="IU\NuevoUsuario.Designer.vb">
+      <DependentUpon>NuevoUsuario.vb</DependentUpon>
+    </Compile>
+    <Compile Include="IU\NuevoUsuario.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -126,7 +132,9 @@
     <Compile Include="IU\NuevaMaquina.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Negocio\NegocioMaquinas.vb" />
     <Compile Include="Negocio\NegocioReservas.vb" />
+    <Compile Include="Negocio\NegocioTiposMaquinas.vb" />
     <Compile Include="Negocio\NegocioTiposUsuarios.vb" />
     <Compile Include="Negocio\NegocioUsuarios.vb" />
   </ItemGroup>
@@ -139,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="IU\NuevaMaquina.resx">
       <DependentUpon>NuevaMaquina.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IU\NuevoUsuario.resx">
+      <DependentUpon>NuevoUsuario.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
