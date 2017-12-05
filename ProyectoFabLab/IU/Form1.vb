@@ -45,4 +45,12 @@ Public Class Form1
 
     End Sub
 
+    Private Sub NuevoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NuevoToolStripMenuItem.Click
+
+        Dim formNuevaMaquina As New NuevaMaquina
+        formNuevaMaquina.MdiParent = Me
+        formNuevaMaquina.Show()
+
+    End Sub
+
 End Class

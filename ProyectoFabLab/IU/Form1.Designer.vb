@@ -240,6 +240,7 @@ Partial Class Form1
         '
         'AyudaToolStripButton
         '
+        Me.AyudaToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.AyudaToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.AyudaToolStripButton.Image = CType(resources.GetObject("AyudaToolStripButton.Image"), System.Drawing.Image)
         Me.AyudaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
