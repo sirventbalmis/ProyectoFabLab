@@ -49,6 +49,68 @@ Public Class TiposMaquinaGateway
 
 
     ''' <summary>
+    ''' Devuelve ID de la máquina con un nombre
+    ''' </summary>
+    ''' <param name="tipo"></param>
+    ''' <returns></returns>
+    Public Function SeleccionaMaquinaPorNombre(ByRef tipo As String) As Integer
+        Dim idTipoMaquina As Integer
+        Try
+            ConexionBD.Open()
+            Comando.CommandText = String.Format("SELECT id FROM TiposMaquina WHERE tipo = '{0}'", tipo)
+            idTipoMaquina = DirectCast(Comando.ExecuteScalar(), Integer)
+            CerrarBD()
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+        Return idTipoMaquina
+    End Function
+
+    ''' <summary>
+    ''' Modifica máquina a partir de parámetros
+    ''' </summary>
+    ''' <param name="id"></param>
+    ''' <param name="tipo"></param>
+    ''' <returns></returns>
+    Public Function ModificaMaquina(ByRef id As Integer, ByRef tipo As String) As Boolean
+        Dim numeroFilas As Integer
+        Try
+            ConexionBD.Open()
+            Comando.CommandText = String.Format("UPDATE TiposMaquina SET tipo = '{0}' WHERE id = {1}", tipo, id)
+            numeroFilas = Comando.ExecuteNonQuery()
+            CerrarBD()
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+        If numeroFilas > 0 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+    ''' <summary>
+    ''' Borra una máquina a partir de un ID
+    ''' </summary>
+    ''' <param name="id"></param>
+    ''' <returns></returns>
+    Public Function BorraMaquina(ByRef id As Integer) As Boolean
+        Dim numeroFilas As Integer
+        Try
+            ConexionBD.Open()
+            Comando.CommandText = String.Format("DELETE FROM TiposMaquina WHERE id = {0}", id)
+            numeroFilas = Comando.ExecuteNonQuery()
+            CerrarBD()
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+        If numeroFilas > 0 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+    ''' <summary>
     ''' Cierra la conexión a la BBDD
     ''' </summary>
     Private Sub CerrarBD()

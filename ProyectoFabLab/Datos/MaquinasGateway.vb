@@ -69,65 +69,61 @@ Public Class MaquinasGateway
     ''' <param name="descripcion"></param>
     ''' <param name="caracteristicas"></param>
     ''' <returns></returns>
-    Public Function InsertarMaquina(ByRef id As Integer, ByRef modelo As String, ByRef precio_hora As Integer, ByRef fecha_compra As Date, ByRef telefono_sat As String, ByRef tipo As Integer, ByRef descripcion As String, ByRef caracteristicas As String) As Boolean
+    Public Function InsertarMaquina(ByRef modelo As String, ByRef precio_hora As Integer, ByRef fecha_compra As Date, ByRef telefono_sat As String, ByRef tipo As Integer, ByRef descripcion As String, ByRef caracteristicas As String) As Boolean
         Dim numeroFilas As Integer = 0
         Dim condicionModelo As Boolean = False
         Dim condicionprecio_hora As Boolean = False
         Dim condicionfecha_compra As Boolean = False
         Dim condiciontipo As Boolean = False
-        If id > 0 Then
 
-            ' ---------------------------------------------
-            ' Comprobamos que el campo modelo no sea vacío
-            If modelo.Equals("") Or modelo = Nothing Then
-                Throw New ArgumentException("El campo nombre está vacío.")
-            Else
-                condicionModelo = True
-            End If
-            ' ---------------------------------------------
-            ' Comprobamos que el campo precio hora sea correcto
-            If precio_hora < 0 Then
-                Throw New ArgumentException("El campo precio hora no es correcto.")
-            Else
-                condicionprecio_hora = True
-            End If
-            ' ---------------------------------------------
-            ' Comprobamos que el campo fecha compra sea correcto
-            If fecha_compra = Nothing Then
-                Throw New ArgumentException("El campo fecha compra no es correcto.")
-            Else
-                condicionfecha_compra = True
-            End If
-            ' ---------------------------------------------
-            ' Comprobamos que el campo fecha compra sea correcto
-            If fecha_compra = Nothing Then
-                Throw New ArgumentException("El campo fecha compra no es correcto.")
-            Else
-                condicionfecha_compra = True
-            End If
-            ' ---------------------------------------------
-            ' Comprobamos que el campo tipo sea correcto
-            If tipo < 0 Then
-                Throw New ArgumentException("El campo tipo no es correcto.")
-            Else
-                condiciontipo = True
-            End If
-
-
-            Dim sentenciaInsert As String
-            sentenciaInsert = String.Format("INSERT INTO Maquinas(modelo, precio_hora, fechacompra, telefono_sat, tipo, descripcion, caracteristicas) VALUES('{0}',{1},{2},'{3}',{4},'{5}','{6}'", modelo, precio_hora, fecha_compra, telefono_sat, tipo, descripcion, caracteristicas)
-            ConexionBD.Open()
-            Comando.CommandText = sentenciaInsert.ToString()
-            numeroFilas = Comando.ExecuteNonQuery()
-            CerrarBD()
-
-            If numeroFilas > 0 Then
-                Return True
-            Else
-                Return False
-            End If
+        ' ---------------------------------------------
+        ' Comprobamos que el campo modelo no sea vacío
+        If modelo.Equals("") Or modelo = Nothing Then
+            Throw New ArgumentException("El campo nombre está vacío.")
         Else
-            Throw New ArgumentException("El ID no es correcto.")
+            condicionModelo = True
+        End If
+        ' ---------------------------------------------
+        ' Comprobamos que el campo precio hora sea correcto
+        If precio_hora < 0 Then
+            Throw New ArgumentException("El campo precio hora no es correcto.")
+        Else
+            condicionprecio_hora = True
+        End If
+        ' ---------------------------------------------
+        ' Comprobamos que el campo fecha compra sea correcto
+        If fecha_compra = Nothing Then
+            Throw New ArgumentException("El campo fecha compra no es correcto.")
+        Else
+            condicionfecha_compra = True
+        End If
+        ' ---------------------------------------------
+        ' Comprobamos que el campo fecha compra sea correcto
+        If fecha_compra = Nothing Then
+            Throw New ArgumentException("El campo fecha compra no es correcto.")
+        Else
+            condicionfecha_compra = True
+        End If
+        ' ---------------------------------------------
+        ' Comprobamos que el campo tipo sea correcto
+        If tipo < 0 Then
+            Throw New ArgumentException("El campo tipo no es correcto.")
+        Else
+            condiciontipo = True
+        End If
+
+
+        Dim sentenciaInsert As String
+        sentenciaInsert = String.Format("INSERT INTO Maquinas(modelo, precio_hora, fechacompra, telefono_sat, tipo, descripcion, caracteristicas) VALUES('{0}',{1},{2},'{3}',{4},'{5}','{6}'", modelo, precio_hora, fecha_compra, telefono_sat, tipo, descripcion, caracteristicas)
+        ConexionBD.Open()
+        Comando.CommandText = sentenciaInsert.ToString()
+        numeroFilas = Comando.ExecuteNonQuery()
+        CerrarBD()
+
+        If numeroFilas > 0 Then
+            Return True
+        Else
+            Return False
         End If
     End Function
 
