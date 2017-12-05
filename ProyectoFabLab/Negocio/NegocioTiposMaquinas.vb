@@ -1,10 +1,12 @@
 ﻿Imports System.Data.SqlClient
-Module NegocioTiposMaquinas
+Module NegocioTiposMaquinas                                                             ' Atributos de la Clase -> PASCAL CASE. Nombres de variables en funciones, procedimientos -> CAMEL CASE    
+
     ''' <summary>
     ''' Obtiene todos los tipos de máquinas
     ''' </summary>
     ''' <returns></returns>
     Public Function ObtenerTiposMaquinas() As SqlDataReader
+
         Dim TiposMaquinaGateway As New TiposMaquinaGateway(My.Settings.Conexion)
         Return TiposMaquinaGateway.SeleccionarTipos()
     End Function
