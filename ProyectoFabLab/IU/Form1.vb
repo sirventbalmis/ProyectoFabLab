@@ -44,14 +44,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub NuevoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NuevoToolStripMenuItem.Click
-
-        Dim formNuevaMaquina As New NuevaMaquina
-        formNuevaMaquina.MdiParent = Me
-        formNuevaMaquina.Show()
-
-    End Sub
-
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Dim numUsuarios As Integer = NegocioUsuarios.ObtenerNumUsuarios()
@@ -64,6 +56,14 @@ Public Class Form1
         Dim formGestionMaq As New GestionMaquinas(Me)
         formGestionMaq.MdiParent = Me
         formGestionMaq.Show()
+
+    End Sub
+
+    Private Sub NuevaMaquinaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NuevaMaquinaToolStripMenuItem.Click
+
+        Dim formNuevaMaquina As New NuevaMaquina(Foo.TipoAccion.Insertar.ToString())
+        formNuevaMaquina.MdiParent = Me
+        formNuevaMaquina.Show()
 
     End Sub
 End Class

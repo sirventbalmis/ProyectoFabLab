@@ -3,6 +3,9 @@ Imports System.IO
 Imports Microsoft.ProjectOxford.Vision
 
 Public Class NuevaMaquina
+
+    Private TipoAccion As String
+
     Private Sub CancelarButton_Click(sender As Object, e As EventArgs) Handles CancelarButton.Click
 
         Me.Close()
@@ -177,4 +180,12 @@ Public Class NuevaMaquina
         End If
 
     End Sub
+
+    Public Sub New(ByRef tipoAccion As String)
+
+        InitializeComponent()
+        Me.TipoAccion = tipoAccion
+
+    End Sub
+
 End Class

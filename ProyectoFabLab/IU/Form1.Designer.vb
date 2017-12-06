@@ -28,7 +28,7 @@ Partial Class Form1
         Me.AddUsuarioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GestionUsuariosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ArchivoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NuevoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NuevaMaquinaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GuardarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InformesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.VentanaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -88,17 +88,17 @@ Partial Class Form1
         '
         'ArchivoToolStripMenuItem
         '
-        Me.ArchivoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NuevoToolStripMenuItem, Me.GuardarToolStripMenuItem})
+        Me.ArchivoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NuevaMaquinaToolStripMenuItem, Me.GuardarToolStripMenuItem})
         Me.ArchivoToolStripMenuItem.Name = "ArchivoToolStripMenuItem"
         Me.ArchivoToolStripMenuItem.Size = New System.Drawing.Size(71, 20)
         Me.ArchivoToolStripMenuItem.Text = "Máquinas"
         '
-        'NuevoToolStripMenuItem
+        'NuevaMaquinaToolStripMenuItem
         '
-        Me.NuevoToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.NuevoToolStripMenuItem.Name = "NuevoToolStripMenuItem"
-        Me.NuevoToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
-        Me.NuevoToolStripMenuItem.Text = "Nueva Máquina"
+        Me.NuevaMaquinaToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.NuevaMaquinaToolStripMenuItem.Name = "NuevaMaquinaToolStripMenuItem"
+        Me.NuevaMaquinaToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.NuevaMaquinaToolStripMenuItem.Text = "Nueva Máquina"
         '
         'GuardarToolStripMenuItem
         '
@@ -274,7 +274,7 @@ Partial Class Form1
 
     Friend WithEvents MenuStrip As MenuStrip
     Friend WithEvents ArchivoToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents NuevoToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents NuevaMaquinaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GuardarToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents AddUsuarioToolStripMenuItem As ToolStripMenuItem

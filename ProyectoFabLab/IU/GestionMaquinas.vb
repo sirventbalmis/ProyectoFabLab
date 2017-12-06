@@ -6,7 +6,7 @@
 
     Private Sub AddMaquinaButton_Click(sender As Object, e As EventArgs) Handles AddMaquinaButton.Click
 
-        Dim formNuevaMaq As New NuevaMaquina()
+        Dim formNuevaMaq As New NuevaMaquina(Foo.TipoAccion.Insertar.ToString())
         formNuevaMaq.MdiParent = FormPrincipal
         formNuevaMaq.Show()
 
