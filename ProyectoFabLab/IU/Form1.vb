@@ -1,7 +1,6 @@
 ﻿Imports System.Threading
 
 Public Class Form1
-
     Private Sub AddUsuario_Click(sender As Object, e As EventArgs) Handles AddUsuarioToolStripMenuItem.Click
 
         Dim documento As New GestionUsuarios
@@ -37,7 +36,7 @@ Public Class Form1
 
     Private Sub MinimizarTodasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MinimizarTodasToolStripMenuItem.Click
 
-        For Each ventana In MdiChildren
+        For Each ventana In Me.MdiChildren
 
             ventana.WindowState = FormWindowState.Minimized
 
@@ -53,4 +52,18 @@ Public Class Form1
 
     End Sub
 
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Dim numUsuarios As Integer = NegocioUsuarios.ObtenerNumUsuarios()
+        NumUsuariosToolStripLabel.Text = "Usuarios: " & numUsuarios
+
+    End Sub
+
+    Private Sub GuardarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GuardarToolStripMenuItem.Click
+
+        Dim formGestionMaq As New GestionMaquinas(Me)
+        formGestionMaq.MdiParent = Me
+        formGestionMaq.Show()
+
+    End Sub
 End Class

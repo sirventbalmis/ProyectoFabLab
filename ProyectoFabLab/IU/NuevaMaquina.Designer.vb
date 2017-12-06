@@ -22,6 +22,7 @@ Partial Class NuevaMaquina
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.ModeloLabel = New System.Windows.Forms.Label()
         Me.TelefSATLabel = New System.Windows.Forms.Label()
         Me.ModeloTextBox = New System.Windows.Forms.TextBox()
@@ -42,11 +43,16 @@ Partial Class NuevaMaquina
         Me.AceptarButton = New System.Windows.Forms.Button()
         Me.CancelarButton = New System.Windows.Forms.Button()
         Me.AddTipoMaquinaPictureBox = New System.Windows.Forms.PictureBox()
+        Me.ErrorProvider = New System.Windows.Forms.ErrorProvider(Me.components)
         CType(Me.AddTipoMaquinaPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ModeloLabel
         '
+        Me.ModeloLabel.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ModeloLabel.AutoSize = True
         Me.ModeloLabel.Location = New System.Drawing.Point(12, 43)
         Me.ModeloLabel.Name = "ModeloLabel"
@@ -56,6 +62,9 @@ Partial Class NuevaMaquina
         '
         'TelefSATLabel
         '
+        Me.TelefSATLabel.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TelefSATLabel.AutoSize = True
         Me.TelefSATLabel.Location = New System.Drawing.Point(12, 94)
         Me.TelefSATLabel.Name = "TelefSATLabel"
@@ -65,6 +74,9 @@ Partial Class NuevaMaquina
         '
         'ModeloTextBox
         '
+        Me.ModeloTextBox.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ModeloTextBox.Location = New System.Drawing.Point(68, 40)
         Me.ModeloTextBox.Name = "ModeloTextBox"
         Me.ModeloTextBox.Size = New System.Drawing.Size(100, 20)
@@ -72,6 +84,9 @@ Partial Class NuevaMaquina
         '
         'TefSATTextBox
         '
+        Me.TefSATTextBox.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TefSATTextBox.Location = New System.Drawing.Point(91, 91)
         Me.TefSATTextBox.Name = "TefSATTextBox"
         Me.TefSATTextBox.Size = New System.Drawing.Size(100, 20)
@@ -79,6 +94,9 @@ Partial Class NuevaMaquina
         '
         'PrecioPorHoraTextBox
         '
+        Me.PrecioPorHoraTextBox.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PrecioPorHoraTextBox.Location = New System.Drawing.Point(352, 40)
         Me.PrecioPorHoraTextBox.Name = "PrecioPorHoraTextBox"
         Me.PrecioPorHoraTextBox.Size = New System.Drawing.Size(100, 20)
@@ -86,6 +104,9 @@ Partial Class NuevaMaquina
         '
         'Label3
         '
+        Me.Label3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(283, 43)
         Me.Label3.Name = "Label3"
@@ -95,7 +116,9 @@ Partial Class NuevaMaquina
         '
         'Label4
         '
-        Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label4.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(582, 43)
         Me.Label4.Name = "Label4"
@@ -105,7 +128,9 @@ Partial Class NuevaMaquina
         '
         'FechaCompraDateTimePicker
         '
-        Me.FechaCompraDateTimePicker.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.FechaCompraDateTimePicker.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FechaCompraDateTimePicker.Location = New System.Drawing.Point(679, 40)
         Me.FechaCompraDateTimePicker.Name = "FechaCompraDateTimePicker"
         Me.FechaCompraDateTimePicker.Size = New System.Drawing.Size(200, 20)
@@ -113,6 +138,9 @@ Partial Class NuevaMaquina
         '
         'Label1
         '
+        Me.Label1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(283, 94)
         Me.Label1.Name = "Label1"
@@ -122,6 +150,9 @@ Partial Class NuevaMaquina
         '
         'TipoMaquinaComboBox
         '
+        Me.TipoMaquinaComboBox.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TipoMaquinaComboBox.FormattingEnabled = True
         Me.TipoMaquinaComboBox.Location = New System.Drawing.Point(352, 90)
         Me.TipoMaquinaComboBox.Name = "TipoMaquinaComboBox"
@@ -130,8 +161,11 @@ Partial Class NuevaMaquina
         '
         'Label2
         '
+        Me.Label2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(12, 171)
+        Me.Label2.Location = New System.Drawing.Point(12, 173)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(63, 13)
         Me.Label2.TabIndex = 11
@@ -139,7 +173,10 @@ Partial Class NuevaMaquina
         '
         'DescripcionRichTextBox
         '
-        Me.DescripcionRichTextBox.Location = New System.Drawing.Point(15, 198)
+        Me.DescripcionRichTextBox.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DescripcionRichTextBox.Location = New System.Drawing.Point(15, 200)
         Me.DescripcionRichTextBox.Name = "DescripcionRichTextBox"
         Me.DescripcionRichTextBox.Size = New System.Drawing.Size(373, 96)
         Me.DescripcionRichTextBox.TabIndex = 6
@@ -147,7 +184,10 @@ Partial Class NuevaMaquina
         '
         'CaracTecnicasRichTextBox
         '
-        Me.CaracTecnicasRichTextBox.Location = New System.Drawing.Point(494, 198)
+        Me.CaracTecnicasRichTextBox.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.CaracTecnicasRichTextBox.Location = New System.Drawing.Point(494, 200)
         Me.CaracTecnicasRichTextBox.Name = "CaracTecnicasRichTextBox"
         Me.CaracTecnicasRichTextBox.Size = New System.Drawing.Size(385, 96)
         Me.CaracTecnicasRichTextBox.TabIndex = 7
@@ -155,8 +195,11 @@ Partial Class NuevaMaquina
         '
         'Label5
         '
+        Me.Label5.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(519, 171)
+        Me.Label5.Location = New System.Drawing.Point(491, 173)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(125, 13)
         Me.Label5.TabIndex = 13
@@ -182,6 +225,9 @@ Partial Class NuevaMaquina
         '
         'ImgsMaquinasFlowLayoutPanel
         '
+        Me.ImgsMaquinasFlowLayoutPanel.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ImgsMaquinasFlowLayoutPanel.AutoScroll = True
         Me.ImgsMaquinasFlowLayoutPanel.Location = New System.Drawing.Point(15, 383)
         Me.ImgsMaquinasFlowLayoutPanel.Name = "ImgsMaquinasFlowLayoutPanel"
@@ -190,6 +236,7 @@ Partial Class NuevaMaquina
         '
         'AceptarButton
         '
+        Me.AceptarButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.AceptarButton.Location = New System.Drawing.Point(697, 530)
         Me.AceptarButton.Name = "AceptarButton"
         Me.AceptarButton.Size = New System.Drawing.Size(75, 23)
@@ -199,6 +246,7 @@ Partial Class NuevaMaquina
         '
         'CancelarButton
         '
+        Me.CancelarButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CancelarButton.Location = New System.Drawing.Point(804, 530)
         Me.CancelarButton.Name = "CancelarButton"
         Me.CancelarButton.Size = New System.Drawing.Size(75, 23)
@@ -208,6 +256,9 @@ Partial Class NuevaMaquina
         '
         'AddTipoMaquinaPictureBox
         '
+        Me.AddTipoMaquinaPictureBox.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.AddTipoMaquinaPictureBox.Image = Global.ProyectoFabLab.My.Resources.Resources.AddTipoMaquina
         Me.AddTipoMaquinaPictureBox.Location = New System.Drawing.Point(476, 86)
         Me.AddTipoMaquinaPictureBox.Name = "AddTipoMaquinaPictureBox"
@@ -215,6 +266,10 @@ Partial Class NuevaMaquina
         Me.AddTipoMaquinaPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.AddTipoMaquinaPictureBox.TabIndex = 17
         Me.AddTipoMaquinaPictureBox.TabStop = False
+        '
+        'ErrorProvider
+        '
+        Me.ErrorProvider.ContainerControl = Me
         '
         'NuevaMaquina
         '
@@ -244,6 +299,7 @@ Partial Class NuevaMaquina
         Me.Name = "NuevaMaquina"
         Me.Text = "FabLab - Nueva Máquina"
         CType(Me.AddTipoMaquinaPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -269,4 +325,5 @@ Partial Class NuevaMaquina
     Friend WithEvents AceptarButton As Button
     Friend WithEvents CancelarButton As Button
     Friend WithEvents AddTipoMaquinaPictureBox As PictureBox
+    Friend WithEvents ErrorProvider As ErrorProvider
 End Class

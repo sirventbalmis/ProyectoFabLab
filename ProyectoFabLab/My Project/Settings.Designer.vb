@@ -65,6 +65,30 @@ Namespace My
                 Return CType(Me("Conexion"),String)
             End Get
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("https://westcentralus.api.cognitive.microsoft.com/vision/v1.0")>  _
+        Public Property UrlServicioMiniatura() As String
+            Get
+                Return CType(Me("UrlServicioMiniatura"),String)
+            End Get
+            Set
+                Me("UrlServicioMiniatura") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("b376592d3cc64a9ca5da4daed5b83464")>  _
+        Public Property ClaveServicioMiniatura() As String
+            Get
+                Return CType(Me("ClaveServicioMiniatura"),String)
+            End Get
+            Set
+                Me("ClaveServicioMiniatura") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

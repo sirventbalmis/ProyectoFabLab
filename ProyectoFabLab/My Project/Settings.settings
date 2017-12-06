@@ -9,5 +9,11 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FabLab;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False</Value>
     </Setting>
+    <Setting Name="UrlServicioMiniatura" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://westcentralus.api.cognitive.microsoft.com/vision/v1.0</Value>
+    </Setting>
+    <Setting Name="ClaveServicioMiniatura" Type="System.String" Scope="User">
+      <Value Profile="(Default)">b376592d3cc64a9ca5da4daed5b83464</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

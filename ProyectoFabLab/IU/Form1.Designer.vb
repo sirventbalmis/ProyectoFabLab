@@ -41,7 +41,7 @@ Partial Class Form1
         Me.AyudaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AcercaDeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UsuMaquinasToolStrip = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripLabel3 = New System.Windows.Forms.ToolStripLabel()
+        Me.NumUsuariosToolStripLabel = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStrip = New System.Windows.Forms.ToolStrip()
@@ -172,18 +172,18 @@ Partial Class Form1
         'UsuMaquinasToolStrip
         '
         Me.UsuMaquinasToolStrip.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.UsuMaquinasToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel3, Me.ToolStripLabel2, Me.ToolStripLabel1})
+        Me.UsuMaquinasToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NumUsuariosToolStripLabel, Me.ToolStripLabel2, Me.ToolStripLabel1})
         Me.UsuMaquinasToolStrip.Location = New System.Drawing.Point(0, 528)
         Me.UsuMaquinasToolStrip.Name = "UsuMaquinasToolStrip"
         Me.UsuMaquinasToolStrip.Size = New System.Drawing.Size(952, 25)
         Me.UsuMaquinasToolStrip.TabIndex = 5
         Me.UsuMaquinasToolStrip.Text = "ToolStrip1"
         '
-        'ToolStripLabel3
+        'NumUsuariosToolStripLabel
         '
-        Me.ToolStripLabel3.Name = "ToolStripLabel3"
-        Me.ToolStripLabel3.Size = New System.Drawing.Size(70, 22)
-        Me.ToolStripLabel3.Text = "Usuarios: 15"
+        Me.NumUsuariosToolStripLabel.Name = "NumUsuariosToolStripLabel"
+        Me.NumUsuariosToolStripLabel.Size = New System.Drawing.Size(70, 22)
+        Me.NumUsuariosToolStripLabel.Text = "Usuarios: 15"
         '
         'ToolStripLabel2
         '
@@ -285,7 +285,7 @@ Partial Class Form1
     Friend WithEvents UsuMaquinasToolStrip As ToolStrip
     Friend WithEvents ToolStripLabel1 As ToolStripLabel
     Friend WithEvents ToolStripLabel2 As ToolStripLabel
-    Friend WithEvents ToolStripLabel3 As ToolStripLabel
+    Friend WithEvents NumUsuariosToolStripLabel As ToolStripLabel
     Friend WithEvents ToolStrip As ToolStrip
     Friend WithEvents AddUsuarioToolStripButton As ToolStripButton
     Friend WithEvents AbrirToolStripButton As ToolStripButton
