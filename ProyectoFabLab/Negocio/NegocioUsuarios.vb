@@ -10,12 +10,12 @@
     ''' <param name="email">E-mail del usuario</param>
     ''' <param name="direccion">Dirección del usuario</param>
     ''' <param name="organizacion">Organización del usuario</param>
-    ''' <param name="tipo">Tipo de usuario</param>    
-    Public Function InsertarUsuario(ByRef nombre As String, ByRef apellidos As String, ByRef fechaNacimiento As Date, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipo As String) As Boolean
+    ''' <param name="tipoUsuario">Tipo de usuario</param>    
+    Public Function InsertarUsuario(ByRef nombre As String, ByRef apellidos As String, ByRef fechaNacimiento As String, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipoUsuario As String) As Boolean
 
         Dim usuariosGateway As New UsuariosGateway(My.Settings.Conexion)
 
-        Return usuariosGateway.Insertar(nombre, apellidos, fechaNacimiento, telefono, email, direccion, organizacion, tipo)
+        Return usuariosGateway.Insertar(nombre, apellidos, fechaNacimiento, telefono, email, direccion, organizacion, tipoUsuario)
 
     End Function
 

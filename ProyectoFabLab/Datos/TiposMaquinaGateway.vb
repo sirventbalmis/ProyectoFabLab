@@ -100,6 +100,9 @@ Public Class TiposMaquinaGateway
             Comando.CommandText = String.Format("DELETE FROM TiposMaquina WHERE id = {0}", id)
             numeroFilas = Comando.ExecuteNonQuery()
             CerrarBD()
+
+
+
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try

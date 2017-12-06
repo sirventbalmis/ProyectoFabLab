@@ -57,7 +57,7 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=master;Integrated Security=Tru"& _ 
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FabLab;Integrated Security=Tru"& _ 
             "e;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent"& _ 
             "=ReadWrite;MultiSubnetFailover=False")>  _
         Public ReadOnly Property Conexion() As String

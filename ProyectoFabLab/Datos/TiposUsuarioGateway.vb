@@ -25,11 +25,17 @@ Public Class TiposUsuarioGateway
                 Comando.CommandText = String.Format("INSERT INTO TiposUsuario (tipoUsuario) VALUES('{0}')", tipo)
                 numFilas = Comando.ExecuteNonQuery()
 
-                ConexionABd.Close()
-
             Catch ex As Exception
 
                 Throw New Exception(ex.Message)
+
+            Finally
+
+                If ConexionABd.State = ConnectionState.Open Then
+
+                    CerrarConexionABd()
+
+                End If
 
             End Try
 
@@ -51,14 +57,14 @@ Public Class TiposUsuarioGateway
     ''' <summary>
     ''' Obtiene todos los tipos de usuarios.
     ''' </summary>
-    ''' <returns>SqlDataReader con todos los tipos</returns>
+    ''' <returns>DataTable con todos los tipos de usuarios.</returns>
     Public Function SeleccionarTipos() As SqlDataReader
 
         Dim lector As SqlDataReader
 
         Try
             ConexionABd.Open()
-            Comando.CommandText = "SELECT tipo FROM TiposUsuario"
+            Comando.CommandText = "select Tipo from TiposUsuario"
             lector = Comando.ExecuteReader()
 
         Catch ex As Exception
@@ -86,11 +92,17 @@ Public Class TiposUsuarioGateway
             Comando.CommandText = String.Format("SELECT id FROM TiposUsuario WHERE tipo = '{0}'", tipo)
             idTipoUsuario = DirectCast(Comando.ExecuteScalar(), Integer)
 
-            CerrarConexionABd()
-
         Catch ex As Exception
 
             Throw New Exception(ex.Message)
+
+        Finally
+
+            If ConexionABd.State = ConnectionState.Open Then
+
+                CerrarConexionABd()
+
+            End If
 
         End Try
 
@@ -114,11 +126,17 @@ Public Class TiposUsuarioGateway
             Comando.CommandText = String.Format("UPDATE tiposUsuario SET tipo = '{0}' WHERE id = {1}", tipoUsuario, id)
             numFilas = Comando.ExecuteNonQuery()
 
-            CerrarConexionABd()
-
         Catch ex As Exception
 
             Throw New Exception(ex.Message)
+
+        Finally
+
+            If ConexionABd.State = ConnectionState.Open Then
+
+                CerrarConexionABd()
+
+            End If
 
         End Try
 

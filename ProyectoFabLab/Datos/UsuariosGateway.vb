@@ -1,5 +1,4 @@
 ﻿Imports System.Data.SqlClient
-Imports System.Text.RegularExpressions
 Imports System.Text
 
 Public Class UsuariosGateway
@@ -17,9 +16,9 @@ Public Class UsuariosGateway
     ''' <param name="email">E-mail del usuario</param>
     ''' <param name="direccion">Dirección del usuario</param>
     ''' <param name="organizacion">Organización del usuario</param>
-    ''' <param name="tipo">Tipo de usuario</param>    
+    ''' <param name="tipoUsuario">Tipo de usuario</param>    
     ''' <returns>True: El usuario se ha insertado. False: El usuario no se ha insertado</returns>
-    Public Function Insertar(ByRef nombre As String, ByRef apellidos As String, ByRef fechaNacimiento As Date, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipo As String) As Boolean
+    Public Function Insertar(ByRef nombre As String, ByRef apellidos As String, ByRef fechaNacimiento As String, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipoUsuario As String) As Boolean
 
         Dim numFilas As Integer, numTipoUsuario As Integer
         Dim esNombreCorrecto As Boolean = False
@@ -28,7 +27,6 @@ Public Class UsuariosGateway
         ' Dim patronTelefono As Regex = New Regex("^[0-9]{9}$")
         ' Dim patronEmail As Regex = New Regex("^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$")
         Dim sentenciaInsert As New StringBuilder("INSERT INTO Usuarios(nombre, apellidos, fecha_nacimiento, telefono, email, direccion, organizacion, tipo, fecha_alta) VALUES(")
-        Dim lector As SqlDataReader
         Dim tiposUsuarioGateway As New TiposUsuarioGateway(My.Settings.Conexion)
 
         If nombre.Equals("") Or nombre = Nothing Then
@@ -51,56 +49,47 @@ Public Class UsuariosGateway
 
         End If
 
+        If esNombreCorrecto And esApellidoCorrecto Then         ' Añadimos el nombre, los apellidos y la fecha de nacimiento al INSERT.            
 
-        If esNombreCorrecto And esApellidoCorrecto Then         ' Añadimos el nombre, los apellidos y la fecha de nacimiento al INSERT.
-
-            sentenciaInsert.Append(String.Format("'{0}', '{1}', CONVERT(varchar, '{2}', 105)", nombre, apellidos, fechaNacimiento.Date.ToString()))
+            sentenciaInsert.Append("@Nombre, @Apellidos, @FechaNacimiento")
 
         End If
 
         If telefono.Equals("") Then
 
-            sentenciaInsert.Append(", NULL")
+            sentenciaInsert.Append(", @TefVacio")
 
         Else
 
-            sentenciaInsert.Append(String.Format(", '{0}'", telefono))          ' Añadimos el teléfono.
+            sentenciaInsert.Append(", @Telefono")
 
         End If
 
         If email.Equals("") Then
 
-            sentenciaInsert.Append(", NULL")
+            sentenciaInsert.Append(", @EmailVacio")
 
         Else
 
-            sentenciaInsert.Append(String.Format(", '{0}'", email))             ' Añadimos el email.
+            sentenciaInsert.Append(", @Email")
 
         End If
 
         If direccion.Equals("") Then
 
-            sentenciaInsert.Append(", NULL")
+            sentenciaInsert.Append(", @DireccVacio")
 
         Else
 
-            sentenciaInsert.Append(String.Format(", '{0}'", direccion))         ' Añadimos la dirección.
+            sentenciaInsert.Append(", @Direccion")
 
         End If
 
-        lector = tiposUsuarioGateway.SeleccionarTipos()         ' Obtenemos los tipos de usuarios para, saber si el usuario es profesional o investigador.
+        If tipoUsuario.Equals("Profesional") Or tipoUsuario.Equals("Investigador") Then
 
-        While lector.Read
+            esProfesionalOInvestigador = True
 
-            If tipo.Equals(lector.GetString(0)) Then
-
-                esProfesionalOInvestigador = True
-
-            End If
-
-        End While
-
-        CerrarConexionABd()
+        End If
 
         If esProfesionalOInvestigador Then
 
@@ -110,36 +99,81 @@ Public Class UsuariosGateway
 
             Else
 
-                sentenciaInsert.Append(String.Format(", '{0}'", organizacion))                ' Añadimos la organización.
+                sentenciaInsert.Append(", @Organizacion")
 
             End If
 
         Else
 
-            sentenciaInsert.Append(", NULL")
+            sentenciaInsert.Append(", @OrgVacio")
 
         End If
 
-        numTipoUsuario = tiposUsuarioGateway.SeleccionarPorNombre(tipo)
-        sentenciaInsert.Append(String.Format(", {0}", numTipoUsuario))
+        numTipoUsuario = tiposUsuarioGateway.SeleccionarPorNombre(tipoUsuario)              ' Obtenemos el id del tipo de usuario.
+        sentenciaInsert.Append(", @NumTipoUsuario")
 
-        sentenciaInsert.Append(", CONVERT(varchar, GETDATE(), 105))")
-        MessageBox.Show(sentenciaInsert.ToString(), "Sentencia", MessageBoxButtons.OK, MessageBoxIcon.Information)          ' Para hacer pruebas mientras se depura.
+        sentenciaInsert.Append(", @FechaAlta)")
 
         Try
             ConexionABd.Open()
             Comando.CommandText = sentenciaInsert.ToString()
-            numFilas = Comando.ExecuteNonQuery()
 
-            CerrarConexionABd()
+            Comando.Parameters.Add("@Nombre", SqlDbType.VarChar)
+            Comando.Parameters("@Nombre").Value = nombre
+
+            Comando.Parameters.Add("@Apellidos", SqlDbType.VarChar)
+            Comando.Parameters("@Apellidos").Value = apellidos
+
+            Comando.Parameters.Add("@FechaNacimiento", SqlDbType.Date)
+            Comando.Parameters("@FechaNacimiento").Value = Date.Parse(fechaNacimiento)
+
+            Comando.Parameters.Add("@TefVacio", SqlDbType.VarChar)
+            Comando.Parameters("@TefVacio").Value = DBNull.Value
+
+            Comando.Parameters.Add("@EmailVacio", SqlDbType.VarChar)
+            Comando.Parameters("@EmailVacio").Value = DBNull.Value
+
+            Comando.Parameters.Add("@DireccVacio", SqlDbType.VarChar)
+            Comando.Parameters("@DireccVacio").Value = DBNull.Value
+
+            Comando.Parameters.Add("@OrgVacio", SqlDbType.VarChar)
+            Comando.Parameters("@OrgVacio").Value = DBNull.Value
+
+            Comando.Parameters.Add("@Telefono", SqlDbType.VarChar)
+            Comando.Parameters("@Telefono").Value = telefono
+
+            Comando.Parameters.Add("@Email", SqlDbType.VarChar)
+            Comando.Parameters("@Email").Value = email
+
+            Comando.Parameters.Add("@Direccion", SqlDbType.VarChar)
+            Comando.Parameters("@Direccion").Value = direccion
+
+            Comando.Parameters.Add("@Organizacion", SqlDbType.VarChar)
+            Comando.Parameters("@Organizacion").Value = organizacion
+
+            Comando.Parameters.Add("@NumTipoUsuario", SqlDbType.Int)
+            Comando.Parameters("@NumTipoUsuario").Value = numTipoUsuario
+
+            Comando.Parameters.Add("@FechaAlta", SqlDbType.Date)
+            Comando.Parameters("@FechaAlta").Value = Date.Now
+
+            numFilas = Comando.ExecuteNonQuery()
 
         Catch ex As Exception
 
             Throw New Exception(ex.Message)
 
+        Finally
+
+            If ConexionABd.State = ConnectionState.Open Then
+
+                CerrarConexionABd()
+
+            End If
+
         End Try
 
-        If numFilas > 0 Then            ' Se ha insertado un usuario.
+        If numFilas > 0 Then            ' Se ha insertado el usuario.
 
             Return True
 
@@ -169,7 +203,7 @@ Public Class UsuariosGateway
     ''' <returns>DataTable con los datos de ese usuario</returns>
     Public Function SeleccionarPorId(ByRef idUsuario As Integer) As DataTable
 
-        Dim tabla As New DataTable("Usuarios")
+        Dim tabla As New DataTable("Usuario")
         Dim lector As SqlDataReader
 
         Try
@@ -184,6 +218,7 @@ Public Class UsuariosGateway
             Throw New Exception(ex.Message)
 
         Finally
+
             If ConexionABd.State = ConnectionState.Open Then
 
                 ConexionABd.Close()
@@ -207,16 +242,15 @@ Public Class UsuariosGateway
     ''' <param name="email">Nuevo email del usuario</param>
     ''' <param name="direccion">Nueva dirección del usuario</param>
     ''' <param name="organizacion">Nueva organización del usuario</param>
-    ''' <param name="tipo">Nuevo tipo de usuario</param>
+    ''' <param name="tipoUsuario">Nuevo tipo de usuario</param>
     ''' <returns>True: Se han actualizado los datos. False: No se han actualizado los datos</returns>
-    Public Function ModificarPorId(ByRef id As Integer, ByRef nombre As String, ByRef apellidos As String, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipo As String) As Boolean
+    Public Function ModificarPorId(ByRef id As Integer, ByRef nombre As String, ByRef apellidos As String, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipoUsuario As String) As Boolean
 
         Dim numFilas As Integer, numTipoUsuario As Integer
         Dim esNombreCorrecto As Boolean = False
         Dim esApellidoCorrecto As Boolean = False
         Dim esProfesionalOInvestigador As Boolean = False
         Dim sentenciaUpdate As New StringBuilder("UPDATE Usuarios ")
-        Dim lector As SqlDataReader
         Dim tiposUsuariosGateway As New TiposUsuarioGateway(My.Settings.Conexion)
 
         If nombre.Equals("") Or nombre = Nothing Then
@@ -241,43 +275,35 @@ Public Class UsuariosGateway
 
         If esNombreCorrecto And esApellidoCorrecto Then
 
-            sentenciaUpdate.Append(String.Format("SET nombre = '{0}', SET apellidos = '{1}'", nombre, apellidos))
+            sentenciaUpdate.Append("SET Nombre = @Nombre, Apellidos = @Apellidos")
 
         End If
 
         If email.Equals("") Then
 
-            sentenciaUpdate.Append(", SET email = NULL")
+            sentenciaUpdate.Append(", Email = @EmailVacio")
 
         Else
 
-            sentenciaUpdate.Append(String.Format(", SET email = '{0}'", email))
+            sentenciaUpdate.Append(", Email = @Email")
 
         End If
 
         If direccion.Equals("") Then
 
-            sentenciaUpdate.Append(", SET direccion = NULL")
+            sentenciaUpdate.Append(", Direccion = @DireccVacio")
 
         Else
 
-            sentenciaUpdate.Append(String.Format(", SET direccion = '{0}'", direccion))
+            sentenciaUpdate.Append(", Direccion = @Direccion")
 
         End If
 
-        lector = tiposUsuariosGateway.SeleccionarTipos()          ' Obtenemos los tipos de usuarios para, saber si el usuario es profesional o investigador.
+        If tipoUsuario.Equals("Profesional") Or tipoUsuario.Equals("Investigador") Then
 
-        While lector.Read
+            esProfesionalOInvestigador = True
 
-            If tipo.Equals(lector.GetString(0)) Then
-
-                esProfesionalOInvestigador = True
-
-            End If
-
-        End While
-
-        CerrarConexionABd()
+        End If
 
         If esProfesionalOInvestigador Then
 
@@ -287,34 +313,76 @@ Public Class UsuariosGateway
 
             Else
 
-                sentenciaUpdate.Append(String.Format(", SET organizacion = '{0}'", organizacion))                ' Cambiamos la organización.
+                sentenciaUpdate.Append(", Organizacion = @Organizacion")
 
             End If
 
         Else
 
-            sentenciaUpdate.Append(", SET organizacion = NULL")
+            sentenciaUpdate.Append(", Organizacion = @OrgVacio")
 
         End If
 
-        numTipoUsuario = tiposUsuariosGateway.SeleccionarPorNombre(tipo)
-        sentenciaUpdate.Append(String.Format(", SET tipo = {0}", numTipoUsuario)).Append(")")
-        MessageBox.Show(sentenciaUpdate.ToString(), "Sentencia", MessageBoxButtons.OK, MessageBoxIcon.Information)          ' Para hacer pruebas mientras se depura.
+        numTipoUsuario = tiposUsuariosGateway.SeleccionarPorNombre(tipoUsuario)
+        sentenciaUpdate.Append(", tipo = @NumTipoUsuario WHERE id = @NumUsuario")
 
         Try
             ConexionABd.Open()
             Comando.CommandText = sentenciaUpdate.ToString()
-            numFilas = Comando.ExecuteNonQuery()
 
-            CerrarConexionABd()
+            Comando.Parameters.Add("@Nombre", SqlDbType.VarChar)
+            Comando.Parameters("@Nombre").Value = nombre
+
+            Comando.Parameters.Add("@Apellidos", SqlDbType.VarChar)
+            Comando.Parameters("@Apellidos").Value = apellidos
+
+            Comando.Parameters.Add("@TefVacio", SqlDbType.VarChar)
+            Comando.Parameters("@TefVacio").Value = DBNull.Value
+
+            Comando.Parameters.Add("@EmailVacio", SqlDbType.VarChar)
+            Comando.Parameters("@EmailVacio").Value = DBNull.Value
+
+            Comando.Parameters.Add("@DireccVacio", SqlDbType.VarChar)
+            Comando.Parameters("@DireccVacio").Value = DBNull.Value
+
+            Comando.Parameters.Add("@OrgVacio", SqlDbType.VarChar)
+            Comando.Parameters("@OrgVacio").Value = DBNull.Value
+
+            Comando.Parameters.Add("@Telefono", SqlDbType.VarChar)
+            Comando.Parameters("@Telefono").Value = telefono
+
+            Comando.Parameters.Add("@Email", SqlDbType.VarChar)
+            Comando.Parameters("@Email").Value = email
+
+            Comando.Parameters.Add("@Direccion", SqlDbType.VarChar)
+            Comando.Parameters("@Direccion").Value = direccion
+
+            Comando.Parameters.Add("@Organizacion", SqlDbType.VarChar)
+            Comando.Parameters("@Organizacion").Value = organizacion
+
+            Comando.Parameters.Add("@NumTipoUsuario", SqlDbType.Int)
+            Comando.Parameters("@NumTipoUsuario").Value = numTipoUsuario
+
+            Comando.Parameters.Add("@NumUsuario", SqlDbType.Int)
+            Comando.Parameters("@NumUsuario").Value = id
+
+            numFilas = Comando.ExecuteNonQuery()
 
         Catch ex As Exception
 
             Throw New Exception(ex.Message)
 
+        Finally
+
+            If ConexionABd.State = ConnectionState.Open Then
+
+                CerrarConexionABd()
+
+            End If
+
         End Try
 
-        If numFilas > 0 Then            ' Se ha actualizado un usuario.
+        If numFilas > 0 Then            ' Se ha actualizado el usuario.
 
             Return True
 
@@ -338,18 +406,24 @@ Public Class UsuariosGateway
 
         Try
             ConexionABd.Open()
-            Comando.CommandText = String.Format("DELETE FROM Usuarios WHERE id = {0}", id)
+            Comando.CommandText = String.Format("DELETE FROM Usuarios WHERE Id = {0}", id)
             numFilas = Comando.ExecuteNonQuery()
-
-            CerrarConexionABd()
 
         Catch ex As Exception
 
             Throw New Exception(ex.Message)
 
+        Finally
+
+            If ConexionABd.State = ConnectionState.Open Then
+
+                CerrarConexionABd()
+
+            End If
+
         End Try
 
-        If numFilas > 0 Then            ' Se ha actualizado un usuario.
+        If numFilas > 0 Then            ' Se ha actualizado el usuario.
 
             Return True
 
@@ -372,12 +446,20 @@ Public Class UsuariosGateway
 
         Try
             ConexionABd.Open()
-            Comando.CommandText = "SELECT COUNT(id) FROM usuarios"
+            Comando.CommandText = "SELECT COUNT(Id) FROM Usuarios"
             numUsuariosActuales = DirectCast(Comando.ExecuteScalar(), Integer)
 
         Catch ex As Exception
 
             Throw New Exception(ex.Message)
+
+        Finally
+
+            If ConexionABd.State = ConnectionState.Open Then
+
+                CerrarConexionABd()
+
+            End If
 
         End Try
 
