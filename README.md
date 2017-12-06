@@ -1,4 +1,4 @@
-# ProyectoFabLab
+# Proyecto FabLab
 
 Programa que gestiona los usuarios, máquinas y reservas de un FabLab. 
 
