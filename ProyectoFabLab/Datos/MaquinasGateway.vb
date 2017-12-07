@@ -8,18 +8,21 @@ Public Class MaquinasGateway
     ''' Selecciona todas las máquinas y las carga en una tabla
     ''' </summary>
     ''' <returns></returns>
-    Public Function SeleccionaTodasLasMaquinas() As DataTable
-        Dim lector As SqlDataReader
-        Dim tabla As New DataTable("Maquinas")
+    Public Function SeleccionaTodasLasMaquinas() As SqlDataAdapter
+        ' Dim lector As SqlDataReader
+        ' Dim tabla As New DataTable("Maquinas")
+        Dim adaptador As SqlDataAdapter
         Try
             ConexionBD.Open()
-            Comando.CommandText = "SELECT id, modelo, precio_hora, fecha_compra, telefono_sat, tipo, descripcion, caracteristicas FROM Maquinas"
-            lector = Comando.ExecuteReader()
-            tabla.Load(lector)
+            adaptador = New SqlDataAdapter("SELECT id, modelo, precio_hora, fecha_compra, telefono_sat, tipo, descripcion, caracteristicas FROM Maquinas", ConexionBD)
+
+            ' Comando.CommandText = "SELECT id, modelo, precio_hora, fecha_compra, telefono_sat, tipo, descripcion, caracteristicas FROM Maquinas"
+            'lector = Comando.ExecuteReader()
+            'tabla.Load(lector)
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
-        Return tabla
+        Return adaptador
     End Function
 
     Public Function NumeroMaquinas() As SqlDataReader

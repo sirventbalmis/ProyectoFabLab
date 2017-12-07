@@ -4,9 +4,17 @@ Module NegocioMaquinas
     ''' Obtiene todas las máquinas
     ''' </summary>
     ''' <returns></returns>
-    Public Function ObtenerTodasLasMaquinas() As DataTable
+    Public Function ObtenerTodasLasMaquinas() As DataSet
         Dim MaquinasGateway As New MaquinasGateway(My.Settings.Conexion)
-        Return MaquinasGateway.SeleccionaTodasLasMaquinas()
+
+        Dim dataSet As New DataSet
+
+        Dim adaptador As SqlDataAdapter = MaquinasGateway.SeleccionaTodasLasMaquinas()
+        adaptador.Fill(dataSet, "Maquinas")
+
+        Return dataSet
+
+        ' Return MaquinasGateway.SeleccionaTodasLasMaquinas()
     End Function
     ''' <summary>
     ''' Obtiene el número de máquinas

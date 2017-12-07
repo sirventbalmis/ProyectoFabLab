@@ -5,6 +5,16 @@ Imports Microsoft.ProjectOxford.Vision
 Public Class NuevaMaquina
 
     Private TipoAccion As String
+    Private _IdMaquina As Integer
+
+    Public Property IdMaquina As Integer
+        Get
+            Return _IdMaquina
+        End Get
+        Set(value As Integer)
+            _IdMaquina = value
+        End Set
+    End Property
 
     Private Sub CancelarButton_Click(sender As Object, e As EventArgs) Handles CancelarButton.Click
 
@@ -14,10 +24,14 @@ Public Class NuevaMaquina
 
     Private Sub NuevaMaquina_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        CargarTiposMaquinas()
+        ComprobarValorEnum()
 
     End Sub
 
+
+    ''' <summary>
+    ''' Carga en el ComboBox los diferentes tipos de máquinas.
+    ''' </summary>
     Private Sub CargarTiposMaquinas()
 
         Dim tablaTiposMaquinas As SqlDataReader = NegocioTiposMaquinas.ObtenerTiposMaquinas()
@@ -27,6 +41,37 @@ Public Class NuevaMaquina
             TipoMaquinaComboBox.Items.Add(tablaTiposMaquinas.GetString(0))
 
         End While
+
+    End Sub
+
+
+    ''' <summary>
+    ''' Comprueba el valor de la enumeración "TipoAccion" para activar o desactivar controles.
+    ''' </summary>
+    Private Sub ComprobarValorEnum()
+
+        If TipoAccion.Equals(Foo.TipoAccion.Consultar.ToString()) Then
+
+            ModeloTextBox.Enabled = False
+            PrecioPorHoraTextBox.Enabled = False
+            FechaCompraDateTimePicker.Enabled = False
+            TefSATTextBox.Enabled = False
+            TipoMaquinaComboBox.Enabled = False
+            AddTipoMaquinaPictureBox.Visible = False
+            DescripcionRichTextBox.Enabled = False
+            CaracTecnicasRichTextBox.Enabled = False
+            AddImgMaquinaButton.Enabled = False
+            AceptarButton.Visible = False
+
+            CancelarButton.Text = "Cerrar"
+
+            NegocioMaquinas.ObtenerMaquinasPorId(IdMaquina)
+
+        ElseIf TipoAccion.Equals(Foo.TipoAccion.Insertar.ToString()) Then
+
+            CargarTiposMaquinas()
+
+        End If
 
     End Sub
 
@@ -95,7 +140,7 @@ Public Class NuevaMaquina
 
     End Sub
 
-    Private Sub AddImgMaquinaButton_Click(sender As Object, e As EventArgs) Handles AddImgMaquinaButton.Click
+    Private Async Sub AddImgMaquinaButton_Click(sender As Object, e As EventArgs) Handles AddImgMaquinaButton.Click
 
         Dim seleccionarImg As New OpenFileDialog()
 
@@ -103,63 +148,33 @@ Public Class NuevaMaquina
         seleccionarImg.Filter = "jpg|*.jpg|png|*.png"
         seleccionarImg.ShowDialog()
 
-        Dim visionClient As New VisionServiceClient(My.Settings.ClaveServicioMiniatura)
-        Dim rutaImagen As String = seleccionarImg.FileName
-
-        Dim anchura As Integer = 50
-        Dim altura As Integer = 50
-
-        Dim miniatura As Byte() = visionClient.GetThumbnailAsync(rutaImagen, anchura, altura, True).Result
-
-        Using binaryWrite As New BinaryWriter(New FileStream("C:\img\Hola.jpg", FileMode.Create, FileAccess.Write))
-
-            binaryWrite.Write(miniatura)
-
-        End Using
-
-        Process.Start("C:\img\Hola.jpg")
-        Process.Start(rutaImagen)
+        Dim miniaturaImg As Byte() = Await GetThumbnail(seleccionarImg.FileName)
+        Dim archivo As String = Path.ChangeExtension(seleccionarImg.FileName, ".jpg")
+        File.WriteAllBytes(archivo, miniaturaImg)
 
         ' AddImagenAListaImgs(seleccionarImg.FileName)
 
     End Sub
 
-    'Private Async Sub MakeThumbnailRequest(ByVal rutaImagen As String)
+    Private Async Function GetThumbnail(ByVal rutaImagen As String) As Task(Of Byte())
 
-    '    Dim client As New HttpClient()
+        Dim client As New VisionServiceClient(My.Settings.ClaveServicioMiniatura)
 
-    '    client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", My.Settings.ClaveServicioMiniatura)
+        Using stream As Stream = File.OpenRead(rutaImagen)
 
-    '    Dim requestParameters As String = "width=50&height=50&smartCropping=true"
-    '    Dim uri As String = My.Settings.UrlServicioMiniatura & "?" & requestParameters
+            Try
+                Dim miniatura As Byte() = Await client.GetThumbnailAsync(stream, 16, 16, True)
+                Return miniatura
 
-    '    Dim response As HttpResponseMessage
-    '    Dim byteData As Byte() = GetImageAsByteArray(rutaImagen)
+            Catch ex As Exception
 
-    '    Using content As New ByteArrayContent(byteData)
+                MessageBox.Show(ex.Message)
 
-    '        content.Headers.ContentType = New Headers.MediaTypeHeaderValue("application/octet-stream")
+            End Try
 
-    '        response = Await client.PostAsync(uri, content)
+        End Using
 
-    '        If response.IsSuccessStatusCode Then
-
-    '            Dim miniaturaImagen As Byte() = Await response.Content.ReadAsByteArrayAsync()
-
-    '        End If
-
-    '    End Using
-
-    'End Sub
-
-    'Private Function GetImageAsByteArray(ByRef rutaImagen As String) As Byte()
-
-    '    Dim fileStream As New FileStream(rutaImagen, FileMode.Open, FileAccess.Read)
-    '    Dim binaryReader As New BinaryReader(fileStream)
-
-    '    Return binaryReader.ReadBytes(CType(fileStream.Length, Integer))
-
-    'End Function
+    End Function
 
     Private Sub AddImagenAListaImgs(ByRef nombreArchivo As String)
 
