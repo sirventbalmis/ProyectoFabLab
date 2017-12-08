@@ -2,11 +2,9 @@
 
 Public Class Form1
     Private Sub AddUsuario_Click(sender As Object, e As EventArgs) Handles AddUsuarioToolStripMenuItem.Click
-
-        Dim documento As New GestionUsuarios
-        documento.MdiParent = Me
-        documento.Text = "Gestión de usuarios"
-        documento.Show()
+        Dim formNuevoUsuario As New NuevoUsuario(Foo.TipoAccion.Insertar.ToString())
+        formNuevoUsuario.MdiParent = Me
+        formNuevoUsuario.Show()
 
     End Sub
 
@@ -65,5 +63,11 @@ Public Class Form1
         formNuevaMaquina.MdiParent = Me
         formNuevaMaquina.Show()
 
+    End Sub
+
+    Private Sub AcercaDeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AcercaDeToolStripMenuItem.Click
+        Dim formNuevaMaquina As New InicioProgramaSplashScreen()
+        formNuevaMaquina.MdiParent = Me
+        formNuevaMaquina.Show()
     End Sub
 End Class
