@@ -70,4 +70,10 @@ Public Class Form1
         formNuevaMaquina.MdiParent = Me
         formNuevaMaquina.Show()
     End Sub
+
+    Private Sub GestionUsuariosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GestionUsuariosToolStripMenuItem.Click
+        Dim formGestionMaq As New GestionUsuarios(Me)
+        formGestionMaq.MdiParent = Me
+        formGestionMaq.Show()
+    End Sub
 End Class

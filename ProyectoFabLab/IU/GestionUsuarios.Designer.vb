@@ -22,28 +22,89 @@ Partial Class GestionUsuarios
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.BuscarTxtBox = New System.Windows.Forms.TextBox()
+        Me.NuevoUsuarioButton = New System.Windows.Forms.Button()
+        Me.UsuariosDGV = New System.Windows.Forms.DataGridView()
+        Me.ConsultaButton = New System.Windows.Forms.Button()
+        Me.EditarButton = New System.Windows.Forms.Button()
+        Me.EliminarButton = New System.Windows.Forms.Button()
+        CType(Me.UsuariosDGV, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'TextBox1
+        'BuscarTxtBox
         '
-        Me.TextBox1.Location = New System.Drawing.Point(98, 53)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(200, 20)
-        Me.TextBox1.TabIndex = 0
+        Me.BuscarTxtBox.Location = New System.Drawing.Point(98, 53)
+        Me.BuscarTxtBox.Name = "BuscarTxtBox"
+        Me.BuscarTxtBox.Size = New System.Drawing.Size(200, 20)
+        Me.BuscarTxtBox.TabIndex = 0
+        '
+        'NuevoUsuarioButton
+        '
+        Me.NuevoUsuarioButton.Location = New System.Drawing.Point(875, 53)
+        Me.NuevoUsuarioButton.Name = "NuevoUsuarioButton"
+        Me.NuevoUsuarioButton.Size = New System.Drawing.Size(155, 23)
+        Me.NuevoUsuarioButton.TabIndex = 1
+        Me.NuevoUsuarioButton.Text = "Nuevo Usuario"
+        Me.NuevoUsuarioButton.UseVisualStyleBackColor = True
+        '
+        'UsuariosDGV
+        '
+        Me.UsuariosDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.UsuariosDGV.Location = New System.Drawing.Point(98, 124)
+        Me.UsuariosDGV.Name = "UsuariosDGV"
+        Me.UsuariosDGV.Size = New System.Drawing.Size(932, 374)
+        Me.UsuariosDGV.TabIndex = 2
+        '
+        'ConsultaButton
+        '
+        Me.ConsultaButton.Location = New System.Drawing.Point(700, 513)
+        Me.ConsultaButton.Name = "ConsultaButton"
+        Me.ConsultaButton.Size = New System.Drawing.Size(75, 23)
+        Me.ConsultaButton.TabIndex = 3
+        Me.ConsultaButton.Text = "Consultar"
+        Me.ConsultaButton.UseVisualStyleBackColor = True
+        '
+        'EditarButton
+        '
+        Me.EditarButton.Location = New System.Drawing.Point(808, 513)
+        Me.EditarButton.Name = "EditarButton"
+        Me.EditarButton.Size = New System.Drawing.Size(75, 23)
+        Me.EditarButton.TabIndex = 4
+        Me.EditarButton.Text = "Editar"
+        Me.EditarButton.UseVisualStyleBackColor = True
+        '
+        'EliminarButton
+        '
+        Me.EliminarButton.Location = New System.Drawing.Point(911, 513)
+        Me.EliminarButton.Name = "EliminarButton"
+        Me.EliminarButton.Size = New System.Drawing.Size(75, 23)
+        Me.EliminarButton.TabIndex = 5
+        Me.EliminarButton.Text = "Eliminar"
+        Me.EliminarButton.UseVisualStyleBackColor = True
         '
         'GestionUsuarios
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(724, 384)
-        Me.Controls.Add(Me.TextBox1)
+        Me.ClientSize = New System.Drawing.Size(1126, 619)
+        Me.Controls.Add(Me.EliminarButton)
+        Me.Controls.Add(Me.EditarButton)
+        Me.Controls.Add(Me.ConsultaButton)
+        Me.Controls.Add(Me.UsuariosDGV)
+        Me.Controls.Add(Me.NuevoUsuarioButton)
+        Me.Controls.Add(Me.BuscarTxtBox)
         Me.Name = "GestionUsuarios"
         Me.Text = "GestionUsuarios"
+        CType(Me.UsuariosDGV, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents BuscarTxtBox As TextBox
+    Friend WithEvents NuevoUsuarioButton As Button
+    Friend WithEvents UsuariosDGV As DataGridView
+    Friend WithEvents ConsultaButton As Button
+    Friend WithEvents EditarButton As Button
+    Friend WithEvents EliminarButton As Button
 End Class
