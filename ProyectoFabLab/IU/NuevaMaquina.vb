@@ -152,6 +152,7 @@ Public Class NuevaMaquina
         Dim archivo As String = Path.ChangeExtension(seleccionarImg.FileName, ".jpg")
         File.WriteAllBytes(archivo, miniaturaImg)
 
+
         ' AddImagenAListaImgs(seleccionarImg.FileName)
 
     End Sub

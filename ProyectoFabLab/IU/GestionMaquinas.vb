@@ -21,6 +21,8 @@
         PruebaLabel.DataBindings.Add("Text", Enlace, "id")
         DatosMaquinasDataGridView.DataSource = Enlace
 
+        EstablecerColumnasDataGridView()
+
     End Sub
 
     Private Sub ConsultarMaqButton_Click(sender As Object, e As EventArgs) Handles ConsultarMaqButton.Click
@@ -31,6 +33,67 @@
 
         formNuevaMaquina.IdMaquina = Integer.Parse(PruebaLabel.Text)
         formNuevaMaquina.Show()
+
+    End Sub
+
+    Private Sub EliminarMaqButton_Click(sender As Object, e As EventArgs) Handles EliminarMaqButton.Click
+
+        BorrarFilaDataGridView()
+
+        If NegocioMaquinas.BorrarMaquina(Integer.Parse(PruebaLabel.Text)) Then          ' Eliminamos la máquina de la BD.
+
+            MessageBox.Show("Máquina Eliminada", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        Else
+
+            MessageBox.Show("No se ha podido eliminar la máquina", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+        End If
+
+    End Sub
+
+
+    ''' <summary>
+    ''' Borra la fila que contiene los datos de la máquina en el DataGridView.
+    ''' </summary>
+    Private Sub BorrarFilaDataGridView()
+
+        If DatosMaquinasDataGridView.SelectedRows.Count = 0 Then
+
+            MessageBox.Show("Tienes que seleccionar una fila", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+        Else
+
+            For Each fila As DataGridViewRow In DatosMaquinasDataGridView.SelectedRows
+
+                DatosMaquinasDataGridView.Rows.Remove(fila)
+
+            Next
+
+        End If
+
+    End Sub
+
+
+    ''' <summary>
+    ''' Establece el título y anchura de las columnas del DataGridView
+    ''' </summary>
+    Private Sub EstablecerColumnasDataGridView()
+
+        DatosMaquinasDataGridView.Columns(0).HeaderText = "Modelo"
+        DatosMaquinasDataGridView.Columns(0).Width = 120
+
+        DatosMaquinasDataGridView.Columns(1).HeaderText = "Tipo de Máquina"
+        DatosMaquinasDataGridView.Columns(1).Width = 120
+
+        DatosMaquinasDataGridView.Columns(2).HeaderText = "Precio / Hora"
+        DatosMaquinasDataGridView.Columns(3).HeaderText = "Teléfono SAT"
+
+    End Sub
+
+    Private Sub BuscarPorNombreTextBox_TextChanged(sender As Object, e As EventArgs) Handles BuscarPorNombreTextBox.TextChanged
+
+        Enlace.Filter = "Modelo LIKE '" & BuscarPorNombreTextBox.Text & "%'"
 
     End Sub
 
