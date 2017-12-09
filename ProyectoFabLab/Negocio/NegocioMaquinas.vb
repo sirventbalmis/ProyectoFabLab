@@ -3,7 +3,7 @@ Module NegocioMaquinas
     ''' <summary>
     ''' Obtiene todas las máquinas
     ''' </summary>
-    ''' <returns></returns>
+    ''' <returns>Devuelve todas las máquinas en formato DataSet</returns>
     Public Function ObtenerTodasLasMaquinas() As DataSet
         Dim MaquinasGateway As New MaquinasGateway(My.Settings.Conexion)
 
@@ -13,17 +13,19 @@ Module NegocioMaquinas
         adaptador.Fill(dataSet, "Maquinas")
 
         Return dataSet
-
-        ' Return MaquinasGateway.SeleccionaTodasLasMaquinas()
     End Function
+
+
     ''' <summary>
     ''' Obtiene el número de máquinas
     ''' </summary>
-    ''' <returns></returns>
+    ''' <returns>Devuelve el valor de números de máquinas en formato SQLDataReader</returns>
     Public Function ObtenerNumeroMaquinas() As SqlDataReader
         Dim MaquinasGateway As New MaquinasGateway(My.Settings.Conexion)
         Return MaquinasGateway.NumeroMaquinas()
     End Function
+
+
     ''' <summary>
     ''' Obtiene las máquinas por ID
     ''' </summary>

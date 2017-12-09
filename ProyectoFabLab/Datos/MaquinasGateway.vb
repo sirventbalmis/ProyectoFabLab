@@ -14,7 +14,7 @@ Public Class MaquinasGateway
         Dim adaptador As SqlDataAdapter
         Try
             ConexionBD.Open()
-            adaptador = New SqlDataAdapter("SELECT id, modelo, precio_hora, fecha_compra, telefono_sat, tipo, descripcion, caracteristicas FROM Maquinas", ConexionBD)
+            adaptador = New SqlDataAdapter("SELECT m.id, modelo, precio_hora, fecha_compra, telefono_sat, t.tipo, descripcion, caracteristicas FROM Maquinas AS m JOIN TiposMaquina AS t ON m.tipo = t.id", ConexionBD)
 
             ' Comando.CommandText = "SELECT id, modelo, precio_hora, fecha_compra, telefono_sat, tipo, descripcion, caracteristicas FROM Maquinas"
             'lector = Comando.ExecuteReader()
