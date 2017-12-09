@@ -159,7 +159,7 @@ Public Class NuevaMaquina
 
     Private Async Function GetThumbnail(ByVal rutaImagen As String) As Task(Of Byte())
 
-        Dim client As New VisionServiceClient(My.Settings.ClaveServicioMiniatura)
+        Dim client As New VisionServiceClient(My.Settings.ClaveServicioMiniatura, My.Settings.UrlServicioMiniatura)
 
         Using stream As Stream = File.OpenRead(rutaImagen)
 
