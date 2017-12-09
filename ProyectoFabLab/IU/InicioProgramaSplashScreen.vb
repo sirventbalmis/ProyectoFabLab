@@ -24,9 +24,5 @@
         'Información de Copyright
         ' Copyright.Text = My.Application.Info.Copyright
     End Sub
-
-    Private Sub InicioProgramaSplashScreen_MouseClick(sender As Object, e As MouseEventArgs) Handles MyBase.MouseClick
-        'Solucion Temporal por Pablo Sirvent, hay que controlar el cierre mejor en el acerca de
-        Me.Close()
-    End Sub
+    'ponsito
 End Class
