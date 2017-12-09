@@ -27,12 +27,15 @@
 
     Private Sub ConsultarMaqButton_Click(sender As Object, e As EventArgs) Handles ConsultarMaqButton.Click
 
-        Dim formNuevaMaquina As New NuevaMaquina(Foo.TipoAccion.Consultar.ToString())
-        formNuevaMaquina.Text = "FabLab - Consultar Máquina"
-        formNuevaMaquina.MdiParent = FormPrincipal
+        MessageBox.Show(DatosMaquinasDataGridView.SelectedRows.)
 
-        formNuevaMaquina.IdMaquina = Integer.Parse(PruebaLabel.Text)
-        formNuevaMaquina.Show()
+
+        'Dim formNuevaMaquina As New NuevaMaquina(Foo.TipoAccion.Consultar.ToString())
+        'formNuevaMaquina.Text = "FabLab - Consultar Máquina"
+        'formNuevaMaquina.MdiParent = FormPrincipal
+
+        'formNuevaMaquina.IdMaquina = Integer.Parse(PruebaLabel.Text)
+        'formNuevaMaquina.Show()
 
     End Sub
 

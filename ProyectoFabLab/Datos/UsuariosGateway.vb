@@ -467,6 +467,39 @@ Public Class UsuariosGateway
 
     End Function
 
+
+    ''' <summary>
+    ''' Obtiene los datos de los usuarios para mostrarlos en el DataGridView de la gestión de los usuarios.
+    ''' </summary>
+    ''' <returns>SqlDataAdapter con la información de los usuarios.</returns>
+    Public Function SeleccionarDatosUsuarios() As SqlDataAdapter
+
+        Dim adaptador As SqlDataAdapter
+
+        Try
+            ConexionABd.Open()
+            adaptador = New SqlDataAdapter("SELECT Usuarios.Nombre, TiposUsuario.Tipo, Usuarios.Organizacion, Usuarios.Fecha_Alta
+                                            FROM   Usuarios
+	                                               JOIN TiposUsuario ON Usuarios.tipo = TiposUsuario.Id", ConexionABd)
+
+            Return adaptador
+
+        Catch ex As Exception
+
+            Throw New Exception(ex.Message)
+
+        Finally
+
+            If ConexionABd.State = ConnectionState.Open Then
+
+                CerrarConexionABd()
+
+            End If
+
+        End Try
+
+    End Function
+
     Public Sub New(ByRef conexion As String)
 
         Me.ConexionABd = New SqlConnection(conexion)
