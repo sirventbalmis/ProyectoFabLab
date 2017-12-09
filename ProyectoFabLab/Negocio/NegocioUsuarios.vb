@@ -1,4 +1,6 @@
-﻿Module NegocioUsuarios
+﻿Imports System.Data.SqlClient
+
+Module NegocioUsuarios
 
     ''' <summary>
     ''' Inserta un usuario a la tabla "Usuarios".
@@ -78,6 +80,23 @@
         Dim usuariosGateway As New UsuariosGateway(My.Settings.Conexion)
 
         Return usuariosGateway.SeleccionarNumUsuarios()
+
+    End Function
+
+
+    ''' <summary>
+    ''' Obtiene los datos de los usuarios para mostrarlos en el DataGridView de la gestión de los usuarios.
+    ''' </summary>
+    ''' <returns>SqlDataAdapter con la información de los usuarios.</returns>
+    Public Function ObtenerDatosUsuarios() As DataSet
+
+        Dim usuariosGateway As New UsuariosGateway(My.Settings.Conexion)
+        Dim adaptador As SqlDataAdapter = usuariosGateway.SeleccionarDatosUsuarios()
+
+        Dim dataSet As New DataSet()
+        adaptador.Fill(dataSet, "Usuarios")
+
+        Return dataSet
 
     End Function
 
