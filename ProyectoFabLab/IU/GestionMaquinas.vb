@@ -27,8 +27,7 @@
 
     Private Sub ConsultarMaqButton_Click(sender As Object, e As EventArgs) Handles ConsultarMaqButton.Click
 
-        MessageBox.Show(DatosMaquinasDataGridView.SelectedRows.)
-
+        MessageBox.Show(DatosMaquinasDataGridView.SelectedCells(0).Value.ToString())
 
         'Dim formNuevaMaquina As New NuevaMaquina(Foo.TipoAccion.Consultar.ToString())
         'formNuevaMaquina.Text = "FabLab - Consultar Máquina"
