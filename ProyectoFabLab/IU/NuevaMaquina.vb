@@ -1,6 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports System.IO
 Imports Microsoft.ProjectOxford.Vision
+Imports System.Drawing
 
 Public Class NuevaMaquina
 
@@ -148,12 +149,13 @@ Public Class NuevaMaquina
         seleccionarImg.Filter = "jpg|*.jpg|png|*.png"
         seleccionarImg.ShowDialog()
 
-        Dim miniaturaImg As Byte() = Await GetThumbnail(seleccionarImg.FileName)
-        Dim archivo As String = Path.ChangeExtension(seleccionarImg.FileName, ".jpg")
-        File.WriteAllBytes(archivo, miniaturaImg)
+        Dim arrayMiniaturaImg As Byte() = Await GetThumbnail(seleccionarImg.FileName)
+        Dim nombreImagen As String = Path.GetFileName(seleccionarImg.FileName)
 
+        File.WriteAllBytes(My.Settings.CarpetaMaquinas & nombreImagen, arrayMiniaturaImg)
+        Dim imagen As Image = ConvertirArrayByteAImage(arrayMiniaturaImg)
 
-        ' AddImagenAListaImgs(seleccionarImg.FileName)
+        AddImagenAListaImgs(imagen)
 
     End Sub
 
@@ -164,7 +166,7 @@ Public Class NuevaMaquina
         Using stream As Stream = File.OpenRead(rutaImagen)
 
             Try
-                Dim miniatura As Byte() = Await client.GetThumbnailAsync(stream, 16, 16, True)
+                Dim miniatura As Byte() = Await client.GetThumbnailAsync(stream, 400, 400, True)
                 Return miniatura
 
             Catch ex As Exception
@@ -177,10 +179,20 @@ Public Class NuevaMaquina
 
     End Function
 
-    Private Sub AddImagenAListaImgs(ByRef nombreArchivo As String)
+    Private Function ConvertirArrayByteAImage(ByRef arrayMiniaturaImg As Byte()) As Image
+
+        Dim imagen As Image
+        Dim memoryStream As New MemoryStream(arrayMiniaturaImg)
+
+        imagen = Image.FromStream(memoryStream)
+        Return imagen
+
+    End Function
+
+    Private Sub AddImagenAListaImgs(ByRef imagen As Image)
 
         Dim pb As New PictureBox()
-        pb.Image = Image.FromFile(nombreArchivo)
+        pb.Image = imagen
         pb.SizeMode = PictureBoxSizeMode.StretchImage
 
         ImgsMaquinasFlowLayoutPanel.Controls.Add(pb)

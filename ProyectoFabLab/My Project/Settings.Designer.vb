@@ -89,6 +89,30 @@ Namespace My
                 Me("ClaveServicioMiniatura") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("..\..\imagenes\maquinas\")>  _
+        Public Property CarpetaMaquinas() As String
+            Get
+                Return CType(Me("CarpetaMaquinas"),String)
+            End Get
+            Set
+                Me("CarpetaMaquinas") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("..\..\imagenes\usuarios\")>  _
+        Public Property CarpetaUsuarios() As String
+            Get
+                Return CType(Me("CarpetaUsuarios"),String)
+            End Get
+            Set
+                Me("CarpetaUsuarios") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
