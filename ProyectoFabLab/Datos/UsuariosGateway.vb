@@ -478,7 +478,7 @@ Public Class UsuariosGateway
 
         Try
             ConexionABd.Open()
-            adaptador = New SqlDataAdapter("SELECT Usuarios.Nombre, TiposUsuario.Tipo, Usuarios.Organizacion, Usuarios.Fecha_Alta
+            adaptador = New SqlDataAdapter("SELECT Usuarios.Id, Usuarios.Nombre, TiposUsuario.Tipo, Usuarios.Organizacion, Usuarios.Fecha_Alta
                                             FROM   Usuarios
 	                                               JOIN TiposUsuario ON Usuarios.tipo = TiposUsuario.Id", ConexionABd)
 
