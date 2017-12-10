@@ -201,18 +201,16 @@ Public Class UsuariosGateway
     ''' </summary>
     ''' <param name="idUsuario">Id del usuario para obtener sus datos</param>
     ''' <returns>DataTable con los datos de ese usuario</returns>
-    Public Function SeleccionarPorId(ByRef idUsuario As Integer) As DataTable
+    Public Function SeleccionarPorId(ByRef idUsuario As Integer) As SqlDataReader
 
-        Dim tabla As New DataTable("Usuario")
         Dim lector As SqlDataReader
 
         Try
             ConexionABd.Open()
             Comando.CommandText = String.Format("SELECT nombre, apellidos, fecha_nacimiento, telefono, email, direccion, organizacion, tipo, fecha_alta FROM Usuarios WHERE Usuarios.id = {0}", idUsuario)
             lector = Comando.ExecuteReader()
-
-            tabla.Load(lector)
-
+            lector.Read()
+            Return lector
         Catch ex As Exception
 
             Throw New Exception(ex.Message)
@@ -227,7 +225,7 @@ Public Class UsuariosGateway
 
         End Try
 
-        Return tabla
+
 
     End Function
 

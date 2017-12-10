@@ -2,9 +2,30 @@
 Public Class NuevoUsuario
 
     Private TipoAccion As String
+    Private _IdUsuario As Integer
+    Public Property IdUsuario As Integer
+        Get
+            Return _IdUsuario
+        End Get
+        Set(val As Integer)
+            _IdUsuario = val
+        End Set
+    End Property
 
     Private Sub NuevoUsuario_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        CargaValores()
+        If TipoAccion.Equals(Foo.TipoAccion.Consultar.ToString()) Then
+            NombreTextBox.Enabled = False
+
+            Dim valoresUsuario As SqlDataReader = NegocioUsuarios.ObtenerDatosUsuarioPorId(_IdUsuario)
+            NombreTextBox.Text = valoresUsuario.GetString(1)
+
+
+            CargaValores()
+        Else
+            If TipoAccion.Equals(Foo.TipoAccion.Modificar.ToString()) Then
+
+            End If
+        End If
     End Sub
 
     Public Sub CargaValores()

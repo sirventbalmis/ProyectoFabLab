@@ -9,7 +9,7 @@
         SetColumnas()
     End Sub
     Private Sub SetColumnas()
-        UsuariosDGV.Columns(0).Width = 200
+        UsuariosDGV.Columns(0).Visible = False
         UsuariosDGV.Columns(1).Width = 200
         UsuariosDGV.Columns(2).Width = 200
         UsuariosDGV.Columns(3).Width = 200
@@ -33,7 +33,10 @@
         Dim seleccionados As Integer = UsuariosDGV.SelectedCells.Count
         If seleccionados > 0 Then
             For Each fila As DataGridViewRow In UsuariosDGV.SelectedRows
-                MsgBox(UsuariosDGV.SelectedCells(0).Value.ToString())
+                Dim nuevoUsuario As New NuevoUsuario(Foo.TipoAccion.Consultar.ToString())
+                nuevoUsuario.MdiParent = FormPrincipal
+                nuevoUsuario.IdUsuario = Integer.Parse(UsuariosDGV.Rows(fila.Index).Cells(0).Value.ToString())
+                nuevoUsuario.Show()
             Next
         Else
             MessageBox.Show("Tienes que seleccionar una entrada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -48,10 +51,17 @@
         Dim seleccionados As Integer = UsuariosDGV.SelectedCells.Count
         If seleccionados > 0 Then
             For Each fila As DataGridViewRow In UsuariosDGV.SelectedRows
+                If NegocioUsuarios.EliminarUsuarioPorId(Integer.Parse(UsuariosDGV.Rows(fila.Index).Cells(0).Value.ToString)) Then
+                    MessageBox.Show("Usuario Eliminado", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Else
+                    MessageBox.Show("No se ha podido borrar el usuario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+
                 UsuariosDGV.Rows.Remove(fila)
             Next
         Else
             MessageBox.Show("Tienes que seleccionar una entrada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
+
     End Sub
 End Class
