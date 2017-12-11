@@ -29,7 +29,6 @@ Partial Class GestionMaquinas
         Me.ConsultarMaqButton = New System.Windows.Forms.Button()
         Me.EditarMaqButton = New System.Windows.Forms.Button()
         Me.EliminarMaqButton = New System.Windows.Forms.Button()
-        Me.PruebaLabel = New System.Windows.Forms.Label()
         CType(Me.DatosMaquinasDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -97,21 +96,11 @@ Partial Class GestionMaquinas
         Me.EliminarMaqButton.Text = "Eliminar"
         Me.EliminarMaqButton.UseVisualStyleBackColor = True
         '
-        'PruebaLabel
-        '
-        Me.PruebaLabel.AutoSize = True
-        Me.PruebaLabel.Location = New System.Drawing.Point(447, 48)
-        Me.PruebaLabel.Name = "PruebaLabel"
-        Me.PruebaLabel.Size = New System.Drawing.Size(39, 13)
-        Me.PruebaLabel.TabIndex = 7
-        Me.PruebaLabel.Text = "Label2"
-        '
         'GestionMaquinas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(973, 559)
-        Me.Controls.Add(Me.PruebaLabel)
         Me.Controls.Add(Me.EliminarMaqButton)
         Me.Controls.Add(Me.EditarMaqButton)
         Me.Controls.Add(Me.ConsultarMaqButton)
@@ -134,5 +123,4 @@ Partial Class GestionMaquinas
     Friend WithEvents ConsultarMaqButton As Button
     Friend WithEvents EditarMaqButton As Button
     Friend WithEvents EliminarMaqButton As Button
-    Friend WithEvents PruebaLabel As Label
 End Class

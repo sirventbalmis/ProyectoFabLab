@@ -1,6 +1,7 @@
 ﻿Imports System.Threading
 
 Public Class Form1
+
     Private Sub AddUsuario_Click(sender As Object, e As EventArgs) Handles AddUsuarioToolStripMenuItem.Click
         Dim formNuevoUsuario As New NuevoUsuario(Foo.TipoAccion.Insertar.ToString())
         formNuevoUsuario.MdiParent = Me
@@ -66,8 +67,8 @@ Public Class Form1
     End Sub
 
     Private Sub AcercaDeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AcercaDeToolStripMenuItem.Click
-        Dim formNuevaMaquina As New InicioProgramaSplashScreen()
-        formNuevaMaquina.MdiParent = Me
+        Dim formNuevaMaquina = New InicioProgramaSplashScreen()
+        ' formNuevaMaquina.MdiParent = Me
         formNuevaMaquina.Show()
     End Sub
 
@@ -76,4 +77,5 @@ Public Class Form1
         formGestionMaq.MdiParent = Me
         formGestionMaq.Show()
     End Sub
+
 End Class

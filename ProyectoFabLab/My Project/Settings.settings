@@ -15,5 +15,11 @@
     <Setting Name="ClaveServicioMiniatura" Type="System.String" Scope="User">
       <Value Profile="(Default)">b376592d3cc64a9ca5da4daed5b83464</Value>
     </Setting>
+    <Setting Name="CarpetaMaquinas" Type="System.String" Scope="User">
+      <Value Profile="(Default)">..\..\imagenes\maquinas\</Value>
+    </Setting>
+    <Setting Name="CarpetaUsuarios" Type="System.String" Scope="User">
+      <Value Profile="(Default)">..\..\imagenes\usuarios\</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

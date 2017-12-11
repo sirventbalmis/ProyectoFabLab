@@ -18,7 +18,6 @@
 
         Enlace = New BindingSource(dataSet, "Maquinas")
 
-        PruebaLabel.DataBindings.Add("Text", Enlace, "id")
         DatosMaquinasDataGridView.DataSource = Enlace
 
         EstablecerColumnasDataGridView()
@@ -27,14 +26,12 @@
 
     Private Sub ConsultarMaqButton_Click(sender As Object, e As EventArgs) Handles ConsultarMaqButton.Click
 
-        MessageBox.Show(DatosMaquinasDataGridView.SelectedCells(0).Value.ToString())
+        Dim formNuevaMaquina As New NuevaMaquina(Foo.TipoAccion.Consultar.ToString())
+        formNuevaMaquina.Text = "FabLab - Consultar Máquina"
+        formNuevaMaquina.MdiParent = FormPrincipal
 
-        'Dim formNuevaMaquina As New NuevaMaquina(Foo.TipoAccion.Consultar.ToString())
-        'formNuevaMaquina.Text = "FabLab - Consultar Máquina"
-        'formNuevaMaquina.MdiParent = FormPrincipal
-
-        'formNuevaMaquina.IdMaquina = Integer.Parse(PruebaLabel.Text)
-        'formNuevaMaquina.Show()
+        formNuevaMaquina.IdMaquina = DirectCast(DatosMaquinasDataGridView.SelectedCells(0).Value, Integer)
+        formNuevaMaquina.Show()
 
     End Sub
 
@@ -42,7 +39,7 @@
 
         BorrarFilaDataGridView()
 
-        If NegocioMaquinas.BorrarMaquina(Integer.Parse(PruebaLabel.Text)) Then          ' Eliminamos la máquina de la BD.
+        If NegocioMaquinas.BorrarMaquina(DirectCast(DatosMaquinasDataGridView.SelectedCells(0).Value, Integer)) Then          ' Eliminamos la máquina de la BD.
 
             MessageBox.Show("Máquina Eliminada", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
