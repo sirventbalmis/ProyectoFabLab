@@ -39,9 +39,8 @@ Partial Class InicioProgramaSplashScreen
         'TableLayoutPanel
         '
         Me.TableLayoutPanel.ColumnCount = 2
-        Me.TableLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.09322!))
-        Me.TableLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.90678!))
-        Me.TableLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel.Controls.Add(Me.PortadaPictureBox, 0, 0)
         Me.TableLayoutPanel.Controls.Add(Me.Panel1, 1, 0)
         Me.TableLayoutPanel.Controls.Add(Me.Panel2, 1, 1)
@@ -50,19 +49,18 @@ Partial Class InicioProgramaSplashScreen
         Me.TableLayoutPanel.RowCount = 2
         Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 51.6129!))
         Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 48.3871!))
-        Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel.Size = New System.Drawing.Size(472, 279)
         Me.TableLayoutPanel.TabIndex = 0
         '
         'PortadaPictureBox
         '
-        Me.PortadaPictureBox.Dock = System.Windows.Forms.DockStyle.Left
+        Me.PortadaPictureBox.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PortadaPictureBox.Image = Global.ProyectoFabLab.My.Resources.Resources.Fab_Lab_logo_png
         Me.PortadaPictureBox.InitialImage = Nothing
         Me.PortadaPictureBox.Location = New System.Drawing.Point(3, 3)
         Me.PortadaPictureBox.Name = "PortadaPictureBox"
         Me.TableLayoutPanel.SetRowSpan(Me.PortadaPictureBox, 2)
-        Me.PortadaPictureBox.Size = New System.Drawing.Size(220, 273)
+        Me.PortadaPictureBox.Size = New System.Drawing.Size(230, 273)
         Me.PortadaPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PortadaPictureBox.TabIndex = 0
         Me.PortadaPictureBox.TabStop = False
@@ -71,9 +69,9 @@ Partial Class InicioProgramaSplashScreen
         '
         Me.Panel1.Controls.Add(Me.Descripcion2ProgramaLabel)
         Me.Panel1.Controls.Add(Me.Descripcion1ProgramaLabel)
-        Me.Panel1.Location = New System.Drawing.Point(229, 3)
+        Me.Panel1.Location = New System.Drawing.Point(239, 3)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(240, 137)
+        Me.Panel1.Size = New System.Drawing.Size(230, 137)
         Me.Panel1.TabIndex = 1
         '
         'Descripcion2ProgramaLabel
@@ -100,9 +98,9 @@ Partial Class InicioProgramaSplashScreen
         '
         Me.Panel2.Controls.Add(Me.ProgramadoresLabel)
         Me.Panel2.Controls.Add(Me.RealizacionProgramaLabel)
-        Me.Panel2.Location = New System.Drawing.Point(229, 146)
+        Me.Panel2.Location = New System.Drawing.Point(239, 146)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(240, 129)
+        Me.Panel2.Size = New System.Drawing.Size(230, 129)
         Me.Panel2.TabIndex = 2
         '
         'ProgramadoresLabel
