@@ -88,15 +88,11 @@ Module NegocioUsuarios
     ''' Obtiene los datos de los usuarios para mostrarlos en el DataGridView de la gestión de los usuarios.
     ''' </summary>
     ''' <returns>SqlDataAdapter con la información de los usuarios.</returns>
-    Public Function ObtenerDatosUsuarios() As DataSet
+    Public Function ObtenerDatosUsuarios() As DataTable
 
         Dim usuariosGateway As New UsuariosGateway(My.Settings.Conexion)
-        Dim adaptador As SqlDataAdapter = usuariosGateway.SeleccionarDatosUsuarios()
 
-        Dim dataSet As New DataSet()
-        adaptador.Fill(dataSet, "Usuarios")
-
-        Return dataSet
+        Return usuariosGateway.SeleccionarDatosUsuarios()
 
     End Function
 

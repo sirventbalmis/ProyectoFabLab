@@ -469,17 +469,20 @@ Public Class UsuariosGateway
     ''' <summary>
     ''' Obtiene los datos de los usuarios para mostrarlos en el DataGridView de la gestión de los usuarios.
     ''' </summary>
-    ''' <returns>SqlDataAdapter con la información de los usuarios.</returns>
-    Public Function SeleccionarDatosUsuarios() As SqlDataAdapter
+    ''' <returns>DataTable con la información de los usuarios.</returns>
+    Public Function SeleccionarDatosUsuarios() As DataTable
 
-        Dim adaptador As SqlDataAdapter
+        Dim tabla As New DataTable()
+
         Try
-            ConexionABd.Open()
-            adaptador = New SqlDataAdapter("SELECT Usuarios.Id, Usuarios.Nombre, TiposUsuario.Tipo, Usuarios.Organizacion, Usuarios.Fecha_Alta
+            Comando.CommandText = "SELECT Usuarios.Id, Usuarios.Nombre, TiposUsuario.Tipo, Usuarios.Organizacion, Usuarios.Fecha_Alta
                                             FROM   Usuarios
-	                                               JOIN TiposUsuario ON Usuarios.tipo = TiposUsuario.Id", ConexionABd)
+	                                               JOIN TiposUsuario ON Usuarios.tipo = TiposUsuario.Id"
 
-            Return adaptador
+            Dim datos As SqlDataReader = Comando.ExecuteReader()
+
+            tabla.Load(datos)
+            Return tabla
 
         Catch ex As Exception
 
