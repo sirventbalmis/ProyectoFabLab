@@ -473,7 +473,6 @@ Public Class UsuariosGateway
     Public Function SeleccionarDatosUsuarios() As SqlDataAdapter
 
         Dim adaptador As SqlDataAdapter
-
         Try
             ConexionABd.Open()
             adaptador = New SqlDataAdapter("SELECT Usuarios.Id, Usuarios.Nombre, TiposUsuario.Tipo, Usuarios.Organizacion, Usuarios.Fecha_Alta
@@ -485,14 +484,6 @@ Public Class UsuariosGateway
         Catch ex As Exception
 
             Throw New Exception(ex.Message)
-
-        Finally
-
-            If ConexionABd.State = ConnectionState.Open Then
-
-                CerrarConexionABd()
-
-            End If
 
         End Try
 

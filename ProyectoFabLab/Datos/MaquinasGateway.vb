@@ -7,7 +7,7 @@ Public Class MaquinasGateway
     ''' <summary>
     ''' Selecciona todas las máquinas y las carga en una tabla
     ''' </summary>
-    ''' <returns></returns>
+    ''' <returns>Devuelve todas las máquinas en un DataAdapter</returns>
     Public Function SeleccionaTodasLasMaquinas() As SqlDataAdapter
         ' Dim lector As SqlDataReader
         ' Dim tabla As New DataTable("Maquinas")
