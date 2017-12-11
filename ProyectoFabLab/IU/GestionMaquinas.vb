@@ -6,7 +6,7 @@
 
     Private Sub AddMaquinaButton_Click(sender As Object, e As EventArgs) Handles AddMaquinaButton.Click
 
-        Dim formNuevaMaq As New NuevaMaquina(Foo.TipoAccion.Insertar.ToString())
+        Dim formNuevaMaq As New NuevaMaquina(Foo.TipoAccion.Insertar.ToString(), FormPrincipal)
         formNuevaMaq.MdiParent = FormPrincipal
         formNuevaMaq.Show()
 
@@ -26,7 +26,7 @@
 
     Private Sub ConsultarMaqButton_Click(sender As Object, e As EventArgs) Handles ConsultarMaqButton.Click
 
-        Dim formNuevaMaquina As New NuevaMaquina(Foo.TipoAccion.Consultar.ToString())
+        Dim formNuevaMaquina As New NuevaMaquina(Foo.TipoAccion.Consultar.ToString(), FormPrincipal)
         formNuevaMaquina.Text = "FabLab - Consultar Máquina"
         formNuevaMaquina.MdiParent = FormPrincipal
 

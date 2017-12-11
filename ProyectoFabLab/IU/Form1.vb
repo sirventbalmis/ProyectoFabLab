@@ -60,7 +60,7 @@ Public Class Form1
 
     Private Sub NuevaMaquinaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NuevaMaquinaToolStripMenuItem.Click
 
-        Dim formNuevaMaquina As New NuevaMaquina(Foo.TipoAccion.Insertar.ToString())
+        Dim formNuevaMaquina As New NuevaMaquina(Foo.TipoAccion.Insertar.ToString(), Me)
         formNuevaMaquina.MdiParent = Me
         formNuevaMaquina.Show()
 

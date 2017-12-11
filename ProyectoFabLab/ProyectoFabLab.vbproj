@@ -94,6 +94,12 @@
     <Compile Include="Datos\TiposUsuarioGateway.vb" />
     <Compile Include="Datos\UsuariosGateway.vb" />
     <Compile Include="Foo.vb" />
+    <Compile Include="IU\AddNuevoTipoMaquina.Designer.vb">
+      <DependentUpon>AddNuevoTipoMaquina.vb</DependentUpon>
+    </Compile>
+    <Compile Include="IU\AddNuevoTipoMaquina.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="IU\Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -159,6 +165,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="IU\AddNuevoTipoMaquina.resx">
+      <DependentUpon>AddNuevoTipoMaquina.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="IU\Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>

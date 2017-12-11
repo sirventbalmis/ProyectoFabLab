@@ -7,6 +7,7 @@ Public Class NuevaMaquina
 
     Private TipoAccion As String
     Private _IdMaquina As Integer
+    Private FormPrincipal As Form1
 
     Public Property IdMaquina As Integer
         Get
@@ -51,7 +52,7 @@ Public Class NuevaMaquina
     ''' </summary>
     Private Sub ComprobarValorEnum()
 
-        If TipoAccion.Equals(Foo.TipoAccion.Consultar.ToString()) Then
+        If TipoAccion.Equals(Foo.TipoAccion.Consultar.ToString()) Then          ' Se va a consultar los datos de una máquina.
 
             ModeloTextBox.Enabled = False
             PrecioPorHoraTextBox.Enabled = False
@@ -68,7 +69,7 @@ Public Class NuevaMaquina
 
             NegocioMaquinas.ObtenerMaquinasPorId(IdMaquina)
 
-        ElseIf TipoAccion.Equals(Foo.TipoAccion.Insertar.ToString()) Then
+        ElseIf TipoAccion.Equals(Foo.TipoAccion.Insertar.ToString()) Then       ' Se va a añadir una nueva máquina.
 
             CargarTiposMaquinas()
 
@@ -78,7 +79,10 @@ Public Class NuevaMaquina
 
     Private Sub AddTipoMaquinaPictureBox_Click(sender As Object, e As EventArgs) Handles AddTipoMaquinaPictureBox.Click
 
-
+        Dim formAddNuevoTipoMaquina As New AddNuevoTipoMaquina()
+        formAddNuevoTipoMaquina.Text = "Añadir Tipo Máquina"
+        formAddNuevoTipoMaquina.MdiParent = FormPrincipal
+        formAddNuevoTipoMaquina.ShowDialog()
 
     End Sub
 
@@ -209,10 +213,11 @@ Public Class NuevaMaquina
 
     End Sub
 
-    Public Sub New(ByRef tipoAccion As String)
+    Public Sub New(ByRef tipoAccion As String, ByRef formPrincipal As Form1)
 
         InitializeComponent()
         Me.TipoAccion = tipoAccion
+        Me.FormPrincipal = formPrincipal
 
     End Sub
 
