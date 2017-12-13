@@ -168,12 +168,12 @@ Public Class NuevaMaquina
     Private Async Function GetThumbnail(ByVal rutaImagen As String) As Task(Of Byte())
 
         Dim client As New VisionServiceClient(My.Settings.ClaveServicioMiniatura, My.Settings.UrlServicioMiniatura)
+        Dim miniatura As Byte()
 
         Using stream As Stream = File.OpenRead(rutaImagen)
 
             Try
-                Dim miniatura As Byte() = Await client.GetThumbnailAsync(stream, 400, 400, True)
-                Return miniatura
+                miniatura = Await client.GetThumbnailAsync(stream, 400, 400, True)
 
             Catch ex As Exception
 
@@ -182,6 +182,8 @@ Public Class NuevaMaquina
             End Try
 
         End Using
+
+        Return miniatura
 
     End Function
 
