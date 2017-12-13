@@ -4,27 +4,21 @@ Public Class MaquinasGateway
     Private ConexionBD As SqlConnection
     Private Comando As SqlCommand
 
-
     ''' <summary>
     ''' Selecciona todas las máquinas y las carga en una tabla
     ''' </summary>
     ''' <returns>Devuelve todas las máquinas en un DataTable</returns>
     Public Function SeleccionaTodasLasMaquinas() As DataTable
         Dim lector As SqlDataReader
-        Dim tabla As New DataTable("Maquinas")
-
-
-        Dim adaptador As SqlDataAdapter
+        Dim tabla As New DataTable("TipoMaquinas")
         Try
             ConexionBD.Open()
-            adaptador = New SqlDataAdapter("SELECT m.id, modelo, precio_hora, fecha_compra, telefono_sat, t.tipo, descripcion, caracteristicas FROM Maquinas AS m JOIN TiposMaquina AS t ON m.tipo = t.id", ConexionBD)
+            Comando.CommandText = "SELECT m.id, modelo, precio_hora, fecha_compra, telefono_sat, t.tipo, descripcion, caracteristicas FROM Maquinas AS m JOIN TiposMaquina AS t ON m.tipo = t.id"
             lector = Comando.ExecuteReader()
             tabla.Load(lector)
-
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
-
         Return tabla
     End Function
 

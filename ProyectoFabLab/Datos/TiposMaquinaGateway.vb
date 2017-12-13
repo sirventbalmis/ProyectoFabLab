@@ -6,24 +6,26 @@ Public Class TiposMaquinaGateway
     ''' <summary>
     ''' Selecciona los tipos de máquina existentes
     ''' </summary>
-    ''' <returns></returns>
-    Public Function SeleccionarTipos() As SqlDataReader
+    ''' <returns>Devuelve un DataTable con los tipos de máquinas existentes</returns>
+    Public Function SeleccionarTipos() As DataTable
         Dim lector As SqlDataReader
+        Dim tabla As New DataTable("TipoMaquinas")
         Try
             ConexionBD.Open()
             Comando.CommandText = "SELECT tipo FROM TiposMaquina"
             lector = Comando.ExecuteReader()
+            tabla.Load(lector)
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
-        Return lector
+        Return tabla
     End Function
 
     ''' <summary>
     ''' Inserta un tipo de máquina especificado por parámetro
     ''' </summary>
     ''' <param name="tipo"></param>
-    ''' <returns></returns>
+    ''' <returns>Devuelve un booleano si la inserción ha sido correcta</returns>
     Public Function InsertarTipoMaquina(ByRef tipo As String) As Boolean
         Dim numeroFilas As Integer
         If tipo.Equals("") Or tipo = Nothing Then
@@ -37,13 +39,11 @@ Public Class TiposMaquinaGateway
             Catch ex As Exception
                 Throw New Exception(ex.Message)
             End Try
-
             If numeroFilas > 0 Then
                 Return True
             Else
                 Return False
             End If
-
         End If
     End Function
 
