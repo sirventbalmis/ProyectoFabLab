@@ -45,7 +45,17 @@
     End Sub
 
     Private Sub EditarButton_Click(sender As Object, e As EventArgs) Handles EditarButton.Click
-
+        Dim seleccionados As Integer = UsuariosDGV.SelectedCells.Count
+        If seleccionados > 0 Then
+            For Each fila As DataGridViewRow In UsuariosDGV.SelectedRows
+                Dim nuevoUsuario As New NuevoUsuario(Foo.TipoAccion.Modificar.ToString())
+                nuevoUsuario.MdiParent = FormPrincipal
+                nuevoUsuario.IdUsuario = Integer.Parse(UsuariosDGV.Rows(fila.Index).Cells(0).Value.ToString())
+                nuevoUsuario.Show()
+            Next
+        Else
+            MessageBox.Show("Tienes que seleccionar una entrada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
     End Sub
 
     Private Sub EliminarButton_Click(sender As Object, e As EventArgs) Handles EliminarButton.Click

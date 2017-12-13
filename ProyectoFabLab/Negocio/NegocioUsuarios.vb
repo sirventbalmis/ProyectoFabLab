@@ -27,7 +27,7 @@ Module NegocioUsuarios
     ''' </summary>
     ''' <param name="idUsuario"></param>
     ''' <returns>DataTable con los datos de ese usuario</returns>
-    Public Function ObtenerDatosUsuarioPorId(ByRef idUsuario As Integer) As SqlDataReader
+    Public Function ObtenerDatosUsuarioPorId(ByRef idUsuario As Integer) As DataTable
 
         Dim usuariosGateway As New UsuariosGateway(My.Settings.Conexion)
 
