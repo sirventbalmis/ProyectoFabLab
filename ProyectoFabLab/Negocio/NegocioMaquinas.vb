@@ -45,6 +45,16 @@ Module NegocioMaquinas
         Return MaquinasGateway.InsertarMaquina(modelo, precio_hora, fecha_compra, telefono_sat, tipo, descripcion, caracteristicas)
     End Function
 
+
+    ''' <summary>
+    ''' Obtenemos el último Id de la máquina
+    ''' </summary>
+    ''' <returns>El último Id de la máquina</returns>
+    Public Function ObtenerUltimoIdMaquina() As Integer
+        Dim maquinasGateway As New MaquinasGateway(My.Settings.Conexion)
+        Return maquinasGateway.SeleccionarUltimoIdMaquina()
+    End Function
+
     ''' <summary>
     ''' Modifica una máquina con el ID y sus parámetros correspondientes
     ''' </summary>

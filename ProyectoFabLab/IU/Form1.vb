@@ -45,6 +45,10 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        BarraProgresoAPI.Visible = False
+        BarraProgresoAPI.Style = ProgressBarStyle.Marquee
+        BarraProgresoAPI.MarqueeAnimationSpeed = 120
+
         Dim numUsuarios As Integer = NegocioUsuarios.ObtenerNumUsuarios()
         NumUsuariosToolStripLabel.Text = "Usuarios: " & numUsuarios
 
@@ -81,4 +85,9 @@ Public Class Form1
         formGestionMaq.Show()
     End Sub
 
+    Private Sub NuevaMaquinaToolStripButton_Click(sender As Object, e As EventArgs) Handles NuevaMaquinaToolStripButton.Click
+
+        NuevaMaquinaToolStripMenuItem.PerformClick()
+
+    End Sub
 End Class

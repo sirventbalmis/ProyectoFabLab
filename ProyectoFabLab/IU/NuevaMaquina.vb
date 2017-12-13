@@ -36,13 +36,13 @@ Public Class NuevaMaquina
     ''' </summary>
     Private Sub CargarTiposMaquinas()
 
-        'Dim tablaTiposMaquinas As SqlDataReader = NegocioTiposMaquinas.ObtenerTiposMaquinas()
+        Dim tablaTiposMaquinas As DataTable = NegocioTiposMaquinas.ObtenerTiposMaquinas()
 
-        'While tablaTiposMaquinas.Read()
+        For i As Integer = 0 To tablaTiposMaquinas.Rows.Count - 1           ' Recorremos las filas del DataTable.
 
-        '    TipoMaquinaComboBox.Items.Add(tablaTiposMaquinas.GetString(0))
+            TipoMaquinaComboBox.Items.Add(tablaTiposMaquinas.Rows.Item(i).Item(0).ToString())
 
-        'End While
+        Next
 
     End Sub
 
@@ -52,31 +52,31 @@ Public Class NuevaMaquina
     ''' </summary>
     Private Sub ComprobarValorEnum()
 
-        If TipoAccion.Equals(Foo.TipoAccion.Consultar.ToString()) Then          ' Se va a consultar los datos de una máquina.
+        If TipoAccion.Equals(Foo.TipoAccion.Consultar.ToString()) Then          ' Se van a consultar los datos de una máquina.
 
-            Dim tablaDatos As DataTable = NegocioMaquinas.ObtenerMaquinasPorId(IdMaquina)
+            Dim tablaDatosMaquina As DataTable = NegocioMaquinas.ObtenerMaquinasPorId(IdMaquina)
 
             ModeloTextBox.Enabled = False
-            ModeloTextBox.Text = tablaDatos.Rows(0).Item(1).ToString()
+            ModeloTextBox.Text = tablaDatosMaquina.Rows(0).Item(1).ToString()
 
             PrecioPorHoraTextBox.Enabled = False
-            PrecioPorHoraTextBox.Text = tablaDatos.Rows(0).Item(2).ToString()
+            PrecioPorHoraTextBox.Text = tablaDatosMaquina.Rows(0).Item(2).ToString()
 
             FechaCompraDateTimePicker.Enabled = False
-            FechaCompraDateTimePicker.Value = Date.Parse(tablaDatos.Rows(0).Item(3).ToString())
+            FechaCompraDateTimePicker.Value = Date.Parse(tablaDatosMaquina.Rows(0).Item(3).ToString())
 
             TefSATTextBox.Enabled = False
-            TefSATTextBox.Text = tablaDatos.Rows(0).Item(4).ToString()
+            TefSATTextBox.Text = tablaDatosMaquina.Rows(0).Item(4).ToString()
 
             TipoMaquinaComboBox.Enabled = False
-            TipoMaquinaComboBox.Text = tablaDatos.Rows(0).Item(5).ToString()
+            TipoMaquinaComboBox.Text = tablaDatosMaquina.Rows(0).Item(5).ToString()
 
             AddTipoMaquinaPictureBox.Visible = False
             DescripcionRichTextBox.Enabled = False
-            DescripcionRichTextBox.Text = tablaDatos.Rows(0).Item(6).ToString()
+            DescripcionRichTextBox.Text = tablaDatosMaquina.Rows(0).Item(6).ToString()
 
             CaracTecnicasRichTextBox.Enabled = False
-            CaracTecnicasRichTextBox.Text = tablaDatos.Rows(0).Item(7).ToString()
+            CaracTecnicasRichTextBox.Text = tablaDatosMaquina.Rows(0).Item(7).ToString()
 
             AddImgMaquinaButton.Enabled = False
             AceptarButton.Visible = False
@@ -99,7 +99,23 @@ Public Class NuevaMaquina
             DescripcionRichTextBox.Text = tablaDatos.Rows(0).Item(6).ToString()
             CaracTecnicasRichTextBox.Text = tablaDatos.Rows(0).Item(7).ToString()
 
+            CargarImgsMaquinaSeleccionada()
+
         End If
+
+    End Sub
+
+    Private Sub CargarImgsMaquinaSeleccionada()
+
+        Dim arrayImgs As String() = Directory.GetFiles(My.Settings.CarpetaMaquinas, IdMaquina & "*")        ' Obtenemos todas las miniaturas de la máquina seleccionada.
+
+        For Each minImg As String In arrayImgs
+
+            Dim bitmap As New Bitmap(My.Settings.CarpetaMaquinas & minImg)
+
+            AddImagenAListaImgs(bitmap)
+
+        Next
 
     End Sub
 
@@ -116,7 +132,6 @@ Public Class NuevaMaquina
 
         If ModeloTextBox.Text.Equals("") Then
 
-            ' e.Cancel = True                 ' True -> No permite cambiar de control. False -> Permite cambiar de control.
             ErrorProvider.SetError(DirectCast(sender, Control), "El Modelo está vacío")
 
         End If
@@ -179,18 +194,75 @@ Public Class NuevaMaquina
         seleccionarImg.Filter = "jpg|*.jpg|png|*.png"
         seleccionarImg.ShowDialog()
 
+        FormPrincipal.BarraProgresoAPI.Visible = True
+
         Dim arrayMiniaturaImg As Byte() = Await GetThumbnail(seleccionarImg.FileName)
-        Dim nombreImagen As String = Path.GetFileName(seleccionarImg.FileName)
+        Dim nombreImagen As String = Path.GetFileNameWithoutExtension(seleccionarImg.FileName)
 
-        File.WriteAllBytes(My.Settings.CarpetaMaquinas & nombreImagen, arrayMiniaturaImg)
-        Dim imagen As Image = ConvertirArrayByteAImage(arrayMiniaturaImg)           ' Convierte la imagen seleccionada a Image para añadirla en la galería de imágenes.
+        Dim imagen As Image = ConvertirArrayByteAImage(arrayMiniaturaImg)           ' Convierte la imagen seleccionada a Image para añadirla a la galería de imágenes.
 
+        Dim ultimoIdMaquina As Integer = NegocioMaquinas.ObtenerUltimoIdMaquina()
+        ultimoIdMaquina += 1
 
+        If Not File.Exists(My.Settings.CarpetaMaquinas & ultimoIdMaquina & "_1.jpg") Then           ' Si no existe la primera imagen de la máquina.
 
-        AddImagenAListaImgs(imagen)
+            File.WriteAllBytes(My.Settings.CarpetaMaquinas & ultimoIdMaquina & "_1.jpg", arrayMiniaturaImg)            ' Creamos la primera miniatura.
+            AddImagenAListaImgs(imagen)
+
+            FormPrincipal.BarraProgresoAPI.Visible = False
+
+        Else
+
+            Dim arrayArchivos As String() = Directory.GetFiles(My.Settings.CarpetaMaquinas, ultimoIdMaquina & "*")
+
+            If arrayArchivos.Length = 1 Then            ' Si hay una sóla miniatura.
+
+                File.WriteAllBytes(My.Settings.CarpetaMaquinas & ultimoIdMaquina & "_2.jpg", arrayMiniaturaImg)            ' Creamos la segunda miniatura.
+                AddImagenAListaImgs(imagen)
+
+                FormPrincipal.BarraProgresoAPI.Visible = False
+
+            Else
+
+                Dim listaMinImgs As New List(Of String)
+                Dim subIdMayor As Integer
+                Dim primerSubId As Integer
+
+                For Each archivo As String In arrayArchivos
+
+                    listaMinImgs.Add(archivo)
+
+                Next
+
+                primerSubId = Integer.Parse(listaMinImgs(0).Substring(listaMinImgs(0).Length - 5, 1))
+
+                For Each minImg As String In listaMinImgs           ' Recorremos la lista de miniaturas para saber cuál es el mayor subId de todas las miniaturas.
+
+                    If Integer.Parse(minImg.Substring(minImg.Length - 5, 1)) > primerSubId Then
+
+                        subIdMayor = Integer.Parse(minImg.Substring(minImg.Length - 5, 1))
+
+                    End If
+
+                Next
+                subIdMayor += 1
+
+                File.WriteAllBytes(My.Settings.CarpetaMaquinas & ultimoIdMaquina & "_"c & subIdMayor & ".jpg", arrayMiniaturaImg)       ' Creamos las demás miniaturas.
+                AddImagenAListaImgs(imagen)
+
+                FormPrincipal.BarraProgresoAPI.Visible = False
+
+            End If
+
+        End If
 
     End Sub
 
+    ''' <summary>
+    ''' Obtiene una miniatura de la imagen seleccionada.
+    ''' </summary>
+    ''' <param name="rutaImagen"></param>
+    ''' <returns>Array de byte con los datos de la miniatura.</returns>
     Private Async Function GetThumbnail(ByVal rutaImagen As String) As Task(Of Byte())
 
         Dim client As New VisionServiceClient(My.Settings.ClaveServicioMiniatura, My.Settings.UrlServicioMiniatura)
@@ -230,7 +302,21 @@ Public Class NuevaMaquina
     Private Sub AddImagenAListaImgs(ByRef imagen As Image)
 
         Dim pb As New PictureBox()
+        pb.Size = New Size(142, 122)
+
         pb.Image = imagen
+        pb.SizeMode = PictureBoxSizeMode.StretchImage
+
+        ImgsMaquinasFlowLayoutPanel.Controls.Add(pb)
+
+    End Sub
+
+    Private Sub AddImagenAListaImgs(ByRef imagen As Bitmap)
+
+        Dim pb As New PictureBox()
+        pb.Size = New Size(142, 122)
+
+        pb.Image = DirectCast(imagen, Image)
         pb.SizeMode = PictureBoxSizeMode.StretchImage
 
         ImgsMaquinasFlowLayoutPanel.Controls.Add(pb)

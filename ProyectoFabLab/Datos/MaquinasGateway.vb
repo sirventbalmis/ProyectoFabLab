@@ -233,6 +233,27 @@ Public Class MaquinasGateway
 
 
     ''' <summary>
+    ''' Obtenemos el último Id de la máquina
+    ''' </summary>
+    ''' <returns>El último Id de la máquina</returns>
+    Public Function SeleccionarUltimoIdMaquina() As Integer
+        Dim ultimoId As Integer
+        Try
+            ConexionBD.Open()
+            Comando.CommandText = "SELECT MAX(Id) FROM Maquinas"
+            ultimoId = Integer.Parse(Comando.ExecuteScalar().ToString())
+            CerrarBD()
+
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+
+        Return ultimoId
+
+    End Function
+
+
+    ''' <summary>
     ''' Cierra la conexión a la BBDD
     ''' </summary>
     Private Sub CerrarBD()

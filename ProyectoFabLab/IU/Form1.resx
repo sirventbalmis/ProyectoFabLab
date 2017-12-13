@@ -120,7 +120,7 @@
   <metadata name="MenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="UsuMaquinasToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="UsuMaquinasStatusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>132, 17</value>
   </metadata>
   <metadata name="ToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -142,7 +142,7 @@
         AAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="AbrirToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="NuevaMaquinaToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADpSURBVFhH7ZexDUIxDERTUjEDyzAPDMQMiBEYgxJ6GhpE
@@ -150,21 +150,6 @@
         ANRvQc+UuDd7qD8Ljkw05B2AYg/1Z0H4ABFkwQNYj+eD9xES9lB/FvSuYA/Ub0FPS643sAYnoGsU1uhp
         yTUAtQW6RmGtJ/cAS7CagLWe3AN45RpgA55A1yis0dOSa4D//xKGf4giqBK9I/TIusIqcQW8p2/Avct+
         VWI0ZnIkZnIkZnIk8T8mswKV0htM6FdnoV2YFQAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="ImprimirToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAH5SURBVFhH1dfPS5RBAMbxJegiWWHdhH5dUoTqLEiHCLrn
-        Qbp5ibyEIFh/Qqc6BFEEggela7f+ggiCCqSbReCpQ1RepFN9v+6OTOO8r469I/TAx33XHXeefWd33rXX
-        kHP4fQjuIxsL/MTJipbQWuBH/3BXlvGl0HGkeYoDFXiFe7iyT55qX3GafyrwYXC7H50XuIqZQkeRZs8C
-        v+CgWj6itcAWHFDLm8FtNukSzCN9gsAlMUNYQG5McBdhOTwL/i6btIDHK0hP43s8gDmNx0jHxB5iGMb7
-        RQX8XRonDwVKU6XANdxoMYWQzgucwVu4RzR5jVMw/98SXEJ8MdEjxAV8g6VjYscQUlwgvozG4iVw88qN
-        CXyeXUvgj6bBNfNXAa/N8anydB9qAe/ESZdgHJ+Ru9aXcP/PLsFeBYxnJXe9L3ERIcUFuk5RAe+v4kUL
-        dzpzFrnHg8swRQW80t3GnRYXYDzV35Abs4FQtKhASSzgGy4Xt+MDFTiBRTi2yQRMlQKjeALHNQlfTKoU
-        KEmVAkdwHf5xkxEYC3xFbsynwa3ZKeA/Gc88iHIe3/uH2xnDO/gKmtyCcbPJPR5Mwjinc/duwm3WVxky
-        h7X+YZU4l3NOe8fP+Dqew01iFn5efdfHF6iu+GlxLgvsfD9wzV9iE7lLc5ecw7mYs9f7AyiCR1nhzB+b
-        AAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="AyudaToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

@@ -40,18 +40,18 @@ Partial Class Form1
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.AyudaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AcercaDeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.UsuMaquinasToolStrip = New System.Windows.Forms.ToolStrip()
+        Me.UsuMaquinasStatusStrip = New System.Windows.Forms.ToolStrip()
         Me.NumUsuariosToolStripLabel = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
         Me.MaquinasEtiqueta = New System.Windows.Forms.ToolStripLabel()
+        Me.BarraProgresoAPI = New System.Windows.Forms.ToolStripProgressBar()
         Me.ToolStrip = New System.Windows.Forms.ToolStrip()
         Me.AddUsuarioToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.AbrirToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.ImprimirToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.NuevaMaquinaToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.AyudaToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.MenuStrip.SuspendLayout()
-        Me.UsuMaquinasToolStrip.SuspendLayout()
+        Me.UsuMaquinasStatusStrip.SuspendLayout()
         Me.ToolStrip.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -169,15 +169,15 @@ Partial Class Form1
         Me.AcercaDeToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
         Me.AcercaDeToolStripMenuItem.Text = "Acerca de"
         '
-        'UsuMaquinasToolStrip
+        'UsuMaquinasStatusStrip
         '
-        Me.UsuMaquinasToolStrip.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.UsuMaquinasToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NumUsuariosToolStripLabel, Me.ToolStripLabel2, Me.MaquinasEtiqueta})
-        Me.UsuMaquinasToolStrip.Location = New System.Drawing.Point(0, 528)
-        Me.UsuMaquinasToolStrip.Name = "UsuMaquinasToolStrip"
-        Me.UsuMaquinasToolStrip.Size = New System.Drawing.Size(952, 25)
-        Me.UsuMaquinasToolStrip.TabIndex = 5
-        Me.UsuMaquinasToolStrip.Text = "ToolStrip1"
+        Me.UsuMaquinasStatusStrip.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.UsuMaquinasStatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NumUsuariosToolStripLabel, Me.ToolStripLabel2, Me.MaquinasEtiqueta, Me.BarraProgresoAPI})
+        Me.UsuMaquinasStatusStrip.Location = New System.Drawing.Point(0, 528)
+        Me.UsuMaquinasStatusStrip.Name = "UsuMaquinasStatusStrip"
+        Me.UsuMaquinasStatusStrip.Size = New System.Drawing.Size(952, 25)
+        Me.UsuMaquinasStatusStrip.TabIndex = 5
+        Me.UsuMaquinasStatusStrip.Text = "ToolStrip1"
         '
         'NumUsuariosToolStripLabel
         '
@@ -197,9 +197,16 @@ Partial Class Form1
         Me.MaquinasEtiqueta.Size = New System.Drawing.Size(71, 22)
         Me.MaquinasEtiqueta.Text = "Máquinas: 6"
         '
+        'BarraProgresoAPI
+        '
+        Me.BarraProgresoAPI.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.BarraProgresoAPI.Name = "BarraProgresoAPI"
+        Me.BarraProgresoAPI.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.BarraProgresoAPI.Size = New System.Drawing.Size(100, 22)
+        '
         'ToolStrip
         '
-        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUsuarioToolStripButton, Me.AbrirToolStripButton, Me.ImprimirToolStripButton, Me.toolStripSeparator, Me.AyudaToolStripButton})
+        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUsuarioToolStripButton, Me.NuevaMaquinaToolStripButton, Me.toolStripSeparator, Me.AyudaToolStripButton})
         Me.ToolStrip.Location = New System.Drawing.Point(0, 24)
         Me.ToolStrip.Name = "ToolStrip"
         Me.ToolStrip.Size = New System.Drawing.Size(952, 25)
@@ -213,25 +220,16 @@ Partial Class Form1
         Me.AddUsuarioToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.AddUsuarioToolStripButton.Name = "AddUsuarioToolStripButton"
         Me.AddUsuarioToolStripButton.Size = New System.Drawing.Size(23, 22)
-        Me.AddUsuarioToolStripButton.Text = "&Nuevo"
+        Me.AddUsuarioToolStripButton.Text = "Nuevo Usuario"
         '
-        'AbrirToolStripButton
+        'NuevaMaquinaToolStripButton
         '
-        Me.AbrirToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.AbrirToolStripButton.Image = CType(resources.GetObject("AbrirToolStripButton.Image"), System.Drawing.Image)
-        Me.AbrirToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.AbrirToolStripButton.Name = "AbrirToolStripButton"
-        Me.AbrirToolStripButton.Size = New System.Drawing.Size(23, 22)
-        Me.AbrirToolStripButton.Text = "&Abrir"
-        '
-        'ImprimirToolStripButton
-        '
-        Me.ImprimirToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ImprimirToolStripButton.Image = CType(resources.GetObject("ImprimirToolStripButton.Image"), System.Drawing.Image)
-        Me.ImprimirToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ImprimirToolStripButton.Name = "ImprimirToolStripButton"
-        Me.ImprimirToolStripButton.Size = New System.Drawing.Size(23, 22)
-        Me.ImprimirToolStripButton.Text = "&Imprimir"
+        Me.NuevaMaquinaToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.NuevaMaquinaToolStripButton.Image = CType(resources.GetObject("NuevaMaquinaToolStripButton.Image"), System.Drawing.Image)
+        Me.NuevaMaquinaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.NuevaMaquinaToolStripButton.Name = "NuevaMaquinaToolStripButton"
+        Me.NuevaMaquinaToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.NuevaMaquinaToolStripButton.Text = "Nueva Máquina"
         '
         'toolStripSeparator
         '
@@ -254,7 +252,7 @@ Partial Class Form1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(952, 553)
         Me.Controls.Add(Me.ToolStrip)
-        Me.Controls.Add(Me.UsuMaquinasToolStrip)
+        Me.Controls.Add(Me.UsuMaquinasStatusStrip)
         Me.Controls.Add(Me.MenuStrip)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.IsMdiContainer = True
@@ -264,8 +262,8 @@ Partial Class Form1
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.MenuStrip.ResumeLayout(False)
         Me.MenuStrip.PerformLayout()
-        Me.UsuMaquinasToolStrip.ResumeLayout(False)
-        Me.UsuMaquinasToolStrip.PerformLayout()
+        Me.UsuMaquinasStatusStrip.ResumeLayout(False)
+        Me.UsuMaquinasStatusStrip.PerformLayout()
         Me.ToolStrip.ResumeLayout(False)
         Me.ToolStrip.PerformLayout()
         Me.ResumeLayout(False)
@@ -283,14 +281,13 @@ Partial Class Form1
     Friend WithEvents InformesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AyudaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AcercaDeToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents UsuMaquinasToolStrip As ToolStrip
+    Friend WithEvents UsuMaquinasStatusStrip As ToolStrip
     Friend WithEvents MaquinasEtiqueta As ToolStripLabel
     Friend WithEvents ToolStripLabel2 As ToolStripLabel
     Friend WithEvents NumUsuariosToolStripLabel As ToolStripLabel
     Friend WithEvents ToolStrip As ToolStrip
     Friend WithEvents AddUsuarioToolStripButton As ToolStripButton
-    Friend WithEvents AbrirToolStripButton As ToolStripButton
-    Friend WithEvents ImprimirToolStripButton As ToolStripButton
+    Friend WithEvents NuevaMaquinaToolStripButton As ToolStripButton
     Friend WithEvents toolStripSeparator As ToolStripSeparator
     Friend WithEvents AyudaToolStripButton As ToolStripButton
     Friend WithEvents VentanaToolStripMenuItem As ToolStripMenuItem
@@ -300,4 +297,5 @@ Partial Class Form1
     Friend WithEvents MosaicoHorizontalToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents MinimizarTodasToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents BarraProgresoAPI As ToolStripProgressBar
 End Class

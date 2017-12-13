@@ -32,14 +32,24 @@
         formNuevaMaquina.Text = "FabLab - Consultar Máquina"
         formNuevaMaquina.MdiParent = FormPrincipal
 
-        ' Por si el usuario no selecciona la primera columna del DataGridView.
+        Dim estaFilaSeleccionada = False
+
+        ' Por si el usuario no seleccionase una fila.
         Try
-            formNuevaMaquina.IdMaquina = DirectCast(DatosMaquinasDataGridView.SelectedCells(0).Value, Integer)
+            formNuevaMaquina.IdMaquina = Integer.Parse(DatosMaquinasDataGridView.SelectedRows.Item(0).Cells(0).Value.ToString())
             formNuevaMaquina.Show()
 
         Catch ex As Exception
 
+            MessageBox.Show("Tienes que seleccionar una fila", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
         End Try
+
+        If estaFilaSeleccionada Then
+
+            formNuevaMaquina.Show()
+
+        End If
 
     End Sub
 
@@ -49,28 +59,42 @@
         formNuevaMaquina.Text = "FabLab - Modificar Máquina"
         formNuevaMaquina.MdiParent = FormPrincipal
 
-        ' Por si el usuario no selecciona la primera columna del DataGridView.
+        Dim estaFilaSeleccionada = False
+
+        ' Por si el usuario no seleccionase una fila.
         Try
-            formNuevaMaquina.IdMaquina = DirectCast(DatosMaquinasDataGridView.SelectedCells(0).Value, Integer)
-            formNuevaMaquina.Show()
+            formNuevaMaquina.IdMaquina = Integer.Parse(DatosMaquinasDataGridView.SelectedRows.Item(0).Cells(0).Value.ToString())
+            estaFilaSeleccionada = True
 
         Catch ex As Exception
 
+            MessageBox.Show("Tienes que seleccionar una fila", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
         End Try
+
+        If estaFilaSeleccionada Then
+
+            formNuevaMaquina.Show()
+
+        End If
 
     End Sub
 
     Private Sub EliminarMaqButton_Click(sender As Object, e As EventArgs) Handles EliminarMaqButton.Click
 
-        BorrarFilaDataGridView()
+        Dim idMaqSeleccionada As Integer = Integer.Parse(DatosMaquinasDataGridView.SelectedRows.Item(0).Cells(0).Value.ToString())
 
-        If NegocioMaquinas.BorrarMaquina(DirectCast(DatosMaquinasDataGridView.SelectedCells(0).Value, Integer)) Then          ' Eliminamos la máquina de la BD.
+        If BorrarFilaDataGridView() Then
 
-            MessageBox.Show("Máquina Eliminada", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            If NegocioMaquinas.BorrarMaquina(idMaqSeleccionada) Then          ' Eliminamos la máquina de la BD.
 
-        Else
+                MessageBox.Show("Máquina Eliminada", "Eliminada", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-            MessageBox.Show("No se ha podido eliminar la máquina", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Else
+
+                MessageBox.Show("No se ha podido eliminar la máquina", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+            End If
 
         End If
 
@@ -80,11 +104,13 @@
     ''' <summary>
     ''' Borra la fila seleccionada que contiene los datos de la máquina en el DataGridView.
     ''' </summary>
-    Private Sub BorrarFilaDataGridView()
+    Private Function BorrarFilaDataGridView() As Boolean
 
         If DatosMaquinasDataGridView.SelectedRows.Count = 0 Then
 
             MessageBox.Show("Tienes que seleccionar una fila", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+            Return False
 
         Else
 
@@ -94,9 +120,11 @@
 
             Next
 
+            Return True
+
         End If
 
-    End Sub
+    End Function
 
 
     ''' <summary>
