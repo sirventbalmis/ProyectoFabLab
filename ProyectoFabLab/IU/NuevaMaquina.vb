@@ -36,13 +36,13 @@ Public Class NuevaMaquina
     ''' </summary>
     Private Sub CargarTiposMaquinas()
 
-        Dim tablaTiposMaquinas As SqlDataReader = NegocioTiposMaquinas.ObtenerTiposMaquinas()
+        'Dim tablaTiposMaquinas As SqlDataReader = NegocioTiposMaquinas.ObtenerTiposMaquinas()
 
-        While tablaTiposMaquinas.Read()
+        'While tablaTiposMaquinas.Read()
 
-            TipoMaquinaComboBox.Items.Add(tablaTiposMaquinas.GetString(0))
+        '    TipoMaquinaComboBox.Items.Add(tablaTiposMaquinas.GetString(0))
 
-        End While
+        'End While
 
     End Sub
 
@@ -159,6 +159,8 @@ Public Class NuevaMaquina
         File.WriteAllBytes(My.Settings.CarpetaMaquinas & nombreImagen, arrayMiniaturaImg)
         Dim imagen As Image = ConvertirArrayByteAImage(arrayMiniaturaImg)           ' Convierte la imagen seleccionada a Image para añadirla en la galería de imágenes.
 
+
+
         AddImagenAListaImgs(imagen)
 
     End Sub
@@ -193,6 +195,10 @@ Public Class NuevaMaquina
 
     End Function
 
+    ''' <summary>
+    ''' Añade una imagen a la galería de máquinas.
+    ''' </summary>
+    ''' <param name="imagen">Imagen para añadirla a un PictureBox.</param>
     Private Sub AddImagenAListaImgs(ByRef imagen As Image)
 
         Dim pb As New PictureBox()
