@@ -72,7 +72,7 @@ Partial Class GestionMaquinas
         '
         'ConsultarMaqButton
         '
-        Me.ConsultarMaqButton.Location = New System.Drawing.Point(628, 500)
+        Me.ConsultarMaqButton.Location = New System.Drawing.Point(628, 487)
         Me.ConsultarMaqButton.Name = "ConsultarMaqButton"
         Me.ConsultarMaqButton.Size = New System.Drawing.Size(75, 23)
         Me.ConsultarMaqButton.TabIndex = 4
@@ -81,7 +81,7 @@ Partial Class GestionMaquinas
         '
         'EditarMaqButton
         '
-        Me.EditarMaqButton.Location = New System.Drawing.Point(727, 500)
+        Me.EditarMaqButton.Location = New System.Drawing.Point(727, 487)
         Me.EditarMaqButton.Name = "EditarMaqButton"
         Me.EditarMaqButton.Size = New System.Drawing.Size(75, 23)
         Me.EditarMaqButton.TabIndex = 5
@@ -90,7 +90,7 @@ Partial Class GestionMaquinas
         '
         'EliminarMaqButton
         '
-        Me.EliminarMaqButton.Location = New System.Drawing.Point(826, 500)
+        Me.EliminarMaqButton.Location = New System.Drawing.Point(826, 487)
         Me.EliminarMaqButton.Name = "EliminarMaqButton"
         Me.EliminarMaqButton.Size = New System.Drawing.Size(75, 23)
         Me.EliminarMaqButton.TabIndex = 6
@@ -101,7 +101,7 @@ Partial Class GestionMaquinas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(973, 559)
+        Me.ClientSize = New System.Drawing.Size(973, 529)
         Me.Controls.Add(Me.EliminarMaqButton)
         Me.Controls.Add(Me.EditarMaqButton)
         Me.Controls.Add(Me.ConsultarMaqButton)

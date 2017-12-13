@@ -20,7 +20,6 @@
         dataSet.Tables.Add(dataTable)
 
         Enlace = New BindingSource(dataSet, "Maquinas")
-
         DatosMaquinasDataGridView.DataSource = Enlace
 
         EstablecerColumnasDataGridView()
