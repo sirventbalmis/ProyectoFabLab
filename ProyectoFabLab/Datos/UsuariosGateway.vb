@@ -17,6 +17,7 @@ Public Class UsuariosGateway
     ''' <param name="direccion">Dirección del usuario</param>
     ''' <param name="organizacion">Organización del usuario</param>
     ''' <param name="tipoUsuario">Tipo de usuario</param>    
+    ''' <param name="observaciones">Observaciones del usuario</param>  
     ''' <returns>True: El usuario se ha insertado. False: El usuario no se ha insertado</returns>
     Public Function Insertar(ByRef nombre As String, ByRef apellidos As String, ByRef fechaNacimiento As String, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipoUsuario As String, ByRef observaciones As String) As Boolean
 
@@ -229,9 +230,6 @@ Public Class UsuariosGateway
     End Function
 
 
-
-
-
     ''' <summary>
     ''' Cambia los datos de un usuario a partir de su Id.
     ''' </summary>
@@ -243,6 +241,7 @@ Public Class UsuariosGateway
     ''' <param name="direccion">Nueva dirección del usuario</param>
     ''' <param name="organizacion">Nueva organización del usuario</param>
     ''' <param name="tipoUsuario">Nuevo tipo de usuario</param>
+    ''' <param name="observaciones">Nuevas observaciones del usuario</param>
     ''' <returns>True: Se han actualizado los datos. False: No se han actualizado los datos</returns>
     Public Function ModificarPorId(ByRef id As Integer, ByRef nombre As String, ByRef apellidos As String, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipoUsuario As String, ByRef observaciones As String) As Boolean
 
