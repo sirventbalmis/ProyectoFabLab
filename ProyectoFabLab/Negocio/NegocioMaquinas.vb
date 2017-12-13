@@ -3,38 +3,32 @@ Module NegocioMaquinas
     ''' <summary>
     ''' Obtiene todas las máquinas
     ''' </summary>
-    ''' <returns>Devuelve todas las máquinas en formato DataSet</returns>
-    Public Function ObtenerTodasLasMaquinas() As DataSet
+    ''' <returns>Devuelve todas las máquinas en formato DataTable</returns>
+    Public Function ObtenerTodasLasMaquinas() As DataTable
         Dim MaquinasGateway As New MaquinasGateway(My.Settings.Conexion)
-
-        Dim dataSet As New DataSet
-
-        Dim adaptador As SqlDataAdapter = MaquinasGateway.SeleccionaTodasLasMaquinas()
-        adaptador.Fill(dataSet, "Maquinas")
-
-        Return dataSet
+        Return MaquinasGateway.SeleccionaTodasLasMaquinas()
     End Function
 
 
     ''' <summary>
     ''' Obtiene el número de máquinas
     ''' </summary>
-    ''' <returns>Devuelve el valor de números de máquinas en formato SQLDataReader</returns>
-    Public Function ObtenerNumeroMaquinas() As SqlDataReader
+    ''' <returns>Devuelve un entero con el número de máquinas</returns>
+    Public Function ObtenerNumeroMaquinas() As Integer
         Dim MaquinasGateway As New MaquinasGateway(My.Settings.Conexion)
         Return MaquinasGateway.NumeroMaquinas()
     End Function
-
 
     ''' <summary>
     ''' Obtiene las máquinas por ID
     ''' </summary>
     ''' <param name="id"></param>
-    ''' <returns></returns>
+    ''' <returns>Devuelve un DataTable con la máquina seleccionada por ID</returns>
     Public Function ObtenerMaquinasPorId(ByRef id As Integer) As DataTable
         Dim MaquinasGateway As New MaquinasGateway(My.Settings.Conexion)
         Return MaquinasGateway.SeleccionarMaquinasPorId(id)
     End Function
+
     ''' <summary>
     ''' Inserta la máquina 
     ''' </summary>
@@ -45,11 +39,12 @@ Module NegocioMaquinas
     ''' <param name="tipo"></param>
     ''' <param name="descripcion"></param>
     ''' <param name="caracteristicas"></param>
-    ''' <returns></returns>
+    ''' <returns>Devuelve un booleano si la inserción ha sido correcta</returns>
     Public Function InsertarMaquina(ByRef modelo As String, ByRef precio_hora As Integer, ByRef fecha_compra As Date, ByRef telefono_sat As String, ByRef tipo As Integer, ByRef descripcion As String, ByRef caracteristicas As String) As Boolean
         Dim MaquinasGateway As New MaquinasGateway(My.Settings.Conexion)
         Return MaquinasGateway.InsertarMaquina(modelo, precio_hora, fecha_compra, telefono_sat, tipo, descripcion, caracteristicas)
     End Function
+
     ''' <summary>
     ''' Modifica una máquina con el ID y sus parámetros correspondientes
     ''' </summary>
@@ -61,7 +56,7 @@ Module NegocioMaquinas
     ''' <param name="tipo"></param>
     ''' <param name="descripcion"></param>
     ''' <param name="caracteristicas"></param>
-    ''' <returns></returns>
+    ''' <returns>Devuelve un booleano si la modificación ha sido correcta</returns>
     Public Function ModificaMaquina(ByRef id As Integer, ByRef modelo As String, ByRef precio_hora As Integer, ByRef fecha_compra As Date, ByRef telefono_sat As String, ByRef tipo As Integer, ByRef descripcion As String, ByRef caracteristicas As String) As Boolean
         Dim MaquinasGateway As New MaquinasGateway(My.Settings.Conexion)
         Return MaquinasGateway.ModificaMaquina(id, modelo, precio_hora, fecha_compra, telefono_sat, tipo, descripcion, caracteristicas)
@@ -71,7 +66,7 @@ Module NegocioMaquinas
     ''' Borra una máquina con el ID
     ''' </summary>
     ''' <param name="id"></param>
-    ''' <returns></returns>
+    ''' <returns>Devuelve un booleano si el borrado ha sido correcto</returns>
     Public Function BorrarMaquina(ByRef id As Integer) As Boolean
         Dim MaquinasGateway As New MaquinasGateway(My.Settings.Conexion)
         Return MaquinasGateway.BorrarMaquina(id)

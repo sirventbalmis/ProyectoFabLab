@@ -15,6 +15,7 @@ Public Class TiposMaquinaGateway
             Comando.CommandText = "SELECT tipo FROM TiposMaquina"
             lector = Comando.ExecuteReader()
             tabla.Load(lector)
+            CerrarBD()
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
@@ -52,7 +53,7 @@ Public Class TiposMaquinaGateway
     ''' Devuelve ID de la máquina con un nombre
     ''' </summary>
     ''' <param name="tipo"></param>
-    ''' <returns></returns>
+    ''' <returns>Devuelve el ID de la máquina especificándole un nombre</returns>
     Public Function SeleccionaMaquinaPorNombre(ByRef tipo As String) As Integer
         Dim idTipoMaquina As Integer
         Try
@@ -71,7 +72,7 @@ Public Class TiposMaquinaGateway
     ''' </summary>
     ''' <param name="id"></param>
     ''' <param name="tipo"></param>
-    ''' <returns></returns>
+    ''' <returns>Devuelve un booleano si la modificación ha sido correcta</returns>
     Public Function ModificaMaquina(ByRef id As Integer, ByRef tipo As String) As Boolean
         Dim numeroFilas As Integer
         Try
@@ -92,7 +93,7 @@ Public Class TiposMaquinaGateway
     ''' Borra una máquina a partir de un ID
     ''' </summary>
     ''' <param name="id"></param>
-    ''' <returns></returns>
+    ''' <returns>Devuelve un booleano si el borrado ha sido correcto</returns>
     Public Function BorraMaquina(ByRef id As Integer) As Boolean
         Dim numeroFilas As Integer
         Try
@@ -100,9 +101,6 @@ Public Class TiposMaquinaGateway
             Comando.CommandText = String.Format("DELETE FROM TiposMaquina WHERE id = {0}", id)
             numeroFilas = Comando.ExecuteNonQuery()
             CerrarBD()
-
-
-
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try

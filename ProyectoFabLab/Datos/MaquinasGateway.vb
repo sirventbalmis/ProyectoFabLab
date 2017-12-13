@@ -10,12 +10,13 @@ Public Class MaquinasGateway
     ''' <returns>Devuelve todas las máquinas en un DataTable</returns>
     Public Function SeleccionaTodasLasMaquinas() As DataTable
         Dim lector As SqlDataReader
-        Dim tabla As New DataTable("TipoMaquinas")
+        Dim tabla As New DataTable("Maquinas")
         Try
             ConexionBD.Open()
             Comando.CommandText = "SELECT m.id, modelo, precio_hora, fecha_compra, telefono_sat, t.tipo, descripcion, caracteristicas FROM Maquinas AS m JOIN TiposMaquina AS t ON m.tipo = t.id"
             lector = Comando.ExecuteReader()
             tabla.Load(lector)
+            CerrarBD()
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
@@ -32,6 +33,7 @@ Public Class MaquinasGateway
             ConexionBD.Open()
             Comando.CommandText = "SELECT COUNT(*) FROM Maquinas"
             num = CInt(Comando.ExecuteScalar())
+            CerrarBD()
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
@@ -52,6 +54,7 @@ Public Class MaquinasGateway
                 Comando.CommandText = String.Format("SELECT id, modelo, precio_hora, fecha_compra, telefono_sat, tipo, descripcion, caracteristicas FROM Maquinas WHERE id = {0}", id)
                 lector = Comando.ExecuteReader()
                 tabla.Load(lector)
+                CerrarBD()
             Catch ex As Exception
                 Throw New Exception(ex.Message)
             End Try
