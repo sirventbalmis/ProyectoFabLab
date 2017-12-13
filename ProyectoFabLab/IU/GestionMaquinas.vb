@@ -14,7 +14,11 @@
 
     Private Sub GestionMaquinas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Dim dataSet As DataTable = NegocioMaquinas.ObtenerTodasLasMaquinas()
+        Dim dataTable As DataTable = NegocioMaquinas.ObtenerTodasLasMaquinas()
+        Dim dataSet As New DataSet()
+
+        dataSet.Tables.Add(dataTable)
+
         Enlace = New BindingSource(dataSet, "Maquinas")
 
         DatosMaquinasDataGridView.DataSource = Enlace
