@@ -54,24 +54,50 @@ Public Class NuevaMaquina
 
         If TipoAccion.Equals(Foo.TipoAccion.Consultar.ToString()) Then          ' Se va a consultar los datos de una máquina.
 
+            Dim tablaDatos As DataTable = NegocioMaquinas.ObtenerMaquinasPorId(IdMaquina)
+
             ModeloTextBox.Enabled = False
+            ModeloTextBox.Text = tablaDatos.Rows(0).Item(1).ToString()
+
             PrecioPorHoraTextBox.Enabled = False
+            PrecioPorHoraTextBox.Text = tablaDatos.Rows(0).Item(2).ToString()
+
             FechaCompraDateTimePicker.Enabled = False
+            FechaCompraDateTimePicker.Value = Date.Parse(tablaDatos.Rows(0).Item(3).ToString())
+
             TefSATTextBox.Enabled = False
+            TefSATTextBox.Text = tablaDatos.Rows(0).Item(4).ToString()
+
             TipoMaquinaComboBox.Enabled = False
+            TipoMaquinaComboBox.Text = tablaDatos.Rows(0).Item(5).ToString()
+
             AddTipoMaquinaPictureBox.Visible = False
             DescripcionRichTextBox.Enabled = False
+            DescripcionRichTextBox.Text = tablaDatos.Rows(0).Item(6).ToString()
+
             CaracTecnicasRichTextBox.Enabled = False
+            CaracTecnicasRichTextBox.Text = tablaDatos.Rows(0).Item(7).ToString()
+
             AddImgMaquinaButton.Enabled = False
             AceptarButton.Visible = False
 
             CancelarButton.Text = "Cerrar"
 
-            NegocioMaquinas.ObtenerMaquinasPorId(IdMaquina)
-
         ElseIf TipoAccion.Equals(Foo.TipoAccion.Insertar.ToString()) Then       ' Se va a añadir una nueva máquina.
 
             CargarTiposMaquinas()
+
+        Else                ' Se va a modificar los datos de una máquina.
+
+            Dim tablaDatos As DataTable = NegocioMaquinas.ObtenerMaquinasPorId(IdMaquina)
+
+            ModeloTextBox.Text = tablaDatos.Rows(0).Item(1).ToString()
+            PrecioPorHoraTextBox.Text = tablaDatos.Rows(0).Item(2).ToString()
+            FechaCompraDateTimePicker.Value = Date.Parse(tablaDatos.Rows(0).Item(3).ToString())
+            TefSATTextBox.Text = tablaDatos.Rows(0).Item(4).ToString()
+            TipoMaquinaComboBox.Text = tablaDatos.Rows(0).Item(5).ToString()
+            DescripcionRichTextBox.Text = tablaDatos.Rows(0).Item(6).ToString()
+            CaracTecnicasRichTextBox.Text = tablaDatos.Rows(0).Item(7).ToString()
 
         End If
 
@@ -82,7 +108,7 @@ Public Class NuevaMaquina
         Dim formAddNuevoTipoMaquina As New AddNuevoTipoMaquina()
         formAddNuevoTipoMaquina.Text = "Añadir Tipo Máquina"
         formAddNuevoTipoMaquina.MdiParent = FormPrincipal
-        formAddNuevoTipoMaquina.ShowDialog()
+        formAddNuevoTipoMaquina.Show()
 
     End Sub
 

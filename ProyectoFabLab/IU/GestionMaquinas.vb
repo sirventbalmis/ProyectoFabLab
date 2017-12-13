@@ -32,8 +32,31 @@
         formNuevaMaquina.Text = "FabLab - Consultar Máquina"
         formNuevaMaquina.MdiParent = FormPrincipal
 
-        formNuevaMaquina.IdMaquina = DirectCast(DatosMaquinasDataGridView.SelectedCells(0).Value, Integer)
-        formNuevaMaquina.Show()
+        ' Por si el usuario no selecciona la primera columna del DataGridView.
+        Try
+            formNuevaMaquina.IdMaquina = DirectCast(DatosMaquinasDataGridView.SelectedCells(0).Value, Integer)
+            formNuevaMaquina.Show()
+
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
+
+    Private Sub EditarMaqButton_Click(sender As Object, e As EventArgs) Handles EditarMaqButton.Click
+
+        Dim formNuevaMaquina As New NuevaMaquina(Foo.TipoAccion.Modificar.ToString(), FormPrincipal)
+        formNuevaMaquina.Text = "FabLab - Modificar Máquina"
+        formNuevaMaquina.MdiParent = FormPrincipal
+
+        ' Por si el usuario no selecciona la primera columna del DataGridView.
+        Try
+            formNuevaMaquina.IdMaquina = DirectCast(DatosMaquinasDataGridView.SelectedCells(0).Value, Integer)
+            formNuevaMaquina.Show()
+
+        Catch ex As Exception
+
+        End Try
 
     End Sub
 
@@ -55,7 +78,7 @@
 
 
     ''' <summary>
-    ''' Borra la fila que contiene los datos de la máquina en el DataGridView.
+    ''' Borra la fila seleccionada que contiene los datos de la máquina en el DataGridView.
     ''' </summary>
     Private Sub BorrarFilaDataGridView()
 

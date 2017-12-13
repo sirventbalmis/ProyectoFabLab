@@ -80,7 +80,7 @@ Partial Class NuevaMaquina
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ModeloTextBox.Location = New System.Drawing.Point(68, 40)
         Me.ModeloTextBox.Name = "ModeloTextBox"
-        Me.ModeloTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.ModeloTextBox.Size = New System.Drawing.Size(123, 20)
         Me.ModeloTextBox.TabIndex = 1
         '
         'TefSATTextBox
