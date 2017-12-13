@@ -43,7 +43,7 @@ Partial Class Form1
         Me.UsuMaquinasToolStrip = New System.Windows.Forms.ToolStrip()
         Me.NumUsuariosToolStripLabel = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+        Me.MaquinasEtiqueta = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStrip = New System.Windows.Forms.ToolStrip()
         Me.AddUsuarioToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.AbrirToolStripButton = New System.Windows.Forms.ToolStripButton()
@@ -172,7 +172,7 @@ Partial Class Form1
         'UsuMaquinasToolStrip
         '
         Me.UsuMaquinasToolStrip.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.UsuMaquinasToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NumUsuariosToolStripLabel, Me.ToolStripLabel2, Me.ToolStripLabel1})
+        Me.UsuMaquinasToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NumUsuariosToolStripLabel, Me.ToolStripLabel2, Me.MaquinasEtiqueta})
         Me.UsuMaquinasToolStrip.Location = New System.Drawing.Point(0, 528)
         Me.UsuMaquinasToolStrip.Name = "UsuMaquinasToolStrip"
         Me.UsuMaquinasToolStrip.Size = New System.Drawing.Size(952, 25)
@@ -191,11 +191,11 @@ Partial Class Form1
         Me.ToolStripLabel2.Size = New System.Drawing.Size(12, 22)
         Me.ToolStripLabel2.Text = "-"
         '
-        'ToolStripLabel1
+        'MaquinasEtiqueta
         '
-        Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        Me.ToolStripLabel1.Size = New System.Drawing.Size(71, 22)
-        Me.ToolStripLabel1.Text = "Máquinas: 6"
+        Me.MaquinasEtiqueta.Name = "MaquinasEtiqueta"
+        Me.MaquinasEtiqueta.Size = New System.Drawing.Size(71, 22)
+        Me.MaquinasEtiqueta.Text = "Máquinas: 6"
         '
         'ToolStrip
         '
@@ -284,7 +284,7 @@ Partial Class Form1
     Friend WithEvents AyudaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AcercaDeToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents UsuMaquinasToolStrip As ToolStrip
-    Friend WithEvents ToolStripLabel1 As ToolStripLabel
+    Friend WithEvents MaquinasEtiqueta As ToolStripLabel
     Friend WithEvents ToolStripLabel2 As ToolStripLabel
     Friend WithEvents NumUsuariosToolStripLabel As ToolStripLabel
     Friend WithEvents ToolStrip As ToolStrip

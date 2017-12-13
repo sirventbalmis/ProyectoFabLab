@@ -48,6 +48,9 @@ Public Class Form1
         Dim numUsuarios As Integer = NegocioUsuarios.ObtenerNumUsuarios()
         NumUsuariosToolStripLabel.Text = "Usuarios: " & numUsuarios
 
+        Dim numMaquinas As Integer = NegocioMaquinas.ObtenerNumeroMaquinas()
+        MaquinasEtiqueta.Text = "Maquinas: " & numMaquinas
+
     End Sub
 
     Private Sub GuardarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GuardarToolStripMenuItem.Click
