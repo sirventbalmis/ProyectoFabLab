@@ -4,44 +4,51 @@ Public Class MaquinasGateway
     Private ConexionBD As SqlConnection
     Private Comando As SqlCommand
 
+
     ''' <summary>
     ''' Selecciona todas las máquinas y las carga en una tabla
     ''' </summary>
-    ''' <returns>Devuelve todas las máquinas en un DataAdapter</returns>
-    Public Function SeleccionaTodasLasMaquinas() As SqlDataAdapter
-        ' Dim lector As SqlDataReader
-        ' Dim tabla As New DataTable("Maquinas")
+    ''' <returns>Devuelve todas las máquinas en un DataTable</returns>
+    Public Function SeleccionaTodasLasMaquinas() As DataTable
+        Dim lector As SqlDataReader
+        Dim tabla As New DataTable("Maquinas")
+
+
         Dim adaptador As SqlDataAdapter
         Try
             ConexionBD.Open()
             adaptador = New SqlDataAdapter("SELECT m.id, modelo, precio_hora, fecha_compra, telefono_sat, t.tipo, descripcion, caracteristicas FROM Maquinas AS m JOIN TiposMaquina AS t ON m.tipo = t.id", ConexionBD)
-
-            ' Comando.CommandText = "SELECT id, modelo, precio_hora, fecha_compra, telefono_sat, tipo, descripcion, caracteristicas FROM Maquinas"
-            'lector = Comando.ExecuteReader()
-            'tabla.Load(lector)
-        Catch ex As Exception
-            Throw New Exception(ex.Message)
-        End Try
-        Return adaptador
-    End Function
-
-    Public Function NumeroMaquinas() As SqlDataReader
-        Dim lector As SqlDataReader
-        Try
-            ConexionBD.Open()
-            Comando.CommandText = "SELECT COUNT(*) FROM Maquinas"
             lector = Comando.ExecuteReader()
+            tabla.Load(lector)
+
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
-        Return lector
+
+        Return tabla
     End Function
 
     ''' <summary>
-    ''' Selecciona una máquina y la carga en una tabla
+    ''' Obtenemos el número de todas las máquinas ahora mismo
+    ''' </summary>
+    ''' <returns>Devuelve un entero con el número de maquinas actuales</returns>
+    Public Function NumeroMaquinas() As Integer
+        Dim num As Integer
+        Try
+            ConexionBD.Open()
+            Comando.CommandText = "SELECT COUNT(*) FROM Maquinas"
+            num = CInt(Comando.ExecuteScalar())
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+        Return num
+    End Function
+
+    ''' <summary>
+    ''' Selecciona una máquina por ID
     ''' </summary>
     ''' <param name="id"></param>
-    ''' <returns></returns>
+    ''' <returns>Devuelve un DataTable con el valor de la máquina seleccionada</returns>
     Public Function SeleccionarMaquinasPorId(ByRef id As Integer) As DataTable
         Dim lector As SqlDataReader
         Dim tabla As New DataTable("Maquinas")
@@ -71,7 +78,7 @@ Public Class MaquinasGateway
     ''' <param name="tipo"></param>
     ''' <param name="descripcion"></param>
     ''' <param name="caracteristicas"></param>
-    ''' <returns></returns>
+    ''' <returns>Devuelve un booleano de si la inserción ha sido correcta</returns>
     Public Function InsertarMaquina(ByRef modelo As String, ByRef precio_hora As Integer, ByRef fecha_compra As Date, ByRef telefono_sat As String, ByRef tipo As Integer, ByRef descripcion As String, ByRef caracteristicas As String) As Boolean
         Dim numeroFilas As Integer = 0
         Dim condicionModelo As Boolean = False
@@ -141,7 +148,7 @@ Public Class MaquinasGateway
     ''' <param name="tipo"></param>
     ''' <param name="descripcion"></param>
     ''' <param name="caracteristicas"></param>
-    ''' <returns></returns>
+    ''' <returns>Devuelve si la modificación ha sido correcta o no mediante un Booleano</returns>
     Public Function ModificaMaquina(ByRef id As Integer, ByRef modelo As String, ByRef precio_hora As Integer, ByRef fecha_compra As Date, ByRef telefono_sat As String, ByRef tipo As Integer, ByRef descripcion As String, ByRef caracteristicas As String) As Boolean
         Dim numeroFilas As Integer = 0
         Dim condicionModelo As Boolean = False
@@ -205,7 +212,7 @@ Public Class MaquinasGateway
     ''' Borra la máquina con un ID seleccionado
     ''' </summary>
     ''' <param name="id"></param>
-    ''' <returns></returns>
+    ''' <returns>Devuelve un booleano de si el borrado ha sido correcto o no</returns>
     Public Function BorrarMaquina(ByRef id As Integer) As Boolean
         Dim numeroFilas As Integer = 0
         If id > 0 Then
@@ -244,5 +251,4 @@ Public Class MaquinasGateway
         Me.Comando = New SqlCommand()
         Me.Comando.Connection = Me.ConexionBD
     End Sub
-
 End Class
