@@ -472,16 +472,16 @@ Public Class UsuariosGateway
     ''' <returns>DataTable con la información de los usuarios.</returns>
     Public Function SeleccionarDatosUsuarios() As DataTable
 
-        Dim tabla As New DataTable()
-
+        Dim tabla As New DataTable("Usuarios")
         Try
+            ConexionABd.Open()
             Comando.CommandText = "SELECT Usuarios.Id, Usuarios.Nombre, TiposUsuario.Tipo, Usuarios.Organizacion, Usuarios.Fecha_Alta
                                             FROM   Usuarios
 	                                               JOIN TiposUsuario ON Usuarios.tipo = TiposUsuario.Id"
 
             Dim datos As SqlDataReader = Comando.ExecuteReader()
-
             tabla.Load(datos)
+
             Return tabla
 
         Catch ex As Exception

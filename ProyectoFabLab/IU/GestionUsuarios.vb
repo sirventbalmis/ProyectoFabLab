@@ -1,9 +1,10 @@
 ﻿Public Class GestionUsuarios
     Private FormPrincipal As Form1
     Private Enlace As BindingSource
-
     Private Sub GestionUsuarios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim dataSet As DataSet = NegocioUsuarios.ObtenerDatosUsuarios
+        Dim dataTable As DataTable = NegocioUsuarios.ObtenerDatosUsuarios
+        Dim dataSet As New DataSet()
+        dataSet.Tables.Add(dataTable)
         Enlace = New BindingSource(dataSet, "Usuarios")
         UsuariosDGV.DataSource = Enlace
         SetColumnas()
