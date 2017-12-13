@@ -23,6 +23,7 @@ Partial Class NuevaMaquina
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(NuevaMaquina))
         Me.ModeloLabel = New System.Windows.Forms.Label()
         Me.TelefSATLabel = New System.Windows.Forms.Label()
         Me.ModeloTextBox = New System.Windows.Forms.TextBox()
@@ -296,6 +297,7 @@ Partial Class NuevaMaquina
         Me.Controls.Add(Me.ModeloTextBox)
         Me.Controls.Add(Me.TelefSATLabel)
         Me.Controls.Add(Me.ModeloLabel)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "NuevaMaquina"
         Me.Text = "FabLab - Nueva Máquina"
         CType(Me.AddTipoMaquinaPictureBox, System.ComponentModel.ISupportInitialize).EndInit()

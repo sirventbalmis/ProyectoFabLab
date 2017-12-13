@@ -22,6 +22,7 @@ Partial Class NuevoUsuario
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(NuevoUsuario))
         Me.NombreLabel = New System.Windows.Forms.Label()
         Me.TelefonoLabel = New System.Windows.Forms.Label()
         Me.OrganizacionLabel = New System.Windows.Forms.Label()
@@ -266,6 +267,7 @@ Partial Class NuevoUsuario
         Me.Controls.Add(Me.OrganizacionLabel)
         Me.Controls.Add(Me.TelefonoLabel)
         Me.Controls.Add(Me.NombreLabel)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "NuevoUsuario"
         Me.Text = "NuevoUsuario"
         CType(Me.FotoPictureBox, System.ComponentModel.ISupportInitialize).EndInit()

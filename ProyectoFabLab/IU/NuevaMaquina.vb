@@ -157,7 +157,7 @@ Public Class NuevaMaquina
         Dim nombreImagen As String = Path.GetFileName(seleccionarImg.FileName)
 
         File.WriteAllBytes(My.Settings.CarpetaMaquinas & nombreImagen, arrayMiniaturaImg)
-        Dim imagen As Image = ConvertirArrayByteAImage(arrayMiniaturaImg)
+        Dim imagen As Image = ConvertirArrayByteAImage(arrayMiniaturaImg)           ' Convierte la imagen seleccionada a Image para añadirla en la galería de imágenes.
 
         AddImagenAListaImgs(imagen)
 
