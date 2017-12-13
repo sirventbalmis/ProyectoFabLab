@@ -44,9 +44,11 @@ Partial Class NuevoUsuario
         Me.ApellidosTextBox = New System.Windows.Forms.TextBox()
         Me.EmailTextBox = New System.Windows.Forms.TextBox()
         Me.DireccionTextBox = New System.Windows.Forms.TextBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.TipoUsuariosCMB = New System.Windows.Forms.ComboBox()
+        Me.AddTipoUsuario = New System.Windows.Forms.PictureBox()
+        Me.FechaNacimientoDTP = New System.Windows.Forms.DateTimePicker()
         CType(Me.FotoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.AddTipoUsuario, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'NombreLabel
@@ -224,13 +226,6 @@ Partial Class NuevoUsuario
         Me.DireccionTextBox.Size = New System.Drawing.Size(159, 20)
         Me.DireccionTextBox.TabIndex = 20
         '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(767, 55)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(159, 20)
-        Me.TextBox1.TabIndex = 21
-        '
         'TipoUsuariosCMB
         '
         Me.TipoUsuariosCMB.FormattingEnabled = True
@@ -239,13 +234,34 @@ Partial Class NuevoUsuario
         Me.TipoUsuariosCMB.Size = New System.Drawing.Size(159, 21)
         Me.TipoUsuariosCMB.TabIndex = 22
         '
+        'AddTipoUsuario
+        '
+        Me.AddTipoUsuario.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.AddTipoUsuario.Image = Global.ProyectoFabLab.My.Resources.Resources.AddTipoMaquina
+        Me.AddTipoUsuario.Location = New System.Drawing.Point(590, 187)
+        Me.AddTipoUsuario.Name = "AddTipoUsuario"
+        Me.AddTipoUsuario.Size = New System.Drawing.Size(36, 30)
+        Me.AddTipoUsuario.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.AddTipoUsuario.TabIndex = 23
+        Me.AddTipoUsuario.TabStop = False
+        '
+        'FechaNacimientoDTP
+        '
+        Me.FechaNacimientoDTP.Location = New System.Drawing.Point(748, 53)
+        Me.FechaNacimientoDTP.Name = "FechaNacimientoDTP"
+        Me.FechaNacimientoDTP.Size = New System.Drawing.Size(200, 20)
+        Me.FechaNacimientoDTP.TabIndex = 24
+        '
         'NuevoUsuario
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1001, 598)
+        Me.Controls.Add(Me.FechaNacimientoDTP)
+        Me.Controls.Add(Me.AddTipoUsuario)
         Me.Controls.Add(Me.TipoUsuariosCMB)
-        Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.DireccionTextBox)
         Me.Controls.Add(Me.EmailTextBox)
         Me.Controls.Add(Me.ApellidosTextBox)
@@ -271,6 +287,7 @@ Partial Class NuevoUsuario
         Me.Name = "NuevoUsuario"
         Me.Text = "NuevoUsuario"
         CType(Me.FotoPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.AddTipoUsuario, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -297,6 +314,7 @@ Partial Class NuevoUsuario
     Friend WithEvents ApellidosTextBox As TextBox
     Friend WithEvents EmailTextBox As TextBox
     Friend WithEvents DireccionTextBox As TextBox
-    Friend WithEvents TextBox1 As TextBox
     Friend WithEvents TipoUsuariosCMB As ComboBox
+    Friend WithEvents AddTipoUsuario As PictureBox
+    Friend WithEvents FechaNacimientoDTP As DateTimePicker
 End Class
