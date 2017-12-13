@@ -29,12 +29,13 @@ Partial Class GestionUsuarios
         Me.ConsultaButton = New System.Windows.Forms.Button()
         Me.EditarButton = New System.Windows.Forms.Button()
         Me.EliminarButton = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.UsuariosDGV, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'BuscarTxtBox
         '
-        Me.BuscarTxtBox.Location = New System.Drawing.Point(98, 53)
+        Me.BuscarTxtBox.Location = New System.Drawing.Point(179, 53)
         Me.BuscarTxtBox.Name = "BuscarTxtBox"
         Me.BuscarTxtBox.Size = New System.Drawing.Size(200, 20)
         Me.BuscarTxtBox.TabIndex = 0
@@ -83,11 +84,21 @@ Partial Class GestionUsuarios
         Me.EliminarButton.Text = "Eliminar"
         Me.EliminarButton.UseVisualStyleBackColor = True
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(94, 56)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(79, 13)
+        Me.Label1.TabIndex = 6
+        Me.Label1.Text = "Buscar Usuario"
+        '
         'GestionUsuarios
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1126, 619)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.EliminarButton)
         Me.Controls.Add(Me.EditarButton)
         Me.Controls.Add(Me.ConsultaButton)
@@ -109,4 +120,5 @@ Partial Class GestionUsuarios
     Friend WithEvents ConsultaButton As Button
     Friend WithEvents EditarButton As Button
     Friend WithEvents EliminarButton As Button
+    Friend WithEvents Label1 As Label
 End Class

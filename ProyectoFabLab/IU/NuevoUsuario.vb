@@ -13,13 +13,14 @@ Public Class NuevoUsuario
     End Property
 
     Private Sub NuevoUsuario_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         If TipoAccion.Equals(Foo.TipoAccion.Consultar.ToString()) Then
+            CargaValores()
+
             Dim valoresUsuario As DataTable = NegocioUsuarios.ObtenerDatosUsuarioPorId(_IdUsuario)
-            '0 nombre, 1 apellidos, 2 fecha_nacimiento, 3 telefono, 4 email, 5 direccion, 6 organizacion, 7 tipo, 8 fecha_alta'
 
             NombreTextBox.Enabled = False
             NombreTextBox.Text = CType(valoresUsuario.Rows(0).Item(0), String)
-
             ApellidosTextBox.Enabled = False
             ApellidosTextBox.Text = CType(valoresUsuario.Rows(0).Item(1), String)
 
@@ -30,7 +31,9 @@ Public Class NuevoUsuario
             EmailTextBox.Enabled = False
             DireccionTextBox.Enabled = False
             OrganizacionTextBox.Enabled = False
+            ObservacionesRichTextBox.Enabled = False
 
+            TipoUsuariosCMB.SelectedIndex = CInt(valoresUsuario.Rows(0).Item(7)) - 1
 
             If Not IsDBNull(valoresUsuario.Rows(0).Item(3)) Then
                 TelefonoTextBox.Text = CType(valoresUsuario.Rows(0).Item(3), String)
@@ -44,17 +47,24 @@ Public Class NuevoUsuario
             If Not IsDBNull(valoresUsuario.Rows(0).Item(6)) Then
                 OrganizacionTextBox.Text = CType(valoresUsuario.Rows(0).Item(6), String)
             End If
+            If Not IsDBNull(valoresUsuario.Rows(0).Item(9)) Then
+                ObservacionesRichTextBox.Text = CType(valoresUsuario.Rows(0).Item(9), String)
+            End If
             AceptarButton.Visible = False
             CancelarButton.Text = "OK"
-            CargaValores()
         Else
             If TipoAccion.Equals(Foo.TipoAccion.Modificar.ToString()) Then
-                Dim valoresUsuario As DataTable = NegocioUsuarios.ObtenerDatosUsuarioPorId(_IdUsuario)
-                '0 nombre, 1 apellidos, 2 fecha_nacimiento, 3 telefono, 4 email, 5 direccion, 6 organizacion, 7 tipo, 8 fecha_alta'
 
+                Dim valoresUsuario As DataTable = NegocioUsuarios.ObtenerDatosUsuarioPorId(_IdUsuario)
+
+                CargaValores()
                 NombreTextBox.Text = CType(valoresUsuario.Rows(0).Item(0), String)
+
                 ApellidosTextBox.Text = CType(valoresUsuario.Rows(0).Item(1), String)
+
                 FechaNacimientoDTP.Text = CType(valoresUsuario.Rows(0).Item(2), String)
+
+                TipoUsuariosCMB.SelectedIndex = CInt(valoresUsuario.Rows(0).Item(7)) - 1
 
                 If Not IsDBNull(valoresUsuario.Rows(0).Item(3)) Then
                     TelefonoTextBox.Text = CType(valoresUsuario.Rows(0).Item(3), String)
@@ -68,8 +78,15 @@ Public Class NuevoUsuario
                 If Not IsDBNull(valoresUsuario.Rows(0).Item(6)) Then
                     OrganizacionTextBox.Text = CType(valoresUsuario.Rows(0).Item(6), String)
                 End If
-                CargaValores()
+                If Not IsDBNull(valoresUsuario.Rows(0).Item(9)) Then
+                    ObservacionesRichTextBox.Text = CType(valoresUsuario.Rows(0).Item(9), String)
+                End If
                 AceptarButton.Text = "Guardar"
+            Else
+                If TipoAccion.Equals(Foo.TipoAccion.Insertar.ToString()) Then
+                    CargaValores()
+                     AceptarButton.Text = "Guardar"
+                End If
             End If
         End If
     End Sub
@@ -93,4 +110,15 @@ Public Class NuevoUsuario
         Me.Close()
     End Sub
 
+    Private Sub AceptarButton_Click(sender As Object, e As EventArgs) Handles AceptarButton.Click
+        If TipoAccion.Equals(Foo.TipoAccion.Insertar.ToString()) Then
+            If NegocioUsuarios.InsertarUsuario(NombreTextBox.Text, ApellidosTextBox.Text, CType(FechaNacimientoDTP.Value, String), TelefonoTextBox.Text, EmailTextBox.Text, DireccionTextBox.Text, OrganizacionTextBox.Text, TipoUsuariosCMB.Text, ObservacionesRichTextBox.Text) Then
+                MessageBox.Show("Máquina Guardada", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Else
+            If NegocioUsuarios.ModificarDatosUsuarioPorId(_IdUsuario, NombreTextBox.Text, ApellidosTextBox.Text, TelefonoTextBox.Text, EmailTextBox.Text, DireccionTextBox.Text, OrganizacionTextBox.Text, TipoUsuariosCMB.Text, ObservacionesRichTextBox.Text) Then
+                MessageBox.Show("Máquina Guardada", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        End If
+    End Sub
 End Class

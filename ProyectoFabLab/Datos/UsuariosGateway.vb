@@ -18,7 +18,7 @@ Public Class UsuariosGateway
     ''' <param name="organizacion">Organización del usuario</param>
     ''' <param name="tipoUsuario">Tipo de usuario</param>    
     ''' <returns>True: El usuario se ha insertado. False: El usuario no se ha insertado</returns>
-    Public Function Insertar(ByRef nombre As String, ByRef apellidos As String, ByRef fechaNacimiento As String, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipoUsuario As String) As Boolean
+    Public Function Insertar(ByRef nombre As String, ByRef apellidos As String, ByRef fechaNacimiento As String, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipoUsuario As String, ByRef observaciones As String) As Boolean
 
         Dim numFilas As Integer, numTipoUsuario As Integer
         Dim esNombreCorrecto As Boolean = False
@@ -26,7 +26,7 @@ Public Class UsuariosGateway
         Dim esProfesionalOInvestigador As Boolean = False
         ' Dim patronTelefono As Regex = New Regex("^[0-9]{9}$")
         ' Dim patronEmail As Regex = New Regex("^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$")
-        Dim sentenciaInsert As New StringBuilder("INSERT INTO Usuarios(nombre, apellidos, fecha_nacimiento, telefono, email, direccion, organizacion, tipo, fecha_alta) VALUES(")
+        Dim sentenciaInsert As New StringBuilder("INSERT INTO Usuarios(nombre, apellidos, fecha_nacimiento, telefono, email, direccion, organizacion, tipo, fecha_alta, observaciones) VALUES(")
         Dim tiposUsuarioGateway As New TiposUsuarioGateway(My.Settings.Conexion)
 
         If nombre.Equals("") Or nombre = Nothing Then
@@ -51,7 +51,7 @@ Public Class UsuariosGateway
 
         If esNombreCorrecto And esApellidoCorrecto Then         ' Añadimos el nombre, los apellidos y la fecha de nacimiento al INSERT.            
 
-            sentenciaInsert.Append("@Nombre, @Apellidos, @FechaNacimiento")
+            sentenciaInsert.Append("@Nombre, @Apellidos, '@FechaNacimiento'")
 
         End If
 
@@ -85,6 +85,16 @@ Public Class UsuariosGateway
 
         End If
 
+        If observaciones.Equals("") Then
+
+            sentenciaInsert.Append(", @ObservacionesVacio")
+
+        Else
+
+            sentenciaInsert.Append(", @Observaciones")
+
+        End If
+
         If tipoUsuario.Equals("Profesional") Or tipoUsuario.Equals("Investigador") Then
 
             esProfesionalOInvestigador = True
@@ -112,7 +122,7 @@ Public Class UsuariosGateway
         numTipoUsuario = tiposUsuarioGateway.SeleccionarPorNombre(tipoUsuario)              ' Obtenemos el id del tipo de usuario.
         sentenciaInsert.Append(", @NumTipoUsuario")
 
-        sentenciaInsert.Append(", @FechaAlta)")
+        sentenciaInsert.Append(", '@FechaAlta')")
 
         Try
             ConexionABd.Open()
@@ -157,6 +167,8 @@ Public Class UsuariosGateway
             Comando.Parameters.Add("@FechaAlta", SqlDbType.Date)
             Comando.Parameters("@FechaAlta").Value = Date.Now
 
+            Comando.Parameters.Add("@Observaciones", SqlDbType.Text)
+            Comando.Parameters("@Observaciones").Value = observaciones
             numFilas = Comando.ExecuteNonQuery()
 
         Catch ex As Exception
@@ -205,7 +217,7 @@ Public Class UsuariosGateway
         Dim tabla As New DataTable("Usuarios")
         Try
             ConexionABd.Open()
-            Comando.CommandText = String.Format("SELECT nombre, apellidos, fecha_nacimiento, telefono, email, direccion, organizacion, tipo, fecha_alta FROM Usuarios WHERE Usuarios.id = {0}", idUsuario)
+            Comando.CommandText = String.Format("SELECT nombre, apellidos, fecha_nacimiento, telefono, email, direccion, organizacion, tipo, fecha_alta, observaciones FROM Usuarios WHERE Usuarios.id = {0}", idUsuario)
             Dim datos As SqlDataReader = Comando.ExecuteReader()
             tabla.Load(datos)
             Return tabla
@@ -232,7 +244,7 @@ Public Class UsuariosGateway
     ''' <param name="organizacion">Nueva organización del usuario</param>
     ''' <param name="tipoUsuario">Nuevo tipo de usuario</param>
     ''' <returns>True: Se han actualizado los datos. False: No se han actualizado los datos</returns>
-    Public Function ModificarPorId(ByRef id As Integer, ByRef nombre As String, ByRef apellidos As String, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipoUsuario As String) As Boolean
+    Public Function ModificarPorId(ByRef id As Integer, ByRef nombre As String, ByRef apellidos As String, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipoUsuario As String, ByRef observaciones As String) As Boolean
 
         Dim numFilas As Integer, numTipoUsuario As Integer
         Dim esNombreCorrecto As Boolean = False
@@ -274,6 +286,26 @@ Public Class UsuariosGateway
         Else
 
             sentenciaUpdate.Append(", Email = @Email")
+
+        End If
+
+        If observaciones.Equals("") Then
+
+            sentenciaUpdate.Append(", Observaciones = @ObservacionesVacio")
+
+        Else
+
+            sentenciaUpdate.Append(", Observaciones = @Observaciones")
+
+        End If
+
+        If telefono.Equals("") Then
+
+            sentenciaUpdate.Append(", Telefono = @TefVacio")
+
+        Else
+
+            sentenciaUpdate.Append(", Telefono = @Telefono")
 
         End If
 
@@ -347,6 +379,12 @@ Public Class UsuariosGateway
 
             Comando.Parameters.Add("@Organizacion", SqlDbType.VarChar)
             Comando.Parameters("@Organizacion").Value = organizacion
+
+            Comando.Parameters.Add("@Observaciones", SqlDbType.Text)
+            Comando.Parameters("@Observaciones").Value = observaciones
+
+            Comando.Parameters.Add("@ObservacionesVacio", SqlDbType.Text)
+            Comando.Parameters("@ObservacionesVacio").Value = DBNull.Value
 
             Comando.Parameters.Add("@NumTipoUsuario", SqlDbType.Int)
             Comando.Parameters("@NumTipoUsuario").Value = numTipoUsuario

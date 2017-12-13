@@ -13,11 +13,11 @@ Module NegocioUsuarios
     ''' <param name="direccion">Dirección del usuario</param>
     ''' <param name="organizacion">Organización del usuario</param>
     ''' <param name="tipoUsuario">Tipo de usuario</param>    
-    Public Function InsertarUsuario(ByRef nombre As String, ByRef apellidos As String, ByRef fechaNacimiento As String, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipoUsuario As String) As Boolean
+    Public Function InsertarUsuario(ByRef nombre As String, ByRef apellidos As String, ByRef fechaNacimiento As String, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipoUsuario As String, ByRef observaciones As String) As Boolean
 
         Dim usuariosGateway As New UsuariosGateway(My.Settings.Conexion)
 
-        Return usuariosGateway.Insertar(nombre, apellidos, fechaNacimiento, telefono, email, direccion, organizacion, tipoUsuario)
+        Return usuariosGateway.Insertar(nombre, apellidos, fechaNacimiento, telefono, email, direccion, organizacion, tipoUsuario, observaciones)
 
     End Function
 
@@ -35,24 +35,24 @@ Module NegocioUsuarios
 
     End Function
 
-
     ''' <summary>
-    ''' Modifica los datos de un usuario a partir de su Id.
+    '''  Modifica los datos de un usuario a partir de su Id.
     ''' </summary>
-    ''' <param name="id">Id del usuario</param>
-    ''' <param name="nombre">Nuevo nombre del usuario</param>
-    ''' <param name="apellidos">Nuevos apellidos del usuario</param>
-    ''' <param name="telefono">Nuevo teléfono del usuario</param>
-    ''' <param name="email">Nuevo email del usuario</param>
-    ''' <param name="direccion">Nueva dirección del usuario</param>
-    ''' <param name="organizacion">Nueva organización del usuario</param>
-    ''' <param name="tipo">Nuevo tipo de usuario</param>
+    ''' <param name="id"></param>
+    ''' <param name="nombre"></param>
+    ''' <param name="apellidos"></param>
+    ''' <param name="telefono"></param>
+    ''' <param name="email"></param>
+    ''' <param name="direccion"></param>
+    ''' <param name="organizacion"></param>
+    ''' <param name="tipo"></param>
+    ''' <param name="observaciones"></param>
     ''' <returns>True: Se han actualizado los datos. False: No se han actualizado los datos</returns>
-    Public Function ModificarDatosUsuarioPorId(ByRef id As Integer, ByRef nombre As String, ByRef apellidos As String, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipo As String) As Boolean
+    Public Function ModificarDatosUsuarioPorId(ByRef id As Integer, ByRef nombre As String, ByRef apellidos As String, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipo As String, ByRef observaciones As String) As Boolean
 
         Dim usuariosGateway As New UsuariosGateway(My.Settings.Conexion)
 
-        Return usuariosGateway.ModificarPorId(id, nombre, apellidos, telefono, email, direccion, organizacion, tipo)
+        Return usuariosGateway.ModificarPorId(id, nombre, apellidos, telefono, email, direccion, organizacion, tipo, observaciones)
 
     End Function
 
