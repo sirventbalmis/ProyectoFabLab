@@ -127,7 +127,7 @@ Public Class NuevoUsuario
                 MessageBox.Show("Usuario Guardado", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
         Else
-            If NegocioUsuarios.ModificarDatosUsuarioPorId(_IdUsuario, NombreTextBox.Text, ApellidosTextBox.Text, FechaNacimientoDTP.Value, TelefonoTextBox.Text, EmailTextBox.Text, DireccionTextBox.Text, OrganizacionTextBox.Text, TipoUsuariosCMB.Text, ObservacionesRichTextBox.Text) Then
+            If NegocioUsuarios.ModificarDatosUsuarioPorId(_IdUsuario, NombreTextBox.Text, ApellidosTextBox.Text, FechaNacimientoDTP.Value.Date, TelefonoTextBox.Text, EmailTextBox.Text, DireccionTextBox.Text, OrganizacionTextBox.Text, TipoUsuariosCMB.Text, ObservacionesRichTextBox.Text) Then
                 MessageBox.Show("Usuario Guardado", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
         End If

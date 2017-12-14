@@ -460,6 +460,7 @@ Public Class UsuariosGateway
         End Try
         Return ultimoId
     End Function
+
     ''' <summary>
     ''' Obtiene los datos de los usuarios para mostrarlos en el DataGridView de la gestión de los usuarios.
     ''' </summary>

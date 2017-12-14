@@ -43,7 +43,7 @@ Public Class MaquinasGateway
     ''' <summary>
     ''' Selecciona una máquina por ID
     ''' </summary>
-    ''' <param name="id"></param>
+    ''' <param name="id">Id de la máquina a seleccionar</param>
     ''' <returns>Devuelve un DataTable con el valor de la máquina seleccionada</returns>
     Public Function SeleccionarMaquinasPorId(ByRef id As Integer) As DataTable
         Dim lector As SqlDataReader
@@ -67,13 +67,13 @@ Public Class MaquinasGateway
     ''' <summary>
     ''' Inserta una máquina en la BBDD
     ''' </summary>
-    ''' <param name="modelo"></param>
-    ''' <param name="precio_hora"></param>
-    ''' <param name="fecha_compra"></param>
-    ''' <param name="telefono_sat"></param>
-    ''' <param name="tipo"></param>
-    ''' <param name="descripcion"></param>
-    ''' <param name="caracteristicas"></param>
+    ''' <param name="modelo">Modelo de máquina</param>
+    ''' <param name="precio_hora">Precio/hora de máquina</param>
+    ''' <param name="fecha_compra">Fecha de compra de máquina</param>
+    ''' <param name="telefono_sat">Teléfono de máquina</param>
+    ''' <param name="tipo">Tipo de máquina</param>
+    ''' <param name="descripcion">Descripción de máquina</param>
+    ''' <param name="caracteristicas">Características de máquina</param>
     ''' <returns>Devuelve un booleano de si la inserción ha sido correcta</returns>
     Public Function InsertarMaquina(ByRef modelo As String, ByRef precio_hora As Integer, ByRef fecha_compra As Date, ByRef telefono_sat As String, ByRef tipo As Integer, ByRef descripcion As String, ByRef caracteristicas As String) As Boolean
         Dim numeroFilas As Integer = 0
@@ -136,14 +136,14 @@ Public Class MaquinasGateway
     ''' <summary>
     ''' Modificamos la máquina mediante los parámetros
     ''' </summary>
-    ''' <param name="id"></param>
-    ''' <param name="modelo"></param>
-    ''' <param name="precio_hora"></param>
-    ''' <param name="fecha_compra"></param>
-    ''' <param name="telefono_sat"></param>
-    ''' <param name="tipo"></param>
-    ''' <param name="descripcion"></param>
-    ''' <param name="caracteristicas"></param>
+    ''' <param name="id">Id de la máquina a modificar</param>
+    ''' <param name="modelo">Nuevo modelo de máquina</param>
+    ''' <param name="precio_hora">Nuevo precio/hora de máquina</param>
+    ''' <param name="fecha_compra">Nueva fecha de compra de máquina</param>
+    ''' <param name="telefono_sat">Nuevo teléfono de máquina</param>
+    ''' <param name="tipo">Nuevo tipo de máquina</param>
+    ''' <param name="descripcion">Nueva descripción de máquina</param>
+    ''' <param name="caracteristicas">Nuevas características de máquina</param>
     ''' <returns>Devuelve si la modificación ha sido correcta o no mediante un Booleano</returns>
     Public Function ModificaMaquina(ByRef id As Integer, ByRef modelo As String, ByRef precio_hora As Integer, ByRef fecha_compra As Date, ByRef telefono_sat As String, ByRef tipo As Integer, ByRef descripcion As String, ByRef caracteristicas As String) As Boolean
         Dim numeroFilas As Integer = 0
@@ -207,7 +207,7 @@ Public Class MaquinasGateway
     ''' <summary>
     ''' Borra la máquina con un ID seleccionado
     ''' </summary>
-    ''' <param name="id"></param>
+    ''' <param name="id">Id de la máquina a borrar</param>
     ''' <returns>Devuelve un booleano de si el borrado ha sido correcto o no</returns>
     Public Function BorrarMaquina(ByRef id As Integer) As Boolean
         Dim numeroFilas As Integer = 0

@@ -55,7 +55,7 @@ Public Class ReservasGateway
 
                 If ConexionABd.State = ConnectionState.Open Then
 
-                    ' ConexionABd.Close()
+                    ConexionABd.Close()
 
                 End If
 

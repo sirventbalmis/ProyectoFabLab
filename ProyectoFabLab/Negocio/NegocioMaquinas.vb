@@ -1,5 +1,4 @@
-﻿Imports System.Data.SqlClient
-Module NegocioMaquinas
+﻿Module NegocioMaquinas
     ''' <summary>
     ''' Obtiene todas las máquinas
     ''' </summary>
@@ -58,14 +57,14 @@ Module NegocioMaquinas
     ''' <summary>
     ''' Modifica una máquina con el ID y sus parámetros correspondientes
     ''' </summary>
-    ''' <param name="id"></param>
-    ''' <param name="modelo"></param>
-    ''' <param name="precio_hora"></param>
-    ''' <param name="fecha_compra"></param>
-    ''' <param name="telefono_sat"></param>
-    ''' <param name="tipo"></param>
-    ''' <param name="descripcion"></param>
-    ''' <param name="caracteristicas"></param>
+    ''' <param name="id">Id de la máquina a modificar</param>
+    ''' <param name="modelo">Nuevo modelo de máquina</param>
+    ''' <param name="precio_hora">Nuevo precio/hora de máquina</param>
+    ''' <param name="fecha_compra">Nueva fecha de compra de máquina</param>
+    ''' <param name="telefono_sat">Nuevo teléfono de máquina</param>
+    ''' <param name="tipo">Nuevo tipo de máquina</param>
+    ''' <param name="descripcion">Nueva descripción de máquina</param>
+    ''' <param name="caracteristicas">Nuevas características de máquina</param>
     ''' <returns>Devuelve un booleano si la modificación ha sido correcta</returns>
     Public Function ModificaMaquina(ByRef id As Integer, ByRef modelo As String, ByRef precio_hora As Integer, ByRef fecha_compra As Date, ByRef telefono_sat As String, ByRef tipo As Integer, ByRef descripcion As String, ByRef caracteristicas As String) As Boolean
         Dim MaquinasGateway As New MaquinasGateway(My.Settings.Conexion)
