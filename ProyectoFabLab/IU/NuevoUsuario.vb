@@ -123,7 +123,7 @@ Public Class NuevoUsuario
 
     Private Sub AceptarButton_Click(sender As Object, e As EventArgs) Handles AceptarButton.Click
         If TipoAccion.Equals(Foo.TipoAccion.Insertar.ToString()) Then
-            If NegocioUsuarios.InsertarUsuario(NombreTextBox.Text, ApellidosTextBox.Text, FechaNacimientoDTP.Value, TelefonoTextBox.Text, EmailTextBox.Text, DireccionTextBox.Text, OrganizacionTextBox.Text, TipoUsuariosCMB.Text, ObservacionesRichTextBox.Text) Then
+            If NegocioUsuarios.InsertarUsuario(NombreTextBox.Text, ApellidosTextBox.Text, FechaNacimientoDTP.Value.ToString(), TelefonoTextBox.Text, EmailTextBox.Text, DireccionTextBox.Text, OrganizacionTextBox.Text, TipoUsuariosCMB.Text, ObservacionesRichTextBox.Text) Then
                 MessageBox.Show("Usuario Guardado", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
         Else

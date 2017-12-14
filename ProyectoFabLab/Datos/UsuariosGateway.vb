@@ -37,8 +37,7 @@ Public Class UsuariosGateway
     ''' <param name="tipoUsuario">Tipo de usuario</param>    
     ''' <param name="observaciones">Observaciones del usuario</param>  
     ''' <returns>True: El usuario se ha insertado. False: El usuario no se ha insertado</returns>
-    Public Function Insertar(ByRef nombre As String, ByRef apellidos As String, ByRef fechaNacimiento As Date, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipoUsuario As String, ByRef observaciones As String) As Boolean
-
+    Public Function Insertar(ByRef nombre As String, ByRef apellidos As String, ByRef fechaNacimiento As String, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipoUsuario As String, ByRef observaciones As String) As Boolean
 
         Dim numFilas As Integer, numTipoUsuario As Integer
         Dim esNombreCorrecto As Boolean = False
@@ -155,7 +154,7 @@ Public Class UsuariosGateway
             Comando.Parameters("@Apellidos").Value = apellidos
 
             Comando.Parameters.Add("@FechaNacimiento", SqlDbType.Date)
-            Comando.Parameters("@FechaNacimiento").Value = fechaNacimiento.Date.Year & "-" & fechaNacimiento.Date.Month & "-" & fechaNacimiento.Date.Day
+            Comando.Parameters("@FechaNacimiento").Value = Date.Parse(fechaNacimiento)
 
             Comando.Parameters.Add("@TefVacio", SqlDbType.VarChar)
             Comando.Parameters("@TefVacio").Value = DBNull.Value
@@ -189,6 +188,9 @@ Public Class UsuariosGateway
 
             Comando.Parameters.Add("@Observaciones", SqlDbType.Text)
             Comando.Parameters("@Observaciones").Value = observaciones
+
+            Comando.Parameters.Add("@ObservacionesVacio", SqlDbType.Text)
+            Comando.Parameters("@ObservacionesVacio").Value = DBNull.Value
             numFilas = Comando.ExecuteNonQuery()
 
         Catch ex As Exception

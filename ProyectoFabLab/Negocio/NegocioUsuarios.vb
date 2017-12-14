@@ -13,7 +13,7 @@ Module NegocioUsuarios
     ''' <param name="direccion">Dirección del usuario</param>
     ''' <param name="organizacion">Organización del usuario</param>
     ''' <param name="tipoUsuario">Tipo de usuario</param>    
-    Public Function InsertarUsuario(ByRef nombre As String, ByRef apellidos As String, ByRef fechaNacimiento As Date, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipoUsuario As String, ByRef observaciones As String) As Boolean
+    Public Function InsertarUsuario(ByRef nombre As String, ByRef apellidos As String, ByRef fechaNacimiento As String, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipoUsuario As String, ByRef observaciones As String) As Boolean
 
         Dim usuariosGateway As New UsuariosGateway(My.Settings.Conexion)
 

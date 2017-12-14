@@ -250,8 +250,7 @@ Partial Class NuevoUsuario
         '
         'FechaNacimientoDTP
         '
-        Me.FechaNacimientoDTP.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.FechaNacimientoDTP.Location = New System.Drawing.Point(748, 53)
+        Me.FechaNacimientoDTP.Location = New System.Drawing.Point(726, 49)
         Me.FechaNacimientoDTP.Name = "FechaNacimientoDTP"
         Me.FechaNacimientoDTP.Size = New System.Drawing.Size(200, 20)
         Me.FechaNacimientoDTP.TabIndex = 24
