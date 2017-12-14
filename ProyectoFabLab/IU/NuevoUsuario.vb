@@ -16,7 +16,6 @@ Public Class NuevoUsuario
         End Set
     End Property
     Private Sub CargarImgUsuario()
-        MsgBox(My.Settings.CarpetaUsuarios & IdUsuario & ".jpg")
         Try
             FotoPictureBox.Image = Image.FromFile(My.Settings.CarpetaUsuarios & IdUsuario & ".jpg")
         Catch ex As FileNotFoundException

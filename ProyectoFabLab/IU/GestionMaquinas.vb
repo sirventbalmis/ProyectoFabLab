@@ -156,4 +156,15 @@
 
     End Sub
 
+    Private Sub GestionMaquinas_Enter(sender As Object, e As EventArgs) Handles MyBase.Enter
+        Dim dataTable As DataTable = NegocioMaquinas.ObtenerTodasLasMaquinas()
+        Dim dataSet As New DataSet()
+
+        dataSet.Tables.Add(dataTable)
+
+        Enlace = New BindingSource(dataSet, "Maquinas")
+        DatosMaquinasDataGridView.DataSource = Enlace
+
+        EstablecerColumnasDataGridView()
+    End Sub
 End Class

@@ -2,6 +2,9 @@
     Private FormPrincipal As Form1
     Private Enlace As BindingSource
     Private Sub GestionUsuarios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Carga()
+    End Sub
+    Public Sub Carga()
         Dim dataTable As DataTable = NegocioUsuarios.ObtenerDatosUsuarios
         Dim dataSet As New DataSet()
         dataSet.Tables.Add(dataTable)
@@ -96,5 +99,9 @@
 
         End If
 
+    End Sub
+
+    Private Sub GestionUsuarios_Enter(sender As Object, e As EventArgs) Handles MyBase.Enter
+        Carga()
     End Sub
 End Class
