@@ -52,9 +52,12 @@ Partial Class GestionUsuarios
         '
         'UsuariosDGV
         '
+        Me.UsuariosDGV.AllowUserToAddRows = False
+        Me.UsuariosDGV.AllowUserToDeleteRows = False
         Me.UsuariosDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.UsuariosDGV.Location = New System.Drawing.Point(98, 124)
         Me.UsuariosDGV.Name = "UsuariosDGV"
+        Me.UsuariosDGV.ReadOnly = True
         Me.UsuariosDGV.Size = New System.Drawing.Size(932, 374)
         Me.UsuariosDGV.TabIndex = 2
         '

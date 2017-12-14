@@ -44,12 +44,12 @@ Partial Class Form1
         Me.NumUsuariosToolStripLabel = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
         Me.MaquinasEtiqueta = New System.Windows.Forms.ToolStripLabel()
-        Me.BarraProgresoAPI = New System.Windows.Forms.ToolStripProgressBar()
         Me.ToolStrip = New System.Windows.Forms.ToolStrip()
         Me.AddUsuarioToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.NuevaMaquinaToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.AyudaToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.BarraProgresoAPI = New System.Windows.Forms.ToolStripProgressBar()
         Me.MenuStrip.SuspendLayout()
         Me.UsuMaquinasStatusStrip.SuspendLayout()
         Me.ToolStrip.SuspendLayout()
@@ -197,13 +197,6 @@ Partial Class Form1
         Me.MaquinasEtiqueta.Size = New System.Drawing.Size(71, 22)
         Me.MaquinasEtiqueta.Text = "Máquinas: 6"
         '
-        'BarraProgresoAPI
-        '
-        Me.BarraProgresoAPI.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.BarraProgresoAPI.Name = "BarraProgresoAPI"
-        Me.BarraProgresoAPI.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BarraProgresoAPI.Size = New System.Drawing.Size(100, 22)
-        '
         'ToolStrip
         '
         Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUsuarioToolStripButton, Me.NuevaMaquinaToolStripButton, Me.toolStripSeparator, Me.AyudaToolStripButton})
@@ -245,6 +238,12 @@ Partial Class Form1
         Me.AyudaToolStripButton.Name = "AyudaToolStripButton"
         Me.AyudaToolStripButton.Size = New System.Drawing.Size(23, 22)
         Me.AyudaToolStripButton.Text = "Ay&uda"
+        '
+        'BarraProgresoAPI
+        '
+        Me.BarraProgresoAPI.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.BarraProgresoAPI.Name = "BarraProgresoAPI"
+        Me.BarraProgresoAPI.Size = New System.Drawing.Size(100, 22)
         '
         'Form1
         '
