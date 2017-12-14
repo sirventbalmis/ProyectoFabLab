@@ -22,7 +22,7 @@ Public Class TiposUsuarioGateway
 
             Try
                 ConexionABd.Open()
-                Comando.CommandText = String.Format("INSERT INTO TiposUsuario (tipoUsuario) VALUES('{0}')", tipo)
+                Comando.CommandText = String.Format("INSERT INTO TiposUsuario (tipo) VALUES('{0}')", tipo)
                 numFilas = Comando.ExecuteNonQuery()
 
             Catch ex As Exception

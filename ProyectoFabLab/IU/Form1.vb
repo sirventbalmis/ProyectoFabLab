@@ -3,14 +3,13 @@
 Public Class Form1
 
     Private Sub AddUsuario_Click(sender As Object, e As EventArgs) Handles AddUsuarioToolStripMenuItem.Click
-        Dim formNuevoUsuario As New NuevoUsuario(Foo.TipoAccion.Insertar.ToString())
+        Dim formNuevoUsuario As New NuevoUsuario(Foo.TipoAccion.Insertar.ToString(), Me)
         formNuevoUsuario.MdiParent = Me
         formNuevoUsuario.Show()
 
     End Sub
 
     Private Sub AddUsuarioToolStripButton_Click(sender As Object, e As EventArgs) Handles AddUsuarioToolStripButton.Click
-
         AddUsuarioToolStripMenuItem.PerformClick()
 
     End Sub
