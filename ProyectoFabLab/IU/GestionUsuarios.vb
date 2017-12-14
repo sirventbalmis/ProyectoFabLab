@@ -25,7 +25,7 @@
     End Sub
 
     Private Sub NuevoUsuarioButton_Click(sender As Object, e As EventArgs) Handles NuevoUsuarioButton.Click
-        Dim nuevoUsuario As New NuevoUsuario(Foo.TipoAccion.Insertar.ToString())
+        Dim nuevoUsuario As New NuevoUsuario(Foo.TipoAccion.Insertar.ToString(), FormPrincipal)
         nuevoUsuario.MdiParent = FormPrincipal
         nuevoUsuario.Show()
     End Sub
@@ -34,7 +34,7 @@
         Dim seleccionados As Integer = UsuariosDGV.SelectedCells.Count
         If seleccionados > 0 Then
             For Each fila As DataGridViewRow In UsuariosDGV.SelectedRows
-                Dim nuevoUsuario As New NuevoUsuario(Foo.TipoAccion.Consultar.ToString())
+                Dim nuevoUsuario As New NuevoUsuario(Foo.TipoAccion.Consultar.ToString(), FormPrincipal)
                 nuevoUsuario.MdiParent = FormPrincipal
                 nuevoUsuario.IdUsuario = Integer.Parse(UsuariosDGV.Rows(fila.Index).Cells(0).Value.ToString())
                 nuevoUsuario.Show()
@@ -48,7 +48,7 @@
         Dim seleccionados As Integer = UsuariosDGV.SelectedCells.Count
         If seleccionados > 0 Then
             For Each fila As DataGridViewRow In UsuariosDGV.SelectedRows
-                Dim nuevoUsuario As New NuevoUsuario(Foo.TipoAccion.Modificar.ToString())
+                Dim nuevoUsuario As New NuevoUsuario(Foo.TipoAccion.Modificar.ToString(), FormPrincipal)
                 nuevoUsuario.MdiParent = FormPrincipal
                 nuevoUsuario.IdUsuario = Integer.Parse(UsuariosDGV.Rows(fila.Index).Cells(0).Value.ToString())
                 nuevoUsuario.Show()

@@ -68,7 +68,6 @@ Public Class MaquinasGateway
     ''' <summary>
     ''' Inserta una máquina en la BBDD
     ''' </summary>
-    ''' <param name="id"></param>
     ''' <param name="modelo"></param>
     ''' <param name="precio_hora"></param>
     ''' <param name="fecha_compra"></param>

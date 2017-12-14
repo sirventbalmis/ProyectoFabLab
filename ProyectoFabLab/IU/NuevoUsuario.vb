@@ -103,11 +103,11 @@ Public Class NuevoUsuario
     End Sub
 
 
-    Public Sub New(ByRef tipoAccion As String)
+    Public Sub New(ByRef tipoAccion As String, ByRef formPrincipal As Form1)
 
         InitializeComponent()
         Me.TipoAccion = tipoAccion
-
+        Me.FormPrincipal = formPrincipal
     End Sub
 
     Private Sub CancelarButton_Click(sender As Object, e As EventArgs) Handles CancelarButton.Click
@@ -211,5 +211,12 @@ Public Class NuevoUsuario
             AddImagenAListaImgs(imagen)
             FormPrincipal.BarraProgresoAPI.Visible = False
         End If
+    End Sub
+
+    Private Sub AddTipoUsuario_Click(sender As Object, e As EventArgs) Handles AddTipoUsuario.Click
+        Dim addTipoUsuario As New AddNuevoTipoUsuario()
+        addTipoUsuario.Text = "Añadir Tipo Usuario"
+        addTipoUsuario.MdiParent = FormPrincipal
+        addTipoUsuario.Show()
     End Sub
 End Class

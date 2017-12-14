@@ -134,9 +134,10 @@ Partial Class NuevoUsuario
         '
         'FotoPictureBox
         '
-        Me.FotoPictureBox.Location = New System.Drawing.Point(56, 286)
+        Me.FotoPictureBox.Location = New System.Drawing.Point(110, 286)
         Me.FotoPictureBox.Name = "FotoPictureBox"
-        Me.FotoPictureBox.Size = New System.Drawing.Size(328, 245)
+        Me.FotoPictureBox.Size = New System.Drawing.Size(210, 245)
+        Me.FotoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.FotoPictureBox.TabIndex = 9
         Me.FotoPictureBox.TabStop = False
         '
