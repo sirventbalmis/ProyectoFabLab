@@ -6,6 +6,25 @@ Public Class ReservasGateway
     Private Comando As SqlCommand
 
     ''' <summary>
+    ''' Altera la tabla de reservas para que permita borrar sin problema alguno
+    ''' </summary>
+    Public Sub NoCheck()
+        ConexionABd.Open()
+        Comando.CommandText = "ALTER TABLE MaquinasReserva NOCHECK CONSTRAINT all"
+        Comando.ExecuteNonQuery()
+        ConexionABd.Close()
+    End Sub
+    ''' <summary>
+    ''' Vuelve al estado original de la tabla haciendo un check
+    ''' </summary>
+    Public Sub Check()
+        ConexionABd.Open()
+        Comando.CommandText = "ALTER TABLE MaquinasReserva CHECK CONSTRAINT all"
+        Comando.ExecuteNonQuery()
+        ConexionABd.Close()
+    End Sub
+
+    ''' <summary>
     ''' Obtiene las reservas de un usuario a partir de su Id.
     ''' </summary>
     ''' <param name="id">Id del usuario</param>

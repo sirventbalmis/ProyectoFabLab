@@ -1,25 +1,25 @@
 ﻿Imports System.Data.SqlClient
 Public Class TiposMaquinaGateway
-    Private ConexionBD As SqlConnection
-    Private Comando As SqlCommand
+    Private ConexionBaseDatos As SqlConnection
+    Private ComandoSql As SqlCommand
 
     ''' <summary>
     ''' Selecciona los tipos de máquina existentes
     ''' </summary>
     ''' <returns>Devuelve un DataTable con los tipos de máquinas existentes</returns>
     Public Function SeleccionarTipos() As DataTable
-        Dim lector As SqlDataReader
-        Dim tabla As New DataTable("TipoMaquinas")
+        Dim lectorReader As SqlDataReader
+        Dim tablaMaquinas As New DataTable("TipoMaquinas")
         Try
-            ConexionBD.Open()
-            Comando.CommandText = "SELECT tipo FROM TiposMaquina"
-            lector = Comando.ExecuteReader()
-            tabla.Load(lector)
+            ConexionBaseDatos.Open()
+            ComandoSql.CommandText = "SELECT tipo FROM TiposMaquina"
+            lectorReader = ComandoSql.ExecuteReader()
+            tablaMaquinas.Load(lectorReader)
             CerrarBD()
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
-        Return tabla
+        Return tablaMaquinas
     End Function
 
     ''' <summary>
@@ -33,9 +33,9 @@ Public Class TiposMaquinaGateway
             Throw New ArgumentException("No has introducido un tipo de máquina correcto.")
         Else
             Try
-                ConexionBD.Open()
-                Comando.CommandText = String.Format("INSERT INTO TiposMaquina VALUES('{0}')", tipo)
-                numeroFilas = Comando.ExecuteNonQuery()
+                ConexionBaseDatos.Open()
+                ComandoSql.CommandText = String.Format("INSERT INTO TiposMaquina VALUES('{0}')", tipo)
+                numeroFilas = ComandoSql.ExecuteNonQuery()
                 CerrarBD()
             Catch ex As Exception
                 Throw New Exception(ex.Message)
@@ -54,12 +54,12 @@ Public Class TiposMaquinaGateway
     ''' </summary>
     ''' <param name="tipo"></param>
     ''' <returns>Devuelve el ID de la máquina especificándole un nombre</returns>
-    Public Function SeleccionaMaquinaPorNombre(ByRef tipo As String) As Integer
+    Public Function SeleccionaMaquinaPorNombre(ByRef Tipo As String) As Integer
         Dim idTipoMaquina As Integer
         Try
-            ConexionBD.Open()
-            Comando.CommandText = String.Format("SELECT id FROM TiposMaquina WHERE tipo = '{0}'", tipo)
-            idTipoMaquina = DirectCast(Comando.ExecuteScalar(), Integer)
+            ConexionBaseDatos.Open()
+            ComandoSql.CommandText = String.Format("SELECT id FROM TiposMaquina WHERE tipo = '{0}'", Tipo)
+            idTipoMaquina = DirectCast(ComandoSql.ExecuteScalar(), Integer)
             CerrarBD()
         Catch ex As Exception
             Throw New Exception(ex.Message)
@@ -73,12 +73,12 @@ Public Class TiposMaquinaGateway
     ''' <param name="id"></param>
     ''' <param name="tipo"></param>
     ''' <returns>Devuelve un booleano si la modificación ha sido correcta</returns>
-    Public Function ModificaMaquina(ByRef id As Integer, ByRef tipo As String) As Boolean
+    Public Function ModificaMaquina(ByRef Id As Integer, ByRef Tipo As String) As Boolean
         Dim numeroFilas As Integer
         Try
-            ConexionBD.Open()
-            Comando.CommandText = String.Format("UPDATE TiposMaquina SET tipo = '{0}' WHERE id = {1}", tipo, id)
-            numeroFilas = Comando.ExecuteNonQuery()
+            ConexionBaseDatos.Open()
+            ComandoSql.CommandText = String.Format("UPDATE TiposMaquina SET tipo = '{0}' WHERE id = {1}", Tipo, Id)
+            numeroFilas = ComandoSql.ExecuteNonQuery()
             CerrarBD()
         Catch ex As Exception
             Throw New Exception(ex.Message)
@@ -94,12 +94,12 @@ Public Class TiposMaquinaGateway
     ''' </summary>
     ''' <param name="id"></param>
     ''' <returns>Devuelve un booleano si el borrado ha sido correcto</returns>
-    Public Function BorraMaquina(ByRef id As Integer) As Boolean
+    Public Function BorraMaquina(ByRef Id As Integer) As Boolean
         Dim numeroFilas As Integer
         Try
-            ConexionBD.Open()
-            Comando.CommandText = String.Format("DELETE FROM TiposMaquina WHERE id = {0}", id)
-            numeroFilas = Comando.ExecuteNonQuery()
+            ConexionBaseDatos.Open()
+            ComandoSql.CommandText = String.Format("DELETE FROM TiposMaquina WHERE id = {0}", Id)
+            numeroFilas = ComandoSql.ExecuteNonQuery()
             CerrarBD()
         Catch ex As Exception
             Throw New Exception(ex.Message)
@@ -115,7 +115,7 @@ Public Class TiposMaquinaGateway
     ''' Cierra la conexión a la BBDD
     ''' </summary>
     Private Sub CerrarBD()
-        ConexionBD.Close()
+        ConexionBaseDatos.Close()
     End Sub
 
     ''' <summary>
@@ -123,8 +123,8 @@ Public Class TiposMaquinaGateway
     ''' </summary>
     ''' <param name="conexion"></param>
     Public Sub New(ByRef conexion As String)
-        Me.ConexionBD = New SqlConnection(conexion)
-        Me.Comando = New SqlCommand()
-        Me.Comando.Connection = Me.ConexionBD
+        Me.ConexionBaseDatos = New SqlConnection(conexion)
+        Me.ComandoSql = New SqlCommand()
+        Me.ComandoSql.Connection = Me.ConexionBaseDatos
     End Sub
 End Class

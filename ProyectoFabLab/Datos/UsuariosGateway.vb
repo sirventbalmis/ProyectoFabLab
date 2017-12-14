@@ -444,9 +444,7 @@ Public Class UsuariosGateway
     ''' <param name="id">Id del usuario a borrar</param>
     ''' <returns>True: El usuario se ha eliminado. False: El usuario no se ha eliminado</returns>
     Public Function EliminarPorId(ByRef id As Integer) As Boolean
-        NoCheck()
         Dim numFilas As Integer
-
         Try
             ConexionABd.Open()
             Comando.CommandText = String.Format("DELETE FROM Usuarios WHERE Id = {0}", id)
@@ -475,8 +473,6 @@ Public Class UsuariosGateway
             Return False
 
         End If
-        Check()
-
     End Function
 
 

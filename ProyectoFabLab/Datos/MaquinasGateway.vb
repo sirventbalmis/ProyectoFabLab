@@ -3,24 +3,8 @@ Imports System.Text.RegularExpressions
 Public Class MaquinasGateway
     Private ConexionBD As SqlConnection
     Private Comando As SqlCommand
-    ''' <summary>
-    ''' Altera la tabla de reservas para que permita borrar sin problema alguno
-    ''' </summary>
-    Public Sub NoCheck()
-        ConexionBD.Open()
-        Comando.CommandText = "ALTER TABLE MaquinasReserva NOCHECK CONSTRAINT all"
-        Comando.ExecuteNonQuery()
-        ConexionBD.Close()
-    End Sub
-    ''' <summary>
-    ''' Vuelve al estado original de la tabla haciendo un check
-    ''' </summary>
-    Public Sub Check()
-        ConexionBD.Open()
-        Comando.CommandText = "ALTER TABLE MaquinasReserva CHECK CONSTRAINT all"
-        Comando.ExecuteNonQuery()
-        ConexionBD.Close()
-    End Sub
+
+
     ''' <summary>
     ''' Selecciona todas las máquinas y las carga en una tabla
     ''' </summary>
@@ -228,7 +212,6 @@ Public Class MaquinasGateway
     ''' <param name="id"></param>
     ''' <returns>Devuelve un booleano de si el borrado ha sido correcto o no</returns>
     Public Function BorrarMaquina(ByRef id As Integer) As Boolean
-        NoCheck()
         Dim numeroFilas As Integer = 0
         If id > 0 Then
             Try
@@ -247,7 +230,6 @@ Public Class MaquinasGateway
         Else
             Return False
         End If
-        Check()
     End Function
 
 

@@ -78,6 +78,7 @@ Module NegocioMaquinas
     ''' <param name="id"></param>
     ''' <returns>Devuelve un booleano si el borrado ha sido correcto</returns>
     Public Function BorrarMaquina(ByRef id As Integer) As Boolean
+
         Dim MaquinasGateway As New MaquinasGateway(My.Settings.Conexion)
         Return MaquinasGateway.BorrarMaquina(id)
     End Function
