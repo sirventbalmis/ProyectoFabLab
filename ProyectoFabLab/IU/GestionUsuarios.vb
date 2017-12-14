@@ -81,8 +81,10 @@
 
     Private Sub VerReservasButton_Click(sender As Object, e As EventArgs) Handles VerReservasButton.Click
 
-        Dim formReservasUsuario As New ReservasUsuario(FormPrincipal)
+        Dim formReservasUsuario As New ReservasUsuario()
         formReservasUsuario.MdiParent = FormPrincipal
+        formReservasUsuario.Show()
+
         Dim estaFilaSeleccionada = False
 
         Try
