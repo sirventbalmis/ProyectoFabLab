@@ -1,8 +1,12 @@
 ﻿Imports System.Data.SqlClient
+Imports System.IO
+Imports Microsoft.ProjectOxford.Vision
+Imports System.Drawing
 Public Class NuevoUsuario
 
     Private TipoAccion As String
     Private _IdUsuario As Integer
+    Private FormPrincipal As Form1
     Public Property IdUsuario As Integer
         Get
             Return _IdUsuario
@@ -119,6 +123,93 @@ Public Class NuevoUsuario
             If NegocioUsuarios.ModificarDatosUsuarioPorId(_IdUsuario, NombreTextBox.Text, ApellidosTextBox.Text, TelefonoTextBox.Text, EmailTextBox.Text, DireccionTextBox.Text, OrganizacionTextBox.Text, TipoUsuariosCMB.Text, ObservacionesRichTextBox.Text) Then
                 MessageBox.Show("Máquina Guardada", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
+        End If
+    End Sub
+
+
+    ''' <summary>
+    ''' Obtiene una miniatura de la imagen seleccionada.
+    ''' </summary>
+    ''' <param name="rutaImagen"></param>
+    ''' <returns>Array de byte con los datos de la miniatura.</returns>
+    Private Async Function GetThumbnail(ByVal rutaImagen As String) As Task(Of Byte())
+
+        Dim client As New VisionServiceClient(My.Settings.ClaveServicioMiniatura, My.Settings.UrlServicioMiniatura)
+        Dim miniatura As Byte()
+
+        Using stream As Stream = File.OpenRead(rutaImagen)
+
+            Try
+                miniatura = Await client.GetThumbnailAsync(stream, 400, 400, True)
+
+            Catch ex As Exception
+
+                MessageBox.Show(ex.Message)
+
+            End Try
+
+        End Using
+
+        Return miniatura
+
+    End Function
+
+    Private Function ConvertirArrayByteAImage(ByRef arrayMiniaturaImg As Byte()) As Image
+
+        Dim imagen As Image
+        Dim memoryStream As New MemoryStream(arrayMiniaturaImg)
+
+        imagen = Image.FromStream(memoryStream)
+        Return imagen
+
+    End Function
+
+    ''' <summary>
+    ''' Añade una imagen a la galería de máquinas.
+    ''' </summary>
+    ''' <param name="imagen">Imagen para añadirla a un PictureBox.</param>
+    Private Sub AddImagenAListaImgs(ByRef imagen As Image)
+
+        FotoPictureBox.Image = imagen
+
+    End Sub
+
+    Private Sub AddImagenAListaImgs(ByRef imagen As Bitmap)
+
+        FotoPictureBox.Image = imagen
+
+    End Sub
+
+    Private Async Sub ExaminarButton_Click(sender As Object, e As EventArgs) Handles ExaminarButton.Click
+        Dim seleccionarImg As New OpenFileDialog()
+
+        seleccionarImg.Title = "Seleccionar Imagen"
+        seleccionarImg.Filter = "jpg|*.jpg|png|*.png"
+        seleccionarImg.ShowDialog()
+
+        FormPrincipal.BarraProgresoAPI.Visible = True
+
+        Dim arrayMiniaturaImg As Byte() = Await GetThumbnail(seleccionarImg.FileName)
+        Dim nombreImagen As String = Path.GetFileNameWithoutExtension(seleccionarImg.FileName)
+
+        Dim imagen As Image = ConvertirArrayByteAImage(arrayMiniaturaImg)
+        Dim ultimoIdUsuario As Integer = 0
+        If TipoAccion.Equals(Foo.TipoAccion.Insertar.ToString()) Then
+            ultimoIdUsuario = NegocioUsuarios.ObtenerUltimoIdUsuarios()
+        Else
+            If TipoAccion.Equals(Foo.TipoAccion.Consultar.ToString()) Then
+                ultimoIdUsuario = IdUsuario
+            End If
+        End If
+
+
+        If Not File.Exists(My.Settings.CarpetaUsuarios & IdUsuario & ".jpg") Then
+            File.WriteAllBytes(My.Settings.CarpetaUsuarios & ultimoIdUsuario & ".jpg", arrayMiniaturaImg)
+            AddImagenAListaImgs(imagen)
+            FormPrincipal.BarraProgresoAPI.Visible = False
+        Else
+            AddImagenAListaImgs(imagen)
+            FormPrincipal.BarraProgresoAPI.Visible = False
         End If
     End Sub
 End Class

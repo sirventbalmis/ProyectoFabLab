@@ -507,7 +507,19 @@ Public Class UsuariosGateway
 
     End Function
 
+    Public Function SeleccionarUltimoUsuario() As Integer
+        Dim ultimoId As Integer
+        Try
+            ConexionABd.Open()
+            Comando.CommandText = "SELECT MAX(Id) FROM Usuarios"
+            ultimoId = Integer.Parse(Comando.ExecuteScalar().ToString())
+            CerrarConexionABd()
 
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+        Return ultimoId
+    End Function
     ''' <summary>
     ''' Obtiene los datos de los usuarios para mostrarlos en el DataGridView de la gestión de los usuarios.
     ''' </summary>

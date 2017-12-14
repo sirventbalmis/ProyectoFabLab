@@ -83,6 +83,10 @@ Module NegocioUsuarios
 
     End Function
 
+    Public Function ObtenerUltimoIdUsuarios() As Integer
+        Dim usuariosGateway As New UsuariosGateway(My.Settings.Conexion)
+        Return usuariosGateway.SeleccionarUltimoUsuario()
+    End Function
 
     ''' <summary>
     ''' Obtiene los datos de los usuarios para mostrarlos en el DataGridView de la gestión de los usuarios.
