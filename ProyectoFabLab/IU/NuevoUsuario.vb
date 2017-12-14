@@ -2,11 +2,14 @@
 Imports System.IO
 Imports Microsoft.ProjectOxford.Vision
 Imports System.Drawing
+Imports System.Text.RegularExpressions
+
 Public Class NuevoUsuario
 
     Private TipoAccion As String
     Private _IdUsuario As Integer
     Private FormPrincipal As Form1
+
     Public Property IdUsuario As Integer
         Get
             Return _IdUsuario
@@ -15,6 +18,7 @@ Public Class NuevoUsuario
             _IdUsuario = val
         End Set
     End Property
+
     Private Sub CargarImgUsuario()
         Try
             FotoPictureBox.Image = Image.FromFile(My.Settings.CarpetaUsuarios & IdUsuario & ".jpg")
@@ -23,6 +27,7 @@ Public Class NuevoUsuario
         End Try
 
     End Sub
+
     Private Sub NuevoUsuario_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         If TipoAccion.Equals(Foo.TipoAccion.Consultar.ToString()) Then
@@ -43,7 +48,9 @@ Public Class NuevoUsuario
             DireccionTextBox.Enabled = False
             OrganizacionTextBox.Enabled = False
             ObservacionesRichTextBox.Enabled = False
-
+            AddTipoUsuario.Enabled = False
+            AddTipoUsuario.Visible = False
+            TipoUsuariosCMB.Enabled = False
             TipoUsuariosCMB.SelectedIndex = CInt(valoresUsuario.Rows(0).Item(7)) - 1
 
             If Not IsDBNull(valoresUsuario.Rows(0).Item(3)) Then
@@ -103,6 +110,7 @@ Public Class NuevoUsuario
     End Sub
 
     Public Sub CargaValores()
+        TipoUsuariosCMB.Items.Clear()
         Dim valoresTipoUsuario As SqlDataReader = NegocioTiposUsuarios.ObtenerTiposUsuarios
         While valoresTipoUsuario.Read
             TipoUsuariosCMB.Items.Add(valoresTipoUsuario.GetString(0))
@@ -121,15 +129,30 @@ Public Class NuevoUsuario
         Me.Close()
     End Sub
 
-    Private Sub AceptarButton_Click(sender As Object, e As EventArgs) Handles AceptarButton.Click
-        If TipoAccion.Equals(Foo.TipoAccion.Insertar.ToString()) Then
-            If NegocioUsuarios.InsertarUsuario(NombreTextBox.Text, ApellidosTextBox.Text, FechaNacimientoDTP.Value.Date, TelefonoTextBox.Text, EmailTextBox.Text, DireccionTextBox.Text, OrganizacionTextBox.Text, TipoUsuariosCMB.Text, ObservacionesRichTextBox.Text) Then
-                MessageBox.Show("Usuario Guardado", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    Public Function ComprobarValores() As Boolean
+        If TelefonoTextBox.Text = String.Empty Then
+            If EmailTextBox.Text = String.Empty Then
+                Return False
+            Else
+                Return True
             End If
         Else
-            If NegocioUsuarios.ModificarDatosUsuarioPorId(_IdUsuario, NombreTextBox.Text, ApellidosTextBox.Text, FechaNacimientoDTP.Value.Date, TelefonoTextBox.Text, EmailTextBox.Text, DireccionTextBox.Text, OrganizacionTextBox.Text, TipoUsuariosCMB.Text, ObservacionesRichTextBox.Text) Then
-                MessageBox.Show("Usuario Guardado", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return True
+        End If
+    End Function
+    Private Sub AceptarButton_Click(sender As Object, e As EventArgs) Handles AceptarButton.Click
+        If ComprobarValores() Then
+            If TipoAccion.Equals(Foo.TipoAccion.Insertar.ToString()) Then
+                If NegocioUsuarios.InsertarUsuario(NombreTextBox.Text, ApellidosTextBox.Text, FechaNacimientoDTP.Value.Date, TelefonoTextBox.Text, EmailTextBox.Text, DireccionTextBox.Text, OrganizacionTextBox.Text, TipoUsuariosCMB.Text, ObservacionesRichTextBox.Text) Then
+                    MessageBox.Show("Usuario Guardado", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+            Else
+                If NegocioUsuarios.ModificarDatosUsuarioPorId(_IdUsuario, NombreTextBox.Text, ApellidosTextBox.Text, FechaNacimientoDTP.Value.Date, TelefonoTextBox.Text, EmailTextBox.Text, DireccionTextBox.Text, OrganizacionTextBox.Text, TipoUsuariosCMB.Text, ObservacionesRichTextBox.Text) Then
+                    MessageBox.Show("Usuario Guardado", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
             End If
+        Else
+            MessageBox.Show("Revisa tus valores", "Información", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
     End Sub
 
@@ -226,5 +249,43 @@ Public Class NuevoUsuario
         addTipoUsuario.Text = "Añadir Tipo Usuario"
         addTipoUsuario.MdiParent = FormPrincipal
         addTipoUsuario.Show()
+    End Sub
+
+    Private Sub NuevoUsuario_Enter(sender As Object, e As EventArgs) Handles MyBase.Enter
+        CargaValores()
+    End Sub
+
+    Private Sub TelefonoTextBox_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TelefonoTextBox.Validating
+        Dim patronTelefono As String = "^[0-9]{9}$"
+
+        Dim patronTelefonoValido As Boolean = False
+
+
+        If Regex.IsMatch(TelefonoTextBox.Text, patronTelefono) Then
+            patronTelefonoValido = True
+
+        End If
+
+        If Not patronTelefonoValido Then
+            ErrorProvider1.SetError(TelefonoTextBox, "Introduce un teléfono válido")
+        End If
+
+
+    End Sub
+
+    Private Sub EmailTextBox_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles EmailTextBox.Validating
+        Dim patronEmail As String = "^[_a-z0-9-]+(.[a-z0-9-]+)@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$"
+
+        Dim patronEmailValido As Boolean = False
+
+        If Regex.IsMatch(EmailTextBox.Text, patronEmail) Then
+            patronEmailValido = True
+        End If
+
+        If Not patronEmailValido Then
+            ErrorProvider1.SetError(EmailTextBox, "Introduce un correo válido")
+        Else
+            ErrorProvider1.Clear()
+        End If
     End Sub
 End Class

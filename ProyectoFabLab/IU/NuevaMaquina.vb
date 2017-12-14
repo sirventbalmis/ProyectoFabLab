@@ -36,6 +36,7 @@ Public Class NuevaMaquina
     ''' </summary>
     Private Sub CargarTiposMaquinas()
 
+        TipoMaquinaComboBox.Items.Clear()
         Dim tablaTiposMaquinas As DataTable = NegocioTiposMaquinas.ObtenerTiposMaquinas()
 
         For i As Integer = 0 To tablaTiposMaquinas.Rows.Count - 1           ' Recorremos las filas del DataTable.
@@ -341,4 +342,7 @@ Public Class NuevaMaquina
 
     End Sub
 
+    Private Sub NuevaMaquina_Enter(sender As Object, e As EventArgs) Handles MyBase.Enter
+        CargarTiposMaquinas()
+    End Sub
 End Class

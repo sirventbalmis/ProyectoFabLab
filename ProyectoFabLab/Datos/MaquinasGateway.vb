@@ -118,7 +118,7 @@ Public Class MaquinasGateway
             condiciontipo = True
         End If
 
-
+        MsgBox(precio_hora)
         Dim sentenciaInsert As String
         sentenciaInsert = String.Format("INSERT INTO Maquinas(modelo, precio_hora, fechacompra, telefono_sat, tipo, descripcion, caracteristicas) VALUES('{0}',{1},{2},'{3}',{4},'{5}','{6}'", modelo, precio_hora, fecha_compra, telefono_sat, tipo, descripcion, caracteristicas)
         ConexionBD.Open()

@@ -1,6 +1,8 @@
 ﻿Public Class AddNuevoTipoUsuario
-    Private Sub AddTipoMaquinaButton_Click(sender As Object, e As EventArgs) Handles AddTipoMaquinaButton.Click
-        If NegocioTiposUsuarios.InsertarTipoUsuario(NuevoTipoMaquinaTextBox.Text) Then
+
+
+    Private Sub AddTipoUsuarioBTN_Click(sender As Object, e As EventArgs) Handles AddTipoUsuarioBTN.Click
+        If NegocioTiposUsuarios.InsertarTipoUsuario(NuevoTipoUsuarioTXT.Text) Then
             MessageBox.Show("Tipo de Usuario Guardado", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub

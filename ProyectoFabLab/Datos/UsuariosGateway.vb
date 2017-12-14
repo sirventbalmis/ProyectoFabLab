@@ -7,24 +7,6 @@ Public Class UsuariosGateway
     Private Comando As SqlCommand
 
     ''' <summary>
-    ''' Altera la tabla de reservas para que permita borrar sin problema alguno
-    ''' </summary>
-    Public Sub NoCheck()
-        ConexionABd.Open()
-        Comando.CommandText = "ALTER TABLE Reservas NOCHECK CONSTRAINT all"
-        Comando.ExecuteNonQuery()
-        ConexionABd.Close()
-    End Sub
-    ''' <summary>
-    ''' Vuelve al estado original de la tabla haciendo un check
-    ''' </summary>
-    Public Sub Check()
-        ConexionABd.Open()
-        Comando.CommandText = "ALTER TABLE Reservas CHECK CONSTRAINT all"
-        Comando.ExecuteNonQuery()
-        ConexionABd.Close()
-    End Sub
-    ''' <summary>
     ''' Inserta un usuario en la tabla.
     ''' </summary>
     ''' <param name="nombre">Nombre del usuario</param>
@@ -41,8 +23,6 @@ Public Class UsuariosGateway
 
         Dim numFilas As Integer, numTipoUsuario As Integer
         Dim esProfesionalOInvestigador As Boolean = False
-        ' Dim patronTelefono As Regex = New Regex("^[0-9]{9}$")
-        ' Dim patronEmail As Regex = New Regex("^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$")        
         Dim tiposUsuarioGateway As New TiposUsuarioGateway(My.Settings.Conexion)
 
         If nombre.Equals("") Or nombre = Nothing Then

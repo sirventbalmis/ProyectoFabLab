@@ -22,52 +22,54 @@ Partial Class AddNuevoTipoUsuario
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.AddTipoMaquinaButton = New System.Windows.Forms.Button()
-        Me.NuevoTipoMaquinaTextBox = New System.Windows.Forms.TextBox()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AddNuevoTipoUsuario))
+        Me.AddTipoUsuarioBTN = New System.Windows.Forms.Button()
+        Me.NuevoTipoUsuarioTXT = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'AddTipoMaquinaButton
+        'AddTipoUsuarioBTN
         '
-        Me.AddTipoMaquinaButton.Location = New System.Drawing.Point(111, 156)
-        Me.AddTipoMaquinaButton.Name = "AddTipoMaquinaButton"
-        Me.AddTipoMaquinaButton.Size = New System.Drawing.Size(75, 23)
-        Me.AddTipoMaquinaButton.TabIndex = 5
-        Me.AddTipoMaquinaButton.Text = "Añadir"
-        Me.AddTipoMaquinaButton.UseVisualStyleBackColor = True
+        Me.AddTipoUsuarioBTN.Location = New System.Drawing.Point(111, 156)
+        Me.AddTipoUsuarioBTN.Name = "AddTipoUsuarioBTN"
+        Me.AddTipoUsuarioBTN.Size = New System.Drawing.Size(75, 23)
+        Me.AddTipoUsuarioBTN.TabIndex = 5
+        Me.AddTipoUsuarioBTN.Text = "Añadir"
+        Me.AddTipoUsuarioBTN.UseVisualStyleBackColor = True
         '
-        'NuevoTipoMaquinaTextBox
+        'NuevoTipoUsuarioTXT
         '
-        Me.NuevoTipoMaquinaTextBox.Location = New System.Drawing.Point(82, 111)
-        Me.NuevoTipoMaquinaTextBox.Name = "NuevoTipoMaquinaTextBox"
-        Me.NuevoTipoMaquinaTextBox.Size = New System.Drawing.Size(124, 20)
-        Me.NuevoTipoMaquinaTextBox.TabIndex = 4
+        Me.NuevoTipoUsuarioTXT.Location = New System.Drawing.Point(82, 111)
+        Me.NuevoTipoUsuarioTXT.Name = "NuevoTipoUsuarioTXT"
+        Me.NuevoTipoUsuarioTXT.Size = New System.Drawing.Size(124, 20)
+        Me.NuevoTipoUsuarioTXT.TabIndex = 4
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(79, 82)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(70, 13)
+        Me.Label1.Size = New System.Drawing.Size(96, 13)
         Me.Label1.TabIndex = 3
-        Me.Label1.Text = "Tipo Usuario:"
+        Me.Label1.Text = "Nuevo tipo usuario"
         '
         'AddNuevoTipoUsuario
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(284, 261)
-        Me.Controls.Add(Me.AddTipoMaquinaButton)
-        Me.Controls.Add(Me.NuevoTipoMaquinaTextBox)
+        Me.Controls.Add(Me.AddTipoUsuarioBTN)
+        Me.Controls.Add(Me.NuevoTipoUsuarioTXT)
         Me.Controls.Add(Me.Label1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "AddNuevoTipoUsuario"
-        Me.Text = "Add tipo usuario"
+        Me.Text = "AddNuevoTipoUsuario"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents AddTipoMaquinaButton As Button
-    Friend WithEvents NuevoTipoMaquinaTextBox As TextBox
+    Friend WithEvents AddTipoUsuarioBTN As Button
+    Friend WithEvents NuevoTipoUsuarioTXT As TextBox
     Friend WithEvents Label1 As Label
 End Class

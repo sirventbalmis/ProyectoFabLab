@@ -22,6 +22,7 @@ Partial Class NuevoUsuario
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(NuevoUsuario))
         Me.NombreLabel = New System.Windows.Forms.Label()
         Me.TelefonoLabel = New System.Windows.Forms.Label()
@@ -47,8 +48,10 @@ Partial Class NuevoUsuario
         Me.TipoUsuariosCMB = New System.Windows.Forms.ComboBox()
         Me.AddTipoUsuario = New System.Windows.Forms.PictureBox()
         Me.FechaNacimientoDTP = New System.Windows.Forms.DateTimePicker()
+        Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         CType(Me.FotoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.AddTipoUsuario, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'NombreLabel
@@ -250,10 +253,15 @@ Partial Class NuevoUsuario
         '
         'FechaNacimientoDTP
         '
+        Me.FechaNacimientoDTP.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.FechaNacimientoDTP.Location = New System.Drawing.Point(726, 49)
         Me.FechaNacimientoDTP.Name = "FechaNacimientoDTP"
         Me.FechaNacimientoDTP.Size = New System.Drawing.Size(200, 20)
         Me.FechaNacimientoDTP.TabIndex = 24
+        '
+        'ErrorProvider1
+        '
+        Me.ErrorProvider1.ContainerControl = Me
         '
         'NuevoUsuario
         '
@@ -289,6 +297,7 @@ Partial Class NuevoUsuario
         Me.Text = "NuevoUsuario"
         CType(Me.FotoPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.AddTipoUsuario, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -318,4 +327,5 @@ Partial Class NuevoUsuario
     Friend WithEvents TipoUsuariosCMB As ComboBox
     Friend WithEvents AddTipoUsuario As PictureBox
     Friend WithEvents FechaNacimientoDTP As DateTimePicker
+    Friend WithEvents ErrorProvider1 As ErrorProvider
 End Class
