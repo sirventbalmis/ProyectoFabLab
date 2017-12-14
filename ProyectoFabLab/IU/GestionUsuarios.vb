@@ -60,7 +60,7 @@
 
     Private Sub EliminarButton_Click(sender As Object, e As EventArgs) Handles EliminarButton.Click
         Dim seleccionados As Integer = UsuariosDGV.SelectedCells.Count
-
+        'pons
         If seleccionados > 0 Then
             For Each fila As DataGridViewRow In UsuariosDGV.SelectedRows
                 If NegocioUsuarios.EliminarUsuarioPorId(Integer.Parse(UsuariosDGV.Rows(fila.Index).Cells(0).Value.ToString)) Then

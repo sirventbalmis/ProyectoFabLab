@@ -7,6 +7,24 @@ Public Class UsuariosGateway
     Private Comando As SqlCommand
 
     ''' <summary>
+    ''' Altera la tabla de reservas para que permita borrar sin problema alguno
+    ''' </summary>
+    Public Sub NoCheck()
+        ConexionABd.Open()
+        Comando.CommandText = "ALTER TABLE Reservas NOCHECK CONSTRAINT all"
+        Comando.ExecuteNonQuery()
+        ConexionABd.Close()
+    End Sub
+    ''' <summary>
+    ''' Vuelve al estado original de la tabla haciendo un check
+    ''' </summary>
+    Public Sub Check()
+        ConexionABd.Open()
+        Comando.CommandText = "ALTER TABLE Reservas CHECK CONSTRAINT all"
+        Comando.ExecuteNonQuery()
+        ConexionABd.Close()
+    End Sub
+    ''' <summary>
     ''' Inserta un usuario en la tabla.
     ''' </summary>
     ''' <param name="nombre">Nombre del usuario</param>
@@ -20,6 +38,7 @@ Public Class UsuariosGateway
     ''' <param name="observaciones">Observaciones del usuario</param>  
     ''' <returns>True: El usuario se ha insertado. False: El usuario no se ha insertado</returns>
     Public Function Insertar(ByRef nombre As String, ByRef apellidos As String, ByRef fechaNacimiento As String, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipoUsuario As String, ByRef observaciones As String) As Boolean
+
 
         Dim numFilas As Integer, numTipoUsuario As Integer
         Dim esNombreCorrecto As Boolean = False
@@ -195,7 +214,6 @@ Public Class UsuariosGateway
             Return False
 
         End If
-
     End Function
 
 
@@ -426,7 +444,7 @@ Public Class UsuariosGateway
     ''' <param name="id">Id del usuario a borrar</param>
     ''' <returns>True: El usuario se ha eliminado. False: El usuario no se ha eliminado</returns>
     Public Function EliminarPorId(ByRef id As Integer) As Boolean
-
+        NoCheck()
         Dim numFilas As Integer
 
         Try
@@ -457,6 +475,7 @@ Public Class UsuariosGateway
             Return False
 
         End If
+        Check()
 
     End Function
 
