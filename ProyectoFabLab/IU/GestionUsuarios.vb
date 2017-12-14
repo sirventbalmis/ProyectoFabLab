@@ -75,4 +75,10 @@
         End If
 
     End Sub
+
+    Private Sub VerReservasButton_Click(sender As Object, e As EventArgs) Handles VerReservasButton.Click
+
+
+
+    End Sub
 End Class

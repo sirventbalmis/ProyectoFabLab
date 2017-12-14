@@ -30,6 +30,7 @@ Partial Class GestionUsuarios
         Me.EditarButton = New System.Windows.Forms.Button()
         Me.EliminarButton = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.VerReservasButton = New System.Windows.Forms.Button()
         CType(Me.UsuariosDGV, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -93,11 +94,21 @@ Partial Class GestionUsuarios
         Me.Label1.TabIndex = 6
         Me.Label1.Text = "Buscar Usuario"
         '
+        'VerReservasButton
+        '
+        Me.VerReservasButton.Location = New System.Drawing.Point(98, 513)
+        Me.VerReservasButton.Name = "VerReservasButton"
+        Me.VerReservasButton.Size = New System.Drawing.Size(87, 23)
+        Me.VerReservasButton.TabIndex = 7
+        Me.VerReservasButton.Text = "Ver Reservas"
+        Me.VerReservasButton.UseVisualStyleBackColor = True
+        '
         'GestionUsuarios
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1126, 619)
+        Me.Controls.Add(Me.VerReservasButton)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.EliminarButton)
         Me.Controls.Add(Me.EditarButton)
@@ -121,4 +132,5 @@ Partial Class GestionUsuarios
     Friend WithEvents EditarButton As Button
     Friend WithEvents EliminarButton As Button
     Friend WithEvents Label1 As Label
+    Friend WithEvents VerReservasButton As Button
 End Class
