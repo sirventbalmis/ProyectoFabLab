@@ -15,19 +15,27 @@ Public Class NuevoUsuario
             _IdUsuario = val
         End Set
     End Property
+    Private Sub CargarImgUsuario()
+        MsgBox(My.Settings.CarpetaUsuarios & IdUsuario & ".jpg")
+        Try
+            FotoPictureBox.Image = Image.FromFile(My.Settings.CarpetaUsuarios & IdUsuario & ".jpg")
+        Catch ex As FileNotFoundException
 
+        End Try
+
+    End Sub
     Private Sub NuevoUsuario_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         If TipoAccion.Equals(Foo.TipoAccion.Consultar.ToString()) Then
             CargaValores()
-
+            CargarImgUsuario()
             Dim valoresUsuario As DataTable = NegocioUsuarios.ObtenerDatosUsuarioPorId(_IdUsuario)
 
             NombreTextBox.Enabled = False
             NombreTextBox.Text = CType(valoresUsuario.Rows(0).Item(0), String)
             ApellidosTextBox.Enabled = False
             ApellidosTextBox.Text = CType(valoresUsuario.Rows(0).Item(1), String)
-
+            ExaminarButton.Visible = False
             FechaNacimientoDTP.Enabled = False
             FechaNacimientoDTP.Text = CType(valoresUsuario.Rows(0).Item(2), String)
 
@@ -60,7 +68,7 @@ Public Class NuevoUsuario
             If TipoAccion.Equals(Foo.TipoAccion.Modificar.ToString()) Then
 
                 Dim valoresUsuario As DataTable = NegocioUsuarios.ObtenerDatosUsuarioPorId(_IdUsuario)
-
+                CargarImgUsuario()
                 CargaValores()
                 NombreTextBox.Text = CType(valoresUsuario.Rows(0).Item(0), String)
 
@@ -89,7 +97,7 @@ Public Class NuevoUsuario
             Else
                 If TipoAccion.Equals(Foo.TipoAccion.Insertar.ToString()) Then
                     CargaValores()
-                     AceptarButton.Text = "Guardar"
+                    AceptarButton.Text = "Guardar"
                 End If
             End If
         End If
@@ -117,11 +125,11 @@ Public Class NuevoUsuario
     Private Sub AceptarButton_Click(sender As Object, e As EventArgs) Handles AceptarButton.Click
         If TipoAccion.Equals(Foo.TipoAccion.Insertar.ToString()) Then
             If NegocioUsuarios.InsertarUsuario(NombreTextBox.Text, ApellidosTextBox.Text, CType(FechaNacimientoDTP.Value, String), TelefonoTextBox.Text, EmailTextBox.Text, DireccionTextBox.Text, OrganizacionTextBox.Text, TipoUsuariosCMB.Text, ObservacionesRichTextBox.Text) Then
-                MessageBox.Show("Máquina Guardada", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show("Usuario Guardado", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
         Else
             If NegocioUsuarios.ModificarDatosUsuarioPorId(_IdUsuario, NombreTextBox.Text, ApellidosTextBox.Text, TelefonoTextBox.Text, EmailTextBox.Text, DireccionTextBox.Text, OrganizacionTextBox.Text, TipoUsuariosCMB.Text, ObservacionesRichTextBox.Text) Then
-                MessageBox.Show("Máquina Guardada", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show("Usuario Guardado", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
         End If
     End Sub
@@ -197,8 +205,9 @@ Public Class NuevoUsuario
         If TipoAccion.Equals(Foo.TipoAccion.Insertar.ToString()) Then
             ultimoIdUsuario = NegocioUsuarios.ObtenerUltimoIdUsuarios()
         Else
-            If TipoAccion.Equals(Foo.TipoAccion.Consultar.ToString()) Then
+            If TipoAccion.Equals(Foo.TipoAccion.Consultar.ToString()) Or TipoAccion.Equals(Foo.TipoAccion.Modificar.ToString()) Then
                 ultimoIdUsuario = IdUsuario
+            Else
             End If
         End If
 
