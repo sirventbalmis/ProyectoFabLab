@@ -4,7 +4,6 @@ Public Class MaquinasGateway
     Private ConexionBD As SqlConnection
     Private Comando As SqlCommand
 
-
     ''' <summary>
     ''' Selecciona todas las máquinas y las carga en una tabla
     ''' </summary>

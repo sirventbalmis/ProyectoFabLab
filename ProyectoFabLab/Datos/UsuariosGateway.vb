@@ -507,6 +507,10 @@ Public Class UsuariosGateway
 
     End Function
 
+    ''' <summary>
+    ''' Selecciona el último ID de la tabla usuarios
+    ''' </summary>
+    ''' <returns>Devuelve un ID con el último usuario</returns>
     Public Function SeleccionarUltimoUsuario() As Integer
         Dim ultimoId As Integer
         Try
