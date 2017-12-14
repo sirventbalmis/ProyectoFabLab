@@ -13,7 +13,7 @@ Module NegocioUsuarios
     ''' <param name="direccion">Dirección del usuario</param>
     ''' <param name="organizacion">Organización del usuario</param>
     ''' <param name="tipoUsuario">Tipo de usuario</param>    
-    Public Function InsertarUsuario(ByRef nombre As String, ByRef apellidos As String, ByRef fechaNacimiento As String, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipoUsuario As String, ByRef observaciones As String) As Boolean
+    Public Function InsertarUsuario(ByRef nombre As String, ByRef apellidos As String, ByRef fechaNacimiento As Date, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipoUsuario As String, ByRef observaciones As String) As Boolean
 
         Dim usuariosGateway As New UsuariosGateway(My.Settings.Conexion)
 
@@ -48,11 +48,11 @@ Module NegocioUsuarios
     ''' <param name="tipo"></param>
     ''' <param name="observaciones"></param>
     ''' <returns>True: Se han actualizado los datos. False: No se han actualizado los datos</returns>
-    Public Function ModificarDatosUsuarioPorId(ByRef id As Integer, ByRef nombre As String, ByRef apellidos As String, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipo As String, ByRef observaciones As String) As Boolean
+    Public Function ModificarDatosUsuarioPorId(ByRef id As Integer, ByRef nombre As String, ByRef apellidos As String, ByRef fechaNacimiento As Date, ByRef telefono As String, ByRef email As String, ByRef direccion As String, ByRef organizacion As String, ByRef tipo As String, ByRef observaciones As String) As Boolean
 
         Dim usuariosGateway As New UsuariosGateway(My.Settings.Conexion)
 
-        Return usuariosGateway.ModificarPorId(id, nombre, apellidos, telefono, email, direccion, organizacion, tipo, observaciones)
+        Return usuariosGateway.ModificarPorId(id, nombre, apellidos, fechaNacimiento, telefono, email, direccion, organizacion, tipo, observaciones)
 
     End Function
 
