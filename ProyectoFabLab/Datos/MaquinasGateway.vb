@@ -1,5 +1,4 @@
 ﻿Imports System.Data.SqlClient
-Imports System.Text.RegularExpressions
 Public Class MaquinasGateway
     Private ConexionBD As SqlConnection
     Private Comando As SqlCommand
@@ -16,7 +15,7 @@ Public Class MaquinasGateway
             Comando.CommandText = "SELECT m.id, modelo, precio_hora, fecha_compra, telefono_sat, t.tipo, descripcion, caracteristicas FROM Maquinas AS m JOIN TiposMaquina AS t ON m.tipo = t.id"
             lector = Comando.ExecuteReader()
             tabla.Load(lector)
-            CerrarBD()
+            ConexionBD.Close()
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
@@ -33,7 +32,7 @@ Public Class MaquinasGateway
             ConexionBD.Open()
             Comando.CommandText = "SELECT COUNT(*) FROM Maquinas"
             num = CInt(Comando.ExecuteScalar())
-            CerrarBD()
+            ConexionBD.Close()
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
@@ -54,7 +53,7 @@ Public Class MaquinasGateway
                 Comando.CommandText = String.Format("SELECT id, modelo, precio_hora, fecha_compra, telefono_sat, tipo, descripcion, caracteristicas FROM Maquinas WHERE id = {0}", id)
                 lector = Comando.ExecuteReader()
                 tabla.Load(lector)
-                CerrarBD()
+                ConexionBD.Close()
             Catch ex As Exception
                 Throw New Exception(ex.Message)
             End Try
@@ -124,7 +123,7 @@ Public Class MaquinasGateway
         ConexionBD.Open()
         Comando.CommandText = sentenciaInsert.ToString()
         numeroFilas = Comando.ExecuteNonQuery()
-        CerrarBD()
+        ConexionBD.Close()
 
         If numeroFilas > 0 Then
             Return True
@@ -192,7 +191,7 @@ Public Class MaquinasGateway
             ConexionBD.Open()
             Comando.CommandText = sentenciaUpdate.ToString()
             numeroFilas = Comando.ExecuteNonQuery()
-            CerrarBD()
+            ConexionBD.Close()
 
             If numeroFilas > 0 Then
                 Return True
@@ -214,20 +213,31 @@ Public Class MaquinasGateway
         If id > 0 Then
             Try
                 ConexionBD.Open()
-                Comando.CommandText = String.Format("DELETE FROM Maquinas WHERE id = {0}", id)
+                Comando.CommandText = String.Format("DELETE FROM MaquinasReserva WHERE maquina = {0}", id)
                 numeroFilas = Comando.ExecuteNonQuery()
-                CerrarBD()
+
+                If numeroFilas > 0 Then         ' Se ha eliminado una máquina de la tabla MaquinasReserva.
+
+                    Comando.CommandText = String.Format("DELETE FROM Maquinas WHERE id = {0}", id)
+                    numeroFilas = Comando.ExecuteNonQuery()
+
+                    If numeroFilas > 0 Then
+                        Return True
+                    Else
+                        Return False
+                    End If
+
+                End If
+
+                ConexionBD.Close()
+
             Catch ex As Exception
                 Throw New Exception(ex.Message)
             End Try
         Else
             Throw New ArgumentException("El ID no es correcto.")
         End If
-        If numeroFilas > 0 Then
-            Return True
-        Else
-            Return False
-        End If
+
     End Function
 
 
@@ -241,7 +251,7 @@ Public Class MaquinasGateway
             ConexionBD.Open()
             Comando.CommandText = "SELECT MAX(Id) FROM Maquinas"
             ultimoId = Integer.Parse(Comando.ExecuteScalar().ToString())
-            CerrarBD()
+            ConexionBD.Close()
 
         Catch ex As Exception
             Throw New Exception(ex.Message)
@@ -250,14 +260,6 @@ Public Class MaquinasGateway
         Return ultimoId
 
     End Function
-
-
-    ''' <summary>
-    ''' Cierra la conexión a la BBDD
-    ''' </summary>
-    Private Sub CerrarBD()
-        ConexionBD.Close()
-    End Sub
 
     ''' <summary>
     ''' Conexión a BBDD

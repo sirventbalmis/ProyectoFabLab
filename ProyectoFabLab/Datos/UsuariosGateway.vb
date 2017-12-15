@@ -1,5 +1,4 @@
 ﻿Imports System.Data.SqlClient
-Imports System.Text
 
 Public Class UsuariosGateway
 
