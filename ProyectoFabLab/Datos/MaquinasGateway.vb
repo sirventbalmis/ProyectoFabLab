@@ -12,7 +12,7 @@ Public Class MaquinasGateway
         Dim tabla As New DataTable("Maquinas")
         Try
             ConexionBD.Open()
-            Comando.CommandText = "SELECT m.id, modelo, precio_hora, fecha_compra, telefono_sat, t.tipo, descripcion, caracteristicas FROM Maquinas AS m JOIN TiposMaquina AS t ON m.tipo = t.id"
+            Comando.CommandText = "SELECT m.id, m.modelo, t.tipo, m.precio_hora, m.telefono_sat FROM Maquinas AS m JOIN TiposMaquina AS t ON m.tipo = t.id"
             lector = Comando.ExecuteReader()
             tabla.Load(lector)
             ConexionBD.Close()
@@ -209,27 +209,32 @@ Public Class MaquinasGateway
     ''' <param name="id">Id de la máquina a borrar</param>
     ''' <returns>Devuelve un booleano de si el borrado ha sido correcto o no</returns>
     Public Function BorrarMaquina(ByRef id As Integer) As Boolean
-        Dim numeroFilas As Integer = 0
+        Dim numReservas As Integer
+        Dim numFilas As Integer
         If id > 0 Then
             Try
                 ConexionBD.Open()
-                Comando.CommandText = String.Format("DELETE FROM MaquinasReserva WHERE maquina = {0}", id)
-                numeroFilas = Comando.ExecuteNonQuery()
+                Comando.CommandText = "SELECT COUNT(Maq.Reserva) FROM MaquinasReserva Maq WHERE  Maq.Maquina = 1"
+                numReservas = DirectCast(Comando.ExecuteScalar(), Integer)
 
-                If numeroFilas > 0 Then         ' Se ha eliminado una máquina de la tabla MaquinasReserva.
+                If numReservas > 0 Then
 
-                    Comando.CommandText = String.Format("DELETE FROM Maquinas WHERE id = {0}", id)
-                    numeroFilas = Comando.ExecuteNonQuery()
+                    MessageBox.Show("No se puede eliminar la máquina porque tiene reservas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
-                    If numeroFilas > 0 Then
+                Else
+
+                    Comando.CommandText = String.Format("DELETE FROM Maquinas WHERE Id = {0}", id)
+                    numFilas = Comando.ExecuteNonQuery()
+
+                    ConexionBD.Close()
+
+                    If numFilas > 0 Then
                         Return True
                     Else
                         Return False
                     End If
 
                 End If
-
-                ConexionBD.Close()
 
             Catch ex As Exception
                 Throw New Exception(ex.Message)

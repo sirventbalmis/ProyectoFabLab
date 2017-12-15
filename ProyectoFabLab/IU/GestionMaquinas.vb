@@ -132,14 +132,13 @@
     ''' </summary>
     Private Sub EstablecerColumnasDataGridView()
 
-        DatosMaquinasDataGridView.Columns(0).HeaderText = "Modelo"
-        DatosMaquinasDataGridView.Columns(0).Width = 120
+        DatosMaquinasDataGridView.Columns(0).Visible = False
+        DatosMaquinasDataGridView.Columns(1).HeaderText = "Modelo"
 
-        DatosMaquinasDataGridView.Columns(1).HeaderText = "Tipo de Máquina"
-        DatosMaquinasDataGridView.Columns(1).Width = 120
-
-        DatosMaquinasDataGridView.Columns(2).HeaderText = "Precio / Hora"
-        DatosMaquinasDataGridView.Columns(3).HeaderText = "Teléfono SAT"
+        DatosMaquinasDataGridView.Columns(2).HeaderText = "Tipo de Máquina"
+        DatosMaquinasDataGridView.Columns(3).HeaderText = "Precio / Hora"
+        DatosMaquinasDataGridView.Columns(3).HeaderText = "Precio / Hora"
+        DatosMaquinasDataGridView.Columns(4).HeaderText = "Teléfono SAT"
 
     End Sub
 

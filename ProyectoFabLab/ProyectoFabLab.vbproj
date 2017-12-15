@@ -172,12 +172,6 @@
     <Compile Include="Negocio\NegocioTiposMaquinas.vb" />
     <Compile Include="Negocio\NegocioTiposUsuarios.vb" />
     <Compile Include="Negocio\NegocioUsuarios.vb" />
-    <Compile Include="PruebasMetodos\Form2.Designer.vb">
-      <DependentUpon>Form2.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PruebasMetodos\Form2.vb">
-      <SubType>Form</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="IU\AddNuevoTipoMaquina.resx">
@@ -212,9 +206,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="IU\InicioProgramaSplashScreen.resx">
       <DependentUpon>InicioProgramaSplashScreen.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PruebasMetodos\Form2.resx">
-      <DependentUpon>Form2.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

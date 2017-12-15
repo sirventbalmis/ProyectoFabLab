@@ -63,6 +63,7 @@ Partial Class GestionMaquinas
         '
         Me.DatosMaquinasDataGridView.AllowUserToAddRows = False
         Me.DatosMaquinasDataGridView.AllowUserToDeleteRows = False
+        Me.DatosMaquinasDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DatosMaquinasDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DatosMaquinasDataGridView.Location = New System.Drawing.Point(30, 115)
         Me.DatosMaquinasDataGridView.Name = "DatosMaquinasDataGridView"
