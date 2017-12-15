@@ -66,9 +66,9 @@ Public Class UsuariosGateway
 
             Comando.Parameters.Add("@Telefono", SqlDbType.VarChar)
 
-            If telefono.Equals("") Then
+            If telefono.Equals("") Then             ' Si el teléfono está vacío.
 
-                Comando.Parameters("@Telefono").Value = DBNull.Value
+                Comando.Parameters("@Telefono").Value = DBNull.Value            ' Insertamos NULL.
 
             Else
 
@@ -78,9 +78,9 @@ Public Class UsuariosGateway
 
             Comando.Parameters.Add("@Email", SqlDbType.VarChar)
 
-            If email.Equals("") Then
+            If email.Equals("") Then            ' Si el email está vacío.
 
-                Comando.Parameters("@Email").Value = DBNull.Value
+                Comando.Parameters("@Email").Value = DBNull.Value               ' Insertamos NULL.
 
             Else
 
@@ -90,9 +90,9 @@ Public Class UsuariosGateway
 
             Comando.Parameters.Add("@Direccion", SqlDbType.VarChar)
 
-            If direccion.Equals("") Then
+            If direccion.Equals("") Then        ' Si la dirección está vacía.
 
-                Comando.Parameters("@Direccion").Value = DBNull.Value
+                Comando.Parameters("@Direccion").Value = DBNull.Value           ' Insertamos NULL.
 
             Else
 
@@ -104,7 +104,7 @@ Public Class UsuariosGateway
 
             If esProfesionalOInvestigador Then
 
-                If Not organizacion.Equals("") Then
+                If Not organizacion.Equals("") Then             ' Si es profesional o investigador y la organización está vacía.
 
                     Comando.Parameters("@Organizacion").Value = organizacion
 
@@ -112,7 +112,7 @@ Public Class UsuariosGateway
 
             Else
 
-                Comando.Parameters("@Organizacion").Value = DBNull.Value
+                Comando.Parameters("@Organizacion").Value = DBNull.Value        ' Insertamos NULL.
 
             End If
 
@@ -124,9 +124,9 @@ Public Class UsuariosGateway
 
             Comando.Parameters.Add("@Observaciones", SqlDbType.Text)
 
-            If observaciones.Equals("") Then
+            If observaciones.Equals("") Then            ' Si las observaciones están vacías.
 
-                Comando.Parameters("@Observaciones").Value = DBNull.Value
+                Comando.Parameters("@Observaciones").Value = DBNull.Value       ' Insertamos NULL.
 
             Else
 
